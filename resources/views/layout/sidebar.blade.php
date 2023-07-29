@@ -10,7 +10,7 @@
                         <p class="profile-name"> {{ Auth::user()->name }}</p>
                         <div class="dropdown" data-display="static">
                             <a href="#" class="nav-link d-flex user-switch-dropdown-toggler" id="UsersettingsDropdown" data-toggle="dropdown" aria-expanded="false">
-                                <small class="designation text-muted">Manager</small>
+                                <small class="designation text-muted">Admin</small>
                                 <span class="status-indicator online"></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="UsersettingsDropdown">
@@ -27,7 +27,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item mt-2"> Manage Accounts </a>
+                                <a class="dropdown-item mt-2" href="{{ route('admin_users.index') }}"> Manage Accounts </a>
                                 <a class="dropdown-item"> Change Password </a>
                                 <a class="dropdown-item"> Sign Out </a>
                             </div>
@@ -43,18 +43,36 @@
                 <span class="menu-title">Dashboard</span>
             </a>
         </li>
-        <li class="nav-item {{ request()->is('tables/basic-table') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('/subjects') }}">
-                <i class="menu-icon mdi mdi-table-large"></i>
-                <span class="menu-title">Subjects</span>
-            </a>
-        </li>
-        <li class="nav-item {{ request()->is('basic-ui/*') ? 'active' : '' }}">
-            <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="{{ request()->is('basic-ui/*') }}" aria-controls="basic-ui">
+        <li class="nav-item ">
+      <a class="nav-link" data-toggle="collapse" href="#basic-ui" aria-expanded="" aria-controls="basic-ui">
+        <i class="menu-icon mdi mdi-table-large"></i>
+        <span class="menu-title">Subjects</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse " id="basic-ui">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item ">
+            <a class="nav-link" href="{{ url('/subjects') }}">View Subjects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('/topics') }}">View All Topics</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+        <li class="nav-item ">
+            <a class="nav-link"  href="{{ url('/quizzes') }}" aria-expanded="{{ request()->is('basic-ui/*') }}" aria-controls="basic-ui">
                 <i class="menu-icon mdi mdi-dna"></i>
                 <span class="menu-title">Quiz</span>
             </a>
         </li>
+        <li class="nav-item">
+    <a class="nav-link" href="{{ url('/questions') }}" aria-expanded="{{ request()->is('basic-ui/*') }}" aria-controls="basic-ui">
+        <i class="menu-icon mdi mdi-dna"></i>
+        <span class="menu-title">Question</span>
+    </a>
+</li>
+
        
        
        

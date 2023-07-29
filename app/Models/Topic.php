@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Topic extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description', 'image_path', 'file_path', 'excel_sheet'];
+    protected $fillable = ['name', 'description',  'subject_id',  'content', 'video_path', 'audio_path', 'file_path'];
 
     public function subject()
     {

@@ -130,7 +130,7 @@
               </div>
             </div>
           </a>
-          <a class="dropdown-item mt-2"> Manage Accounts </a>
+          <a class="dropdown-item mt-2" href="{{ route('admin_users.index') }}"> Manage Accounts </a>
           <a class="dropdown-item"> Change Password </a>
           <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

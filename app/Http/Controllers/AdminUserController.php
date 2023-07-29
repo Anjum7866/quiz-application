@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('checkrole:admin')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('checkrole:admin')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+    // }
 
     
     public function index()

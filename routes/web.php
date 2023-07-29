@@ -9,8 +9,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\CertificateController;
-
-
+use App\Http\Controllers\UserProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,38 +65,40 @@ Route::get('{id}/options/create', [App\Http\Controllers\OptionController::class,
 Route::post('{id}/options', [App\Http\Controllers\OptionController::class, 'store'])->name('options.store');
 
 // Admin_user
- Route::resource('admin_users', AdminUserController::class);
-// Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth'], function () {
   
-//     // Admin-only routes
-//     Route::get('/admin', function () {
-//         return 'Welcome, Admin!';
-//     });
-//      // Add middleware 'auth' to ensure only authenticated users can access these routes
+    // Admin-only routes
+    Route::get('/admin', function () {
+        return 'Welcome, Admin!';
+    });
+    Route::resource('admin_users', AdminUserController::class);
 
-//     // List Admin Users
-//     Route::get('/admin-users', [AdminUserController::class,'index'])->name('admin.users.index');
+    // List Admin Users
+    Route::get('/admin-users', [AdminUserController::class,'index'])->name('admin.users.index');
 
-//     // Show Admin User Creation Form
-//     Route::get('/admin-users/create', [AdminUserController::class,'create'])->name('admin.users.create');
+    // Show Admin User Creation Form
+    Route::get('/admin-users/create', [AdminUserController::class,'create'])->name('admin.users.create');
 
-//     // Store New Admin User
-//     Route::post('/admin-users', [AdminUserController::class,'store'])->name('admin.users.store');
+    // Store New Admin User
+    Route::post('/admin-users', [AdminUserController::class,'store'])->name('admin.users.store');
 
-//     // Show Admin User Details
-//     Route::get('/admin-users/{id}', [AdminUserController::class,'show'])->name('admin.users.show');
+    // Show Admin User Details
+    Route::get('/admin-users/{id}', [AdminUserController::class,'show'])->name('admin.users.show');
 
-//     // Show Admin User Editing Form
-//     Route::get('/admin-users/{id}/edit', [AdminUserController::class,'edit'])->name('admin.users.edit');
+    // Show Admin User Editing Form
+    Route::get('/admin-users/{id}/edit', [AdminUserController::class,'edit'])->name('admin.users.edit');
 
-//     // Update Admin User
-//     Route::put('/admin-users/{id}', [AdminUserController::class,'update'])->name('admin.users.update');
+    // Update Admin User
+    Route::put('/admin-users/{id}', [AdminUserController::class,'update'])->name('admin.users.update');
 
-//     // Delete Admin User
-//     Route::delete('/admin-users/{id}', [AdminUserController::class,'destroy'])->name('admin.users.destroy');
+    // Delete Admin User
+    Route::delete('/admin-users/{id}', [AdminUserController::class,'destroy'])->name('admin.users.destroy');
 
-// });
+});
 
+Route::get('/profile/{profile}', [UserProfileController::class,'show'])->name('profile.show');
+Route::get('/profile/{profile}/edit', [UserProfileController::class,'edit'])->name('profile.edit');
+Route::put('/profile/{profile}', [UserProfileController::class,'update'])->name('profile.update');
 
 // Route::group(['middleware' => ['auth', 'checkrole:superadmin']], function () {
 //     // Routes for superadmin users only

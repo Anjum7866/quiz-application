@@ -27,14 +27,16 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a class="dropdown-item mt-2" href="{{ route('admin_users.index') }}"> Manage Accounts </a>
-                                <a class="dropdown-item"> Change Password </a>
+                                <a class="dropdown-item mt-2" href="{{ route('profile.show', Auth::user()->id) }}"> Manage Accounts </a>
+                                <a class="dropdown-item" href="{{ route('change.password', Auth::user()->id) }}"> Change Password </a>
                                 <a class="dropdown-item"> Sign Out </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-success btn-block">New Quiz <i class="mdi mdi-plus"></i></button>
+                <form action="{{ route('quizzes.create') }}" method="GET">
+                <button class="btn btn-success btn-block" >New Quiz <i class="mdi mdi-plus"></i></button>
+               </form>
             </div>
         </li>
         <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">

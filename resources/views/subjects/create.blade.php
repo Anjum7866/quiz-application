@@ -41,7 +41,12 @@
                 <textarea class="form-control" style="height:100px" name="detail" placeholder="Detail"></textarea>
             </div>
         </div>
-        
+        <div class="row">
+            <div class="col-6 mt-3 form-group">
+                <label >Upload Image:</label>
+                <input type="file" name="image_path" id="image_path" class="form-control">
+            </div>
+        </div>
         <!-- End Dynamic Topic Fields -->
         <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6 ">

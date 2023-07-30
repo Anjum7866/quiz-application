@@ -10,6 +10,8 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\OptionController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\ChangePasswordController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +27,7 @@ use App\Http\Controllers\UserProfileController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 //Subjects & Topics
 Route::resource('subjects', SubjectController::class);
@@ -48,6 +51,7 @@ Route::post('{id}/topics', [App\Http\Controllers\TopicController::class, 'store'
 Route::get('/quiz/{Id}', [QuizController::class, 'generateQuiz'])->name('quiz.generate');
 Route::post('/quiz/submit', [QuizController::class, 'submitQuiz'])->name('quiz.submit');
 Route::get('/subjects/{subject}/quizzes/{quiz}', [QuizController::class, 'showQuizz'])->name('subject.quiz.show');
+Route::get('/quiz/history', 'QuizHistoryController@index')->name('quiz.history');
 
 // questions
 Route::resource('questions', QuestionController::class);
@@ -99,6 +103,8 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/profile/{profile}', [UserProfileController::class,'show'])->name('profile.show');
 Route::get('/profile/{profile}/edit', [UserProfileController::class,'edit'])->name('profile.edit');
 Route::put('/profile/{profile}', [UserProfileController::class,'update'])->name('profile.update');
+Route::get('/change-password', [ChangePasswordController::class, 'edit'])->name('change.password')->middleware('auth');
+Route::post('/change-password', [ChangePasswordController::class, 'update'])->middleware('auth');
 
 // Route::group(['middleware' => ['auth', 'checkrole:superadmin']], function () {
 //     // Routes for superadmin users only

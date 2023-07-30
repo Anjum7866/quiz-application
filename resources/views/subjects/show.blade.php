@@ -10,11 +10,17 @@
                 <a class="btn btn-success" href="{{ route('subject.quizzes', $subject->id) }}">Show Quiz</a> <!-- Add this line -->
               
               </div>
-                <strong>Subjects Name:</strong>
+                <strong>Subject Name:</strong>
                 {{ $subject->name }}<br>
-                <strong>Subjects Description:</strong>
-                {{ $subject->detail }}
-            </div>
+                <strong>Subject Description:</strong>
+                {{ $subject->detail }}<br>
+                @if ($subject->image_path)
+                <strong>Subject Image:</strong><br>
+                <img src="{{asset('assets/uploads/profile/'.$subject->image_path)}}" width="200px" height="200px"  alt="Subject Image">
+                @endif
+ 
+                <br>
+              </div>
            
         </div>
     </div>

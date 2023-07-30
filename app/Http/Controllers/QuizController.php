@@ -8,6 +8,8 @@ use App\Models\Option;
 use App\Models\Answer; 
 use App\Models\Quiz; 
 use App\Models\Subject; 
+use App\Models\Topic; 
+use App\Models\QuizHistory; 
 use Illuminate\View\View;
 
 
@@ -112,13 +114,14 @@ class QuizController extends Controller
         $userAnswers = $request->input('answers');
         $score = 0;
         $totalQuestions = 0;
-
+         
 
         foreach ($userAnswers as $questionId => $selectedOptionId) {
             // Fetch the question from the database
             $question = Question::find($questionId);
             $quizId=$question->quiz_id;
             $quizz = Quiz::find($quizId);
+            $quizName=($quizz->title);
             $subjectId= $quizz->subject_id;
             if (!$question) {
                 continue; // Skip if the question is not found in the database
@@ -138,7 +141,14 @@ class QuizController extends Controller
             $totalQuestions++;
 
         }
+        $answeredAt = now(); // Current timestamp
 
+        QuizHistory::create([
+            'quiz_name' => $quizName,
+            'answered_at' => $answeredAt,
+            'score' =>$score
+            // Add other fields as needed
+        ]);
         return redirect()->route('subject.quizzes', $subjectId)
                          ->with('score', $score)
                          ->with('totalQuestions', $totalQuestions);

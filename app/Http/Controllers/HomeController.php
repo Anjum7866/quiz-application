@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Subject;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $subjects = Subject::all();
+        $subjectCount = $subjects->count();
+        return view('dashboard', compact('subjects', 'subjectCount'));
+
     }
 }

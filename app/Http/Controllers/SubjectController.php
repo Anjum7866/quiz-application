@@ -10,6 +10,8 @@ use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 
 class SubjectController extends Controller
@@ -34,14 +36,21 @@ class SubjectController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'detail' => 'required|string',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif',         
         ]);
 
-        // Create the subject
-        $subject = Subject::create([
-            'name' => $request->input('name'),
-            'detail' => $request->input('detail'),
-        ]);
-
+        $subject = new Subject;
+        $subject->name = $request->input('name');
+        $subject->detail = $request->input('detail'); 
+        if ($request->hasFile('image_path')) {
+            $file = $request->file('image_path');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time().'.'.$ext;
+            $file->move('assets/uploads/profile/', $filename);
+            $subject->image_path = $filename;
+        }
+        
+        $subject->save(); 
         
         return redirect()->route('subjects.index')->with('success', 'Subject  added successfully!');
     }
@@ -69,45 +78,31 @@ class SubjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Subject $subject): RedirectResponse
+    public function update(Request $request, $id): RedirectResponse
     {
         $request->validate([
             'name' => 'required',
             'detail' => 'required',
-            // 'name.*' => 'required|string|max:255',
-            // 'description.*' => 'required|string',
-        ]);
-          // Update the subject
-        $subject->update([
-            'name' => $request->input('name'),
-            'detail' => $request->input('detail'),
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,JPG',
         ]);
 
-        // Update or create the topics and associate them with the subject
-        // $topicData = [];
-        // $topicCount = count((array) $request->input('name'));
-
-
-        //     for ($i = 0; $i < $topicCount; $i++) {
-        //         $topicData = [
-        //             'name' => $request->input('topic_name')[$i],
-        //             'description' => $request->input('topic_description')[$i],
-                    
-        //         ];
-          
-            // Handle file uploads and storage for each topic
-        //     if ($request->hasFile('image') && $request->file('image')[$i]->isValid()) {
-        //         $uploadedFile = $request->file('image')[$i];
-        //         $filePath = $uploadedFile->store('images','public');
-        //         $topicData['image_path'] = $filePath;
-        //     }
-           
-        // }
-
-        // Update the topics associated with the subject
-        // $subject->topics()->delete();
-        // $subject->topics()->create($topicData);
-
+        $subject = Subject::findOrFail($id);
+        $subject->name = $request->input('name');
+        $subject->detail = $request->input('detail');
+        if($request->hasFile('image_path'))
+        {
+            $path = 'assets/uploads/profile/'.$subject->image_path;
+            if(File::exists($path))
+            {
+                File::delete($path);
+            }
+            $file = $request->file('image_path');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time().'.'.$ext;
+            $file->move('assets/uploads/profile/',$filename);
+            $subject->image_path =$filename;
+       }
+       $subject->save();
       
         return redirect()->route('subjects.index')
                         ->with('success','Subject updated successfully!');

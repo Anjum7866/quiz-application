@@ -23,7 +23,7 @@
         </div>
     @endif
   
-    <form action="{{ route('subjects.update',$subject->id) }}" method="POST">
+    <form action="{{ route('subjects.update',$subject->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
    
@@ -41,6 +41,23 @@
                     <strong>Detail:</strong>
                     <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $subject->detail }}</textarea>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 mt-3">
+                @if ($subject->image_path)
+                <p><strong>Subject Image:</strong></p> <br>  
+                <img src="{{asset('assets/uploads/profile/'.$subject->image_path)}}" width="100px" height="100px" class="category-img" alt="Subject Image">
+                @endif
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 mt-3">
+                <label for="image_path">Upload Image:</label>
+                <input type="file" name="image_path"  id="image_path"  class="form-control">
+                @error('image_path')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
         <div class="row">    

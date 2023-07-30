@@ -10,7 +10,7 @@ class Subject extends Model
     // use HasFactory;
 
     protected $fillable = [
-        'name', 'detail'
+        'name', 'detail', 'image_path'
     ];
     public function topics()
     {

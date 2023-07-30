@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container py-5">
-<form action="{{ route('profile.update', $profile->user_id) }}" method="POST">
+<form action="{{ route('profile.update', $profile->user_id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
  <div class="row">

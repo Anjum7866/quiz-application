@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use App\Models\Quiz;
+
 
 
 class SubjectController extends Controller
@@ -30,7 +32,6 @@ class SubjectController extends Controller
         return view('subjects.create');
     }
 
-   
     public function store(Request $request)
     {
         $request->validate([
@@ -55,9 +56,6 @@ class SubjectController extends Controller
         return redirect()->route('subjects.index')->with('success', 'Subject  added successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Subject $subject): View
     {
         $topics = $subject->topics()->latest()->get();
@@ -129,6 +127,22 @@ class SubjectController extends Controller
         // Get the subject and its quizzes
         $subjectWithQuizzes = $subject->load('quizzes');
         return view('subjects/subject-show', compact('subjectWithQuizzes'));
+    }
+
+    public function showSubjects(): View
+    {
+        $subjects = Subject::with(['topics' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->orderBy('created_at', 'desc')->get();
+        return view('allsubjects', compact('subjects'));
+    }
+    public function showSingle(Subject $subject): View
+    {
+        $topics = $subject->topics()->latest()->get();
+        $subject_id = $subject->id;
+        $quiz = Quiz::where('subject_id', $subject_id)->first();
+
+        return view('subjects.show', compact('subject', 'topics', 'quiz'));    
     }
 
 }

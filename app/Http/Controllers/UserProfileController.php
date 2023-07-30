@@ -62,7 +62,6 @@ class UserProfileController extends Controller
             $filename = time().'.'.$ext;
             $file->move('assets/uploads/profile/',$filename);
             $profile->avatar =$filename;
-            dd( $profile->avatar);
         }
       
     

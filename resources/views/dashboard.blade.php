@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('admin.layout.master')
 
 @push('plugin-styles')
 <script src="{{ asset('/assets/plugins/plugin.css') }}"></script>

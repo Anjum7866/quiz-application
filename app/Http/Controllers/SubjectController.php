@@ -126,7 +126,7 @@ class SubjectController extends Controller
     {
         // Get the subject and its quizzes
         $subjectWithQuizzes = $subject->load('quizzes');
-        return view('subjects/subject-show', compact('subjectWithQuizzes'));
+        return view('subjects/subject-show', compact('subjectWithQuizzes', 'subject'));
     }
 
     public function showSubjects(): View

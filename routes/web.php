@@ -12,6 +12,8 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\QuizResultController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +69,7 @@ Route::post('{id}/topics', [App\Http\Controllers\TopicController::class, 'store'
 Route::get('/quiz/{Id}', [QuizController::class, 'generateQuiz'])->name('quiz.generate');
 Route::post('/quiz/submit', [QuizController::class, 'submitQuiz'])->name('quiz.submit');
 Route::get('/subjects/{subject}/quizzes/{quiz}', [QuizController::class, 'showQuizz'])->name('subject.quiz.show');
-Route::get('/quiz/history', 'QuizHistoryController@index')->name('quiz.history');
+Route::get('/quiz/history', 'QuizResultController@index')->name('quiz.history');
 
 // questions
 Route::resource('questions', QuestionController::class);
@@ -131,6 +133,8 @@ Route::post('/change-password', [ChangePasswordController::class, 'update'])->mi
 
 
 Route::get('login', function () { return view('pages.user-pages.login'); });
-  
+Route::get('/certificate', function () { return view('certificate'); });
+Route::get('/answered-quiz-history', [QuizResultController::class, 'index'])->name('answered-quiz-history');
+
 Auth::routes();
 

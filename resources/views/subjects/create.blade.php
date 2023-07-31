@@ -1,59 +1,50 @@
-@extends('layout.master')
+<title>Subjects</title>
+
+@extends('admin.layout.master')
   
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Add New Subject</h2>
+<div class="sales-boxes">
+        <div class="recent-sales box">
+            <div class="title">Add New Subject</h2>
+                <div class="button"><a class="btn btn-primary" href="{{ route('subjects.index') }}"> Back</a></div>
+            </div>
+            @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                
+            
+            <div class="sales-details">
+                <form action="{{ route('subjects.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                
+                        <div class="row">
+                                <strong>Name:</strong>
+                                <input type="text" name="name" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="row">
+                                <strong>Detail:</strong>
+                                <textarea class="form-control" style="height:100px" name="detail" placeholder="Detail"></textarea>
+                        </div>
+                        <div class="row">
+                                <label >Upload Image:</label>
+                                <input type="file" name="image_path" id="image_path" class="form-control">
+                        </div>
+                        <!-- End Dynamic Topic Fields -->
+                        <div class="row">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                
+                </form>
+                </div>
         </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('subjects.index') }}"> Back</a>
-        </div>
-    </div>
 </div>
-   
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-   
-<form action="{{ route('subjects.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-  
-     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6">
-            <div class="form-group">
-                <strong>Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Name">
-            </div>
-        </div>
-        </div>
-        <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6">
-            <div class="form-group">
-                <strong>Detail:</strong>
-                <textarea class="form-control" style="height:100px" name="detail" placeholder="Detail"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6 mt-3 form-group">
-                <label >Upload Image:</label>
-                <input type="file" name="image_path" id="image_path" class="form-control">
-            </div>
-        </div>
-        <!-- End Dynamic Topic Fields -->
-        <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6 ">
-                <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-        </div>
-    </div>
-   
-</form>
+
 @endsection

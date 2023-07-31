@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class QuizHistoryController extends Controller
+class QuizResultController extends Controller
 {
     public function index()
     {
-        // Assuming you have a model called 'QuizHistory' representing the quiz history data
-        $quizHistory = \App\Models\QuizHistory::all();
+        // Assuming you have a model called 'QuizResult' representing the quiz history data
+        $QuizResult = \App\Models\QuizResult::all();
 
-        return view('quiz.history', compact('quizHistory'));
+        return view('quiz.history', compact('QuizResult'));
     }
 
 }

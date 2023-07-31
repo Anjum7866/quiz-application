@@ -9,8 +9,9 @@ use App\Models\Answer;
 use App\Models\Quiz; 
 use App\Models\Subject; 
 use App\Models\Topic; 
-use App\Models\QuizHistory; 
+use App\Models\QuizResult; 
 use Illuminate\View\View;
+use Carbon\Carbon;
 
 
 
@@ -61,7 +62,7 @@ class QuizController extends Controller
         // You can load additional quiz details if needed
         $quiz->load('questions');
     $Id=$quiz->id;
-        return redirect()->route('quiz.generate', compact('quiz','Id' ))->with([
+        return redirect()->route('quiz.generate', compact('quiz','Id', 'subject' ))->with([
             'message' => 'successfully fetched !',
             'alert-type' => 'success'
         ]);
@@ -141,13 +142,12 @@ class QuizController extends Controller
             $totalQuestions++;
 
         }
-        $answeredAt = now(); // Current timestamp
-
-        QuizHistory::create([
-            'quiz_name' => $quizName,
+        $answeredAt =Carbon::now(); // Current timestamp
+        QuizResult::create([
+            'user_id' => auth()->id(),
             'answered_at' => $answeredAt,
-            'score' =>$score
-            // Add other fields as needed
+            'score' =>$score,
+            'quiz_id' =>$quizId
         ]);
         return redirect()->route('subject.quizzes', $subjectId)
                          ->with('score', $score)

@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('admin.layout.master')
 
 @section('content')
     <h1>Edit Admin User</h1>

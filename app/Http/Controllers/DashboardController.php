@@ -26,7 +26,8 @@ class DashboardController extends Controller
     {
         $subjects = Subject::all();
         $subjectCount = $subjects->count();
-        return view('dashboard', compact('subjects', 'subjectCount'));
+        
+        return view('admin.dashboard', compact('subjects', 'subjectCount'));
 
     }
 }

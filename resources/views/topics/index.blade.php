@@ -1,14 +1,14 @@
 <!-- topics/index.blade.php -->
-@extends('layout.master')
+<title>Topics</title>
+
+@extends('admin.layout.master')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-8 grid-margin">
-        <div class="card">
-            <div class="card-body">
-                <h2>List of Topics</h2>
-                <hr>
-    
+<div class="sales-boxes">
+        <div class="recent-sales box">
+            <div class="title">List of Topics</h2>
+            </div>
+            <div class="sales-details">
                 @if(count($topics) > 0)
                 <table class="table table-striped">
                     <thead>
@@ -47,8 +47,7 @@
                 @else
                 <p>No topics found.</p>
                 @endif
-            </div>
+                </div>
         </div>
-    </div>
 </div>
 @endsection

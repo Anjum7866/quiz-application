@@ -1,16 +1,27 @@
-@extends('layout.master')
+<title>Change Password</title>
+
+@extends('admin.layout.master')
 
 @section('content')
-<form method="POST" action="{{ route('change.password') }}">
-    @csrf
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Change Password') }}</div>
-
-                <div class="card-body">
+<div class="sales-boxes">
+        <div class="recent-sales box">
+            <div class="title">Change Password</h2>
+            </div>
+            @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                
+            
+            <div class="sales-details">
+                <form method="POST" action="{{ route('change.password') }}">
+                    @csrf
                     <form method="POST" action="{{ route('password.update') }}">
                         @csrf
 
@@ -57,11 +68,9 @@
                                 </button>
                             </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</form>
+                    </form>     
+                </form>
+            </div>   
+        </div>   
+    </div>    
 @endsection

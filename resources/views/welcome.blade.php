@@ -9,9 +9,9 @@
 
     <div class="content">
         <h3>E-learning is a better way of learning</h3>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia repellat aperiam libero, beatae debitis iusto quia sit aliquid placeat facilis?
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia repellat aperiam libero, beatae debitis iusto quia sit aliquid placeat facilis?
-        </p>
+        <p>E-learning allows learners to access educational content anytime and anywhere, providing the flexibility to study at their own pace and convenience.
+
+        E-learning platforms often offer a wide range of multimedia resources, such as videos, interactive quizzes, simulations, and e-books, catering to different learning styles and enhancing engagement.</p>
         <a href="{{ route('login') }}" class="btn">get started</a>
     </div>
 
@@ -46,7 +46,7 @@
                 <div class="icons">
                     <p> <i class="far fa-clock"></i> 2 hours </p>
                     <p> <i class="far fa-calendar"></i> 6 months </p>
-                    <p> <i class="fas fa-book"></i> 12 modules </p>
+                    <p> <i class="fas fa-book"></i>  {{$subject->topics_count}} topics </p>
                 </div>
             </div>
         @endif

@@ -9,7 +9,7 @@
           <div class="box">
             <div class="right-side">
               <div class="box-topic">Total Subjects</div>
-              <div class="number">40,876</div>
+              <div class="number">{{$subjectCount}}</div>
               <div class="indicator">
                 <i class="bx bx-up-arrow-alt"></i>
                 <span class="text">Up from yesterday</span>
@@ -20,7 +20,7 @@
           <div class="box">
             <div class="right-side">
               <div class="box-topic">Total Topics</div>
-              <div class="number">38,876</div>
+              <div class="number">{{$topicCount}}</div>
               <div class="indicator">
                 <i class="bx bx-up-arrow-alt"></i>
                 <span class="text">Up from yesterday</span>
@@ -31,7 +31,7 @@
           <div class="box">
             <div class="right-side">
               <div class="box-topic">Total Users</div>
-              <div class="number">12,876</div>
+              <div class="number">{{$userCount}}</div>
               <div class="indicator">
                 <i class="bx bx-up-arrow-alt"></i>
                 <span class="text">Up from yesterday</span>
@@ -42,10 +42,10 @@
           <div class="box">
             <div class="right-side">
               <div class="box-topic">Total Quizzes</div>
-              <div class="number">11,086</div>
+              <div class="number">{{$quizCount}}</div>
               <div class="indicator">
-                <i class="bx bx-down-arrow-alt down"></i>
-                <span class="text">Down From Today</span>
+                <i class="bx bx-up-arrow-alt"></i>
+                <span class="text">Up from yesterday</span>
               </div>
             </div>
             <i class="bx bxs-cart-download cart four"></i>

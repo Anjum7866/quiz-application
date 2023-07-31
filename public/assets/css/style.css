@@ -1189,6 +1189,14 @@ nav .profile-details i{
   }
 }
 @media (max-width: 550px) {
+  .course .box {
+    width: 100%;
+  }
+  .course .box:hover {
+    transform: scale(1.05);
+  background: rgba(34, 36, 44, 0.8); /* Change the background color on hover */
+  border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
+  }
   .overview-boxes .box{
     width: 100%;
     margin-bottom: 15px;

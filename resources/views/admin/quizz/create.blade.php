@@ -3,12 +3,10 @@
 @extends('admin.layout.master')
 
 @section('content')
-<div class="button"><a class="btn btn-primary" href="{{ route('quizzes.index') }}"> {{ __('Go Back') }}</a></div>
-          
-<br><br>
 <div class="sales-boxes">
         <div class="recent-sales box">
-            <div class="title">
+            <div class="title"><div class="button"><a class="btn btn-primary" href="{{ route('quizzes.index') }}"> {{ __('Go Back') }}</a></div>
+
             </div>
             @if($errors->any())
                         <div class="alert alert-danger">

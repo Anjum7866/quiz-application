@@ -13,6 +13,7 @@
                 <div class="row">
                   <strong>Quizz:</strong>
                   {{ $quiz->title }}<br>
+                  <br>
                   <a href="{{ route('questions.create', $quiz->id) }}" class="btn btn-primary">
                       <span class="icon text-white-50">
                           <i class="fa fa-plus"></i>

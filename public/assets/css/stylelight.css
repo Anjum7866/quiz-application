@@ -35,8 +35,7 @@ html::-webkit-scrollbar-thumb{
 }
 
 body{
-  background:var(--gradient);
-  padding:3rem 7%;
+  background:white;
 }
 
 section{
@@ -156,11 +155,17 @@ header .navbar a:hover{
 }
 
 .course .box{
+  background: none;
   flex:1 1 30rem;
   border-radius: .5rem;
   border:.1rem solid rgba(0,0,0,.1);
   padding:1rem;
   position: relative;
+}
+.course .box:hover {
+  transform: scale(1.05);
+background: rgba(255, 255, 255, 0.8); /* Change the background color on hover */
+border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
 }
 
 .course .box img{
@@ -221,11 +226,17 @@ header .navbar a:hover{
 }
 
 .teacher .box{
+  background: none;
   flex:1 1 23rem;
   border:.1rem solid rgba(0,0,0,.1);
   border-radius:.5rem;
   padding:1.5rem;
   text-align: center;
+}
+.teacher .box:hover {
+  transform: scale(1.05);
+background: rgba(255, 255, 255, 0.8); /* Change the background color on hover */
+border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
 }
 
 .teacher .box img{
@@ -274,10 +285,16 @@ header .navbar a:hover{
 }
 
 .price .box{
+  background: none;
   flex:1 1 30rem;
   text-align: center;
   border:.1rem solid rgba(0,0,0,.1);
   border-radius: .5rem;
+}
+.price .box:hover {
+  transform: scale(1.05);
+background: rgba(255, 255, 255, 0.8); /* Change the background color on hover */
+border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
 }
 
 .price .box h3{
@@ -324,7 +341,13 @@ header .navbar a:hover{
   border-radius: .5rem;
   border:.1rem solid rgba(0,0,0,.1);
   padding:1rem;
+  background: none;
   flex:1 1 30rem;
+}
+.review .box:hover {
+  transform: scale(1.05);
+background: rgba(255, 255, 255, 0.8); /* Change the background color on hover */
+border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
 }
 
 .review .box .student{

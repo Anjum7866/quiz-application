@@ -1,5 +1,6 @@
 <title>Subjects</title>
 
+
 @extends('admin.layout.master')
 @section('content')
 <div class="sales-boxes">
@@ -43,11 +44,11 @@
                                     <td>
                                         <div class="row">
                                         <form action="{{ route('subjects.destroy',$subject->id) }}" method="POST">
-                                         <a class="btn btn-info" href="{{ route('subjects.show',$subject->id) }}">View</a>
-                                           <a class="btn btn-primary" href="{{ route('subjects.edit',$subject->id) }}">Edit</a>
+                                        <a class="btn btn-info" href="{{ route('subjects.show', $subject->id) }}"><i class="fas fa-eye"></i></a>
+                                        <a class="btn btn-primary" href="{{ route('subjects.edit',$subject->id) }}"><i class="fas fa-pencil-alt"></i></a>&nbsp;
                                            @csrf
                                             @method('DELETE')
-                                        <button  type="submit" class="btn btn-danger">Delete</button>
+                                        <button  type="submit" class=""><a class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></button>
                                         
                                         </form>
                                     </div>

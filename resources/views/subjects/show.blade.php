@@ -1,4 +1,4 @@
-<title>Show Subjects</title>
+<title>Show Subject</title>
 
 @extends('admin.layout.master')
   
@@ -7,14 +7,15 @@
         <div class="recent-sales box" >
 
             <div class="title">
+            <strong>Subject Name:</strong>
+                    {{ $subject->name }}<br>
                 <div class="button"> <a class="btn btn-primary" href="{{ route('subjects.index') }}"> Back</a>
                 <a class="btn btn-success" href="{{ route('subject.quizzes', $subject->id) }}">Show Quiz</a> <!-- Add this line -->
               </div>
               </div>
               <div class="sales-details">
                 <div class="row">
-                  <strong>Subject Name:</strong>
-                    {{ $subject->name }}<br>
+                 
                     <strong>Subject Description:</strong>
                     {{ $subject->detail }}<br>
                     @if ($subject->image_path)

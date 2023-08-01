@@ -29,13 +29,11 @@
                                     <div class="row">
                                     <form  action="{{ route('questions.destroy', $question->id) }}" method="POST">
                                     
-                                    <a class="btn btn-info" href="{{ route('questions.show',$question->id) }}">View</a>
-                                    <a class="btn btn-primary" href="{{ route('questions.edit', $question->id) }}">Edit</a>
+                                    <a class="btn btn-info" href="{{ route('questions.show',$question->id) }}"><i class="fas fa-eye"></i></a>
+                                    <a class="btn btn-primary" href="{{ route('questions.edit', $question->id) }}"><i class="fas fa-pencil-alt"></i></a>&nbsp;
                                         @csrf
                                         @method('delete') 
-                                        <button class="btn btn-danger">
-                                        Delete
-                                        </button>
+                                        <button  type="submit"><a class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></button>
                                     </form>
                                     </div>
                                 </td>

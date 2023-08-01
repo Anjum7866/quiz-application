@@ -28,8 +28,8 @@
                                     <td>
                                         <div class="row">
                                             <form action="{{ route('admin.users.destroy', $adminUser->id) }}" method="POST" class="d-inline">
-                                            <a href="{{ route('admin.users.show', $adminUser->id) }}" class="btn btn-info btn-sm">View</a>
-                                            <a href="{{ route('admin.users.edit', $adminUser->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="{{ route('admin.users.show', $adminUser->id) }}" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></a>
+                                            <a href="{{ route('admin.users.edit', $adminUser->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></a>&nbsp;
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm" >Delete</button>

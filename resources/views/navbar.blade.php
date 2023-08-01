@@ -1,8 +1,7 @@
+<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" id="theme-stylesheet">
+
 <style>
- body.dark-theme {
-  background-color: #1a1a1a;
-  color: #ffffff;
-}
+ 
 
 /* Toggle switch styles */
 .theme-switch {
@@ -132,7 +131,7 @@ body:not(.dark-theme) .moon-icon {
 
 </header>
 
-<script>
+<!-- <script>
     // Get the theme toggle checkbox and the body element
 const themeToggle = document.getElementById("themeToggle");
 const body = document.body;
@@ -154,4 +153,27 @@ themeToggle.addEventListener("change", () => {
   }
 });
 
-    </script>
+    </script> -->
+    <script>
+    // JavaScript to toggle between dark and light themes
+    const themeStylesheet = document.getElementById('theme-stylesheet');
+    const themeToggleButton = document.getElementById('themeToggle');
+
+    
+    // Check if the theme preference is stored in localStorage
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      themeStylesheet.setAttribute('href', storedTheme);
+    }
+
+    themeToggleButton.addEventListener('click', () => {
+      if (themeStylesheet.getAttribute('href').endsWith('style.css')) {
+        themeStylesheet.setAttribute('href', "{{ asset('assets/css/stylelight.css') }}");
+        localStorage.setItem('theme', "{{ asset('assets/css/stylelight.css') }}");
+      } else {
+        themeStylesheet.setAttribute('href',  "{{ asset('assets/css/style.css') }}");
+        localStorage.setItem('theme',  "{{ asset('assets/css/style.css') }}");
+      }
+    });
+   
+  </script>

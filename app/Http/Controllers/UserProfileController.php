@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserProfile; 
+use App\Models\User; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class UserProfileController extends Controller
 {
     public function show(UserProfile $profile)
-    {
+    { 
            return view('user.profile.show', compact('profile'));
     }
     
@@ -63,12 +64,17 @@ class UserProfileController extends Controller
             $file->move('assets/uploads/profile/',$filename);
             $profile->avatar =$filename;
         }
-      
     
             // Save the updated profile to the database
              $profile->save();
 
-               return redirect()->route('profile.show', $profile->user_id)
+            
+             $user = User::where('id', $profile->user_id)->first();
+             $user->name = $request->input('first_name');
+             $user->email = $request->input('email');
+             $user->save();     
+
+               return redirect()->route('profile.edit', $profile->user_id)
             ->with('success', 'Profile updated successfully!');
     }
 }

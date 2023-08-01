@@ -29,12 +29,13 @@
                             <td>{{ $topic->name }}</td>
                             <td>{{ $topic->subject->name }}</td>
                             <td>
-                                <a class="btn btn-info" href="{{ route('topics.show',$topic->id) }}">View</a>
-                                <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-primary">Edit</a>
+                                <a class="btn btn-info" href="{{ route('topics.show',$topic->id) }}"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('topics.edit', $topic->id) }}" class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>&nbsp;
                                 <form action="{{ route('topics.destroy', $topic->id) }}" method="POST" style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button  type="submit"><a class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></button>
+                                        
                                 </form>
                             </td>
                         </tr>

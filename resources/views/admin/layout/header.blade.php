@@ -10,12 +10,14 @@
           <i class="bx bx-search"></i>
         </div>
         <div class="profile-details">
-          <img src="{{ asset('/images/profile.jpg') }}" alt="" />
+          <img src="{{asset('assets/uploads/profile/'.Auth::user()->profile->avatar)}}" alt="" />
           <div class="dropdown">
             <span class="admin_name">{{ Auth::user()->name }}</span>
+        
+
             <i class="bx bx-chevron-down"></i>
             <div class="dropdown-content">
-              <a  href="{{ route('profile.show', Auth::user()->id) }}">Manage Accounts</a>
+              <a  href="{{ route('profile.edit', Auth::user()->id) }}">Manage Accounts</a>
               <a href="{{ route('change.password', Auth::user()->id) }}">Change Password</a>
               <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

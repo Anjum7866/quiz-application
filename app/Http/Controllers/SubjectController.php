@@ -136,6 +136,7 @@ class SubjectController extends Controller
         }])->orderBy('created_at', 'desc')->get();
         return view('allsubjects', compact('subjects'));
     }
+    
     public function showSingle(Subject $subject): View
     {
         $topics = $subject->topics()->latest()->get();
@@ -143,6 +144,14 @@ class SubjectController extends Controller
         $quiz = Quiz::where('subject_id', $subject_id)->first();
 
         return view('subjects.show', compact('subject', 'topics', 'quiz'));    
+    }
+    public function showSingleSubject(Subject $subject): View
+    {
+        $topics = $subject->topics()->latest()->get();
+        $subject_id = $subject->id;
+        $quiz = Quiz::where('subject_id', $subject_id)->first();
+
+        return view('showsinglesubject', compact('subject', 'topics', 'quiz'));    
     }
 
 }

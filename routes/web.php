@@ -29,6 +29,7 @@ use App\Http\Controllers\QuizResultController;
 
 Route::resource('/', HomeController::class);
 Route::get('/allsubjects',  [SubjectController::class,'showSubjects']);
+Route::get('/singlesubject/{subject}', [SubjectController::class,'showSingleSubject'])->name('subject.showSingleSubject');
 
 Route::get('/contact', function () {
     return view('contact');
@@ -45,21 +46,13 @@ Route::get('/review', function () {
 
 
 
-Route::middleware('role:admin')->group(function () {
-    // Admin-only routes
     Route::get('/admin', function () {
         return 'Welcome, Admin!';
     });
     
     Route::get('/admin/users', [AdminUserController::class, 'manageUsers']);
-    // Add other routes that require the 'admin' role
-});
 
 
-Route::middleware('role:editor')->group(function () {
-    Route::get('/admin/posts', [AdminUserController::class, 'managePosts']);
-    // Add other routes that require the 'editor' role
-});
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/subjects/{subject}/quizzes', [SubjectController::class,'showQuizzes'])->name('subject.quizzes');

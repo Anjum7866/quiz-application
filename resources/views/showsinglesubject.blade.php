@@ -1,6 +1,8 @@
-@extends('admin.layout.master')
+@include('head')
+
+
+@include('navbar')
   
-@section('content')
 <section class="home">
     <div class="content">
    
@@ -20,9 +22,9 @@
 
 </section>
 
-<h1 class="heading"> All Topics </h1>
+@if($topics && count($topics) > 0)
 
-<!-- course section  -->
+<h1 class="heading"> All Topics </h1>
 
 <section class="course">
 @foreach($topics as $topic)
@@ -47,8 +49,10 @@
     </div>
 @endforeach
 </section>
-@endsection
+@endif
 
+
+@include('footer')
 
 
 

@@ -10,14 +10,18 @@
           <i class="bx bx-search"></i>
         </div>
         <div class="profile-details">
-          <img src="{{asset('assets/uploads/profile/'.Auth::user()->profile->avatar)}}" alt="" />
+          @if (Auth::user() && Auth::user()->profile && Auth::user()->profile->avatar)
+          <img src="{{ asset('assets/uploads/profile/' . Auth::user()->profile->avatar) }}" alt="User Avatar" />
+           @else
+          <img src="{{ asset('/images/profile.jpg') }}" alt="Default Avatar" />
+          @endif
           <div class="dropdown">
             <span class="admin_name">{{ Auth::user()->name }}</span>
         
 
             <i class="bx bx-chevron-down"></i>
             <div class="dropdown-content">
-              <a  href="{{ route('profile.edit', Auth::user()->id) }}">Manage Accounts</a>
+              <a  href="{{ route('profile.edit', Auth::user()->profile->id) }}">Manage Accounts</a>
               <a href="{{ route('change.password', Auth::user()->id) }}">Change Password</a>
               <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

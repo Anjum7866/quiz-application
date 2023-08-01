@@ -9,6 +9,23 @@ class UserProfile extends Model
 {
     use HasFactory;
     // app/UserProfile.php
+    protected $fillable = [
+        'user_id',
+        'first_name',
+        'last_name',
+        'bio',
+        ' avatar ',
+        'role',
+        'email',
+        'phone',
+        'mobile',
+        'address',
+        'skype_url',
+        'facebook_url',
+        'instagram_url',
+        'twitter_url'
+    ];
+
 
     public function user()
     {

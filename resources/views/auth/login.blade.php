@@ -89,7 +89,7 @@
           <a href="#">Terms</a>
         </li>
       </ul>
-      <p class="footer-text text-center">copyright © 2023 Bootstrapdash. All rights reserved.</p>
+      <p class="footer-text text-center">copyright © 2023 TecnolynxGlobal. All rights reserved.</p>
     </div>
   </div>
 </div>

@@ -10,7 +10,7 @@
         @csrf
         <div class="form-group">
             <div class="input-group">
-              <input type="name" class="form-control" placeholder="{{ __('Name') }}">
+              <input type="name" name="name" class="form-control" placeholder="{{ __('Name') }}">
               <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="mdi mdi-check-circle-outline"></i>
@@ -25,7 +25,7 @@
           </div>
           <div class="form-group">
             <div class="input-group">
-              <input type="email" class="form-control" placeholder="{{ __('Email Address') }}">
+              <input type="email" name="email" class="form-control" placeholder="{{ __('Email Address') }}">
               <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="mdi mdi-check-circle-outline"></i>
@@ -40,7 +40,7 @@
           </div>
           <div class="form-group">
             <div class="input-group">
-              <input type="password" class="form-control" placeholder="{{ __('Password') }}">
+              <input type="password" name="password" class="form-control" placeholder="{{ __('Password') }}">
               <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="mdi mdi-check-circle-outline"></i>
@@ -56,7 +56,7 @@
             
           <div class="form-group">
             <div class="input-group">
-              <input type="password" class="form-control" placeholder="{{ __('Confirm Password') }}">
+              <input type="password" name="password_confirmation" class="form-control" placeholder="{{ __('Confirm Password') }}">
               <div class="input-group-append">
                 <span class="input-group-text">
                   <i class="mdi mdi-check-circle-outline"></i>

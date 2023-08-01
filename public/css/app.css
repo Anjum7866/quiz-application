@@ -19575,6 +19575,10 @@ small {
 .right-sidebar-toggler-wrapper .sidebar-toggler:last-child {
   border-bottom: none;
 }
-
+input[type="radio"], input[type="checkbox"] {
+    box-sizing: border-box;
+    padding: 0;
+    opacity: 1 !important;
+  }
 
 /*# sourceMappingURL=app.css.map*/

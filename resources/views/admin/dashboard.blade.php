@@ -86,7 +86,41 @@
               @endforeach
             </ul>
           </div>
-          
+          <div class="recent-sales box">
+            <div class="title">List of Topics</h2>
+            </div>
+            <div class="sales-details">
+                @if(count($topics) > 0)
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Subject</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $counter = 1;
+                        @endphp
+                        @foreach($topics as $topic)
+                        <tr>
+                            <td>{{ $counter }}</td>
+                            <td>{{ $topic->name }}</td>
+                            <td>{{ $topic->subject->name }}</td>
+                          
+                        </tr>
+                        @php
+                            $counter++;
+                        @endphp
+                        @endforeach
+                    </tbody>
+                </table>
+                @else
+                <p>No topics found.</p>
+                @endif
+                </div>
+        </div>
         </div>
       
        

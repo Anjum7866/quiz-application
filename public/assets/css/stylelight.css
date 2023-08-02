@@ -526,6 +526,12 @@ border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
 
 
 /* media queries  */
+@media (min-width: 992px) and (max-width: 1094px) {
+  .course .box {
+    flex: 1 1 23rem;
+  }  
+}
+
 
 @media (max-width:991px){
 
@@ -543,6 +549,9 @@ border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
 
   section{
   padding:2rem 7%;
+}
+.course .box {
+  flex: 1 1 23rem;
 }
 
 
@@ -577,6 +586,9 @@ border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
   .contact form .inputBox input{
     width:100%;
   }
+  .course .box {
+    flex: 1 1 23rem;
+  }
 
 }
 
@@ -584,6 +596,10 @@ border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
 
   html{
     font-size: 50%;
+  }
+  .course .box {
+    width: 100% !important;
+    
   }
 
 } 

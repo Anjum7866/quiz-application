@@ -605,6 +605,11 @@ footer .logo span{
 
 
 /* media queries  */
+@media (min-width: 992px) and (max-width: 1094px) {
+  .course .box {
+    flex: 1 1 23rem;
+  }  
+}
 
 @media (max-width:991px){
 
@@ -623,7 +628,9 @@ footer .logo span{
   section{
     padding:2rem;
   }
-
+  .course .box {
+    flex: 1 1 23rem;
+  }
 }
 .swiper-slide-active .box {
   transform: scale(1.05);
@@ -684,6 +691,9 @@ footer .logo span{
 }
 
 @media (max-width:768px){
+  .course .box {
+    flex: 1 1 23rem;
+  }
   .swiper-navBtn {
     display: none;
   }
@@ -722,7 +732,10 @@ footer .logo span{
 }
 
 @media (max-width:400px){
-
+  .course .box {
+    width: 100% !important;
+    
+  }
   html{
     font-size: 50%;
   }

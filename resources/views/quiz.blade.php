@@ -1,5 +1,3 @@
-@include('head')
-<div>
 
 @include('navbar')
 
@@ -17,6 +15,7 @@
         <ul>
             {{-- List individual quizzes with their titles --}}
             @foreach ($subjectWithQuizzes->quizzes as $quiz)
+            
                 <li>
                     <a href="{{ route('subject.quiz.show', ['subject' => $subjectWithQuizzes->id, 'quiz' => $quiz->id]) }}">
                         {{ $quiz->title }}
@@ -26,7 +25,3 @@
         </ul>
     @endif
     @include('footer')
-
-
-</div>
-

@@ -1,4 +1,3 @@
-@include('head')
 
 
 @include('navbar')
@@ -12,7 +11,7 @@
         <p>E-learning allows learners to access educational content anytime and anywhere, providing the flexibility to study at their own pace and convenience.
 
         E-learning platforms often offer a wide range of multimedia resources, such as videos, interactive quizzes, simulations, and e-books, catering to different learning styles and enhancing engagement.</p>
-        <a href="{{ route('login') }}" class="btn">get started</a>
+        <a href="{{ route('register') }}" class="btn">get started</a>
     </div>
 
     <div class="image">

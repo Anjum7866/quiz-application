@@ -1,5 +1,3 @@
-@include('head')
-<div >
 
 @include('navbar')
 <h1 class="heading"> All Subjects </h1>
@@ -35,7 +33,6 @@
 
 @include('footer')
 
-</div>
 
 
 

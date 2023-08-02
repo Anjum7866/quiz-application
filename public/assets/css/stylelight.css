@@ -156,11 +156,12 @@ header .navbar a:hover{
 
 .course .box{
   background: none;
-  flex:1 1 30rem;
   border-radius: .5rem;
   border:.1rem solid rgba(0,0,0,.1);
   padding:1rem;
   position: relative;
+  width: 30%;
+  margin:10px
 }
 .course .box:hover {
   transform: scale(1.05);
@@ -232,6 +233,7 @@ border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
   border-radius:.5rem;
   padding:1.5rem;
   text-align: center;
+  margin:10px;
 }
 .teacher .box:hover {
   transform: scale(1.05);
@@ -290,6 +292,7 @@ border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
   text-align: center;
   border:.1rem solid rgba(0,0,0,.1);
   border-radius: .5rem;
+  margin:10px;
 }
 .price .box:hover {
   transform: scale(1.05);
@@ -343,6 +346,7 @@ border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
   padding:1rem;
   background: none;
   flex:1 1 30rem;
+  margin:10px;
 }
 .review .box:hover {
   transform: scale(1.05);
@@ -538,8 +542,9 @@ border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
   }
 
   section{
-    padding:2rem;
-  }
+  padding:2rem 7%;
+}
+
 
 }
 

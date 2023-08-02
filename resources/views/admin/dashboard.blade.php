@@ -1,7 +1,6 @@
 
 @extends('admin.layout.master')
 
-
 @section('content')
 
 
@@ -15,7 +14,7 @@
                 <span class="text">Up from yesterday</span>
               </div>
             </div>
-            <i class="bx bx-cart-alt cart"></i>
+           
           </div>
           <div class="box">
             <div class="right-side">
@@ -26,7 +25,7 @@
                 <span class="text">Up from yesterday</span>
               </div>
             </div>
-            <i class="bx bxs-cart-add cart two"></i>
+           
           </div>
           <div class="box">
             <div class="right-side">
@@ -37,7 +36,7 @@
                 <span class="text">Up from yesterday</span>
               </div>
             </div>
-            <i class="bx bx-cart cart three"></i>
+            
           </div>
           <div class="box">
             <div class="right-side">
@@ -48,26 +47,31 @@
                 <span class="text">Up from yesterday</span>
               </div>
             </div>
-            <i class="bx bxs-cart-download cart four"></i>
+          
           </div>
         </div>
-
-        <div class="sales-boxes">
-          <div class="recent-sales box">
-            <div class="title">Recent Topics</div>
-            
-              @foreach($topics as $topic)
-              <div class="sales-details">
-              <ul class="details">
-                <li><a href="#">{{$topic->name}}</a></li>
-               </ul>
+        <div class="card" style="background:none">
+        <h1 style="text-align: center;font-size: x-large;">All Quizes</h1>
+        <div class="overview-boxes">
+            @foreach($quizzes as $quiz)
+            @if ($quiz->questions->count() > 0)
+              <div class="box">
+                <div class="right-side">  
+                  <div class="box-topic"><strong>{{ $quiz->title }}</strong>   
+                    <br> {{$quiz->questions->count()}}Questions covering the basics of {{ $quiz->title }}
+                    <div class="button">
+                    <a href="{{ route('quiz.generate', $quiz->id) }}">Start Quiz</a>
+                    </div>
+                  </div>
+                </div>
               </div>
+              @endif
               @endforeach
-            
-            <div class="button">
-              <a href="/topics">See All</a>
-            </div>
-          </div>
+        
+    
+        </div> 
+</div>
+        <div class="sales-boxes">
           <div class="top-sales box">
             <div class="title">Top Subjects</div>
             <ul class="top-sales-details">
@@ -82,7 +86,10 @@
               @endforeach
             </ul>
           </div>
+          
         </div>
+      
+       
       
      
 

@@ -105,9 +105,10 @@ class QuizController extends Controller
     {
         $quizQuestions = Question::where('quiz_id', $Id)
             ->inRandomOrder()
-            ->limit(5) // Adjust the number of questions you want in the quiz
             ->get();
-        return view('admin.quizz.quiz', compact('quizQuestions'));
+            $quiz = Quiz::find($Id);
+
+        return view('admin.quizz.quiz', compact('quizQuestions', 'quiz'));
     }
 
     public function submitQuiz(Request $request)
@@ -151,6 +152,7 @@ class QuizController extends Controller
         ]);
         return redirect()->route('subject.quizzes', $subjectId)
                          ->with('score', $score)
+                         ->with('quizId', $quizId)
                          ->with('totalQuestions', $totalQuestions);
     
     }

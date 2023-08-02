@@ -1,6 +1,4 @@
     
-@include('head')
-<div >
 
 @include('navbar')
 
@@ -66,7 +64,6 @@
 
 @include('footer')
 
-</div>
 
 
 

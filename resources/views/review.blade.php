@@ -1,5 +1,3 @@
-@include('head')
-
 
 
 @include('navbar')

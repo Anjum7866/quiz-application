@@ -4,8 +4,9 @@
 <div class="sales-boxes">
         <div class="recent-sales box">
             <div class="title">{{ $subjectWithQuizzes->name }} Quizzes</h2>
+            <!-- @if(in_array(Auth::user()->role, ['admin', 'superadmin']))
                 <div class="button"><a class="btn btn-primary" href="{{ route('subjects.show', $subject->id) }}"> Back</a></div>
-                <div class="button"><a class="btn btn-primary" href="{{ route('answered-quiz-history') }}">Show All Quiz History</a></div>
+               @endif -->
            
             </div>
 
@@ -13,19 +14,24 @@
                 <div class="row">
          
                 @if ($subjectWithQuizzes->quizzes->isEmpty())
-                    <p>No quizzes available for this subject.</p>
+                    <p>No quizzes available </p><br>
                 @else
-                    @if (session()->has('score') && session()->has('totalQuestions'))
-                        <p>Your score: {{ session('score') }}/{{ session('totalQuestions') }}</p>
+               
+                    @if (session()->has('score') && session()->has('totalQuestions') && session()->has('quizId'))
+                        <p><strong>Results</strong></p><br/>
+                        <p>Your score: {{ session('score') }}/{{ session('totalQuestions') }}</p><br>
+                        <?php  $quizid= session('quizId'); ?>
+                        <a class="btn btn-primary"href="{{ route('quiz.generate',$quizid)}}">Try Again</a>
                         <a class="btn btn-primary" href="{{ route('certificate.download', ['subject' => $subjectWithQuizzes->id, 'score' => session('score'), 'totalQuestions' => session('totalQuestions')]) }}">Download Certificate</a>
+                        <br>
                         @endif
 
                     <ul>
-                        {{-- List individual quizzes with their titles --}}
+                        <p>Click Below link to start quizz</p>
                         @foreach ($subjectWithQuizzes->quizzes as $quiz)
                             <li>
                                 <a href="{{ route('subject.quiz.show', ['subject' => $subjectWithQuizzes->id, 'quiz' => $quiz->id]) }}">
-                                    {{ $quiz->title }}
+                                    <strong>{{ $quiz->title }}</strong>
                                 </a>
                             </li>
                         @endforeach

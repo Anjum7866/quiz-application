@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
-    protected $guarded = ['id','text', 'subject_id', 'topic_id', 'created_at', 'updated_at'];
+    protected $guarded = ['id','text', 'subject_id', 'topic_id','quiz_id', 'created_at', 'updated_at'];
 
 
     public function subject(){

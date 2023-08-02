@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\QuizResult;
+use App\Models\Question;
 use Carbon\Carbon;
 
 
@@ -11,27 +12,23 @@ class QuizResultController extends Controller
 {
     public function index()
     {
-        $QuizResult = QuizResult::where('user_id', auth()->id())->get();
+        $QuizResult = QuizResult::where('user_id', auth()->id())
+        ->orderByDesc('created_at')
+        ->get();
 
-        // Convert the timestamp to a human-readable format
-        foreach ($QuizResult as $result) {
-            $result->human_readable_time = $this->getHumanReadableTime($result->answered_at);
-        }
+        // $quizIds = $QuizResult->pluck('quiz_id')->all();
+
+        // $totalQuestionsPerQuiz = [];
+        // foreach ($quizIds as $quizId) {
+        //     $totalQuestions = Question::where('quiz_id', $quizId)->count();
+        //     $totalQuestionsPerQuiz[$quizId] = $totalQuestions;
+        // }
+    
         return view('answered_quiz_history', compact('QuizResult'));
 
+    } 
+    public function checkanswers(){
+        dd('testing');
     }
-    private function getHumanReadableTime($timestamp)
-    {
-    $carbonTime = Carbon::parse($timestamp);
-    $now = Carbon::now();
-
-    // Check if the timestamp is within the last hour
-    if ($carbonTime->diffInMinutes($now) < 60) {
-        return $carbonTime->diffForHumans($now);
-    } else {
-        return $carbonTime->format('Y-m-d H:i:s');
-    }
-}
-
 
 }

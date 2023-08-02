@@ -12,6 +12,8 @@
             <span class="links_name">Dashboard</span>
           </a>
         </li>
+       
+        @if(in_array(Auth::user()->role, ['admin', 'superadmin']))
         <li>
           <a  href="{{ url('/subjects') }}">
             <i class="bx bx-box"></i>
@@ -34,6 +36,21 @@
           <a href="{{ url('/questions') }}">
             <i class="bx bx-pie-chart-alt-2"></i>
             <span class="links_name">Question</span>
+          </a>
+        </li>
+        @endif
+        @if(Auth::user()->role === 'superadmin')
+          <li>
+            <a href="{{ url('/admin_users') }}">
+              <i class="bx bx-heart"></i>
+              <span class="links_name">Admin</span>
+            </a>
+          </li>
+        @endif
+        <li>
+          <a href="{{ route('answered-quiz-history') }}" >
+            <i class="bx bx-box"></i>
+            <span class="links_name">Quiz History</span>
           </a>
         </li>
         <!-- <li>
@@ -60,12 +77,7 @@
             <span class="links_name">Messages</span>
           </a>
         </li>
-        <li>
-          <a href="#">
-            <i class="bx bx-heart"></i>
-            <span class="links_name">Favorites</span>
-          </a>
-        </li>
+        
         <li>
           <a href="#">
             <i class="bx bx-cog"></i>

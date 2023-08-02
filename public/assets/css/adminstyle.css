@@ -177,9 +177,9 @@
   .home-content .overview-boxes{
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 0 20px;
+    justify-content: start;
+    /* flex-wrap: wrap; */
+    /* padding: 0 20px; */
     margin-bottom: 26px;
   }
   .overview-boxes .box{
@@ -191,6 +191,7 @@
     padding: 15px 14px;
     border-radius: 12px;
     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    margin:10px
   }
   .overview-boxes .box-topic{
     font-size: 20px;

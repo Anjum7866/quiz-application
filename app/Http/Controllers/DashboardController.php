@@ -31,8 +31,8 @@ class DashboardController extends Controller
         $userCount=$users->count();
         $quizzes =Quiz::all();
         $quizCount=$quizzes->count();
-
-        return view('admin.dashboard', compact('subjects', 'subjectCount','topics','topicCount','userCount', 'quizCount'));
+        
+        return view('admin.dashboard', compact('subjects', 'subjectCount','topics','topicCount','userCount','quizzes', 'quizCount'));
 
     }
 }

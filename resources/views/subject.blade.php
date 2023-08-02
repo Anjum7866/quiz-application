@@ -6,7 +6,11 @@
 <div class="sales-boxes">
         <div class="recent-sales box">
             <div class="title">Subjects with Topics</h2>
-                <div class="button"><a href="{{ route('subjects.create') }}">Add New Subject</a></div>
+            @if(Auth::user()->role === 'admin' || Auth::user()->role === 'superadmin')
+                <div class="button">
+                    <a href="{{ route('subjects.create') }}">Add New Subject</a>
+                </div>
+            @endif
             </div>
             <div class="sales-details">
                 @if (count($subjects) > 0)

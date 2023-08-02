@@ -12,7 +12,6 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>No</th>
                             <th>Question Text</th>
                             <th>Action</th>
                         </tr>
@@ -20,11 +19,8 @@
                     <tbody>
                     @forelse($questions as $question)
                             <tr data-entry-id="{{ $question->id }}">
-                                <td>
-
-                                </td>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $question->text }}</td>
+                                <td style="width:70%">{{ $question->text }}</td>
                                 <td>
                                     <div class="row">
                                     <form  action="{{ route('questions.destroy', $question->id) }}" method="POST">

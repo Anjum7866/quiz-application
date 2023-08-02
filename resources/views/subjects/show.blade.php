@@ -10,7 +10,7 @@
             <strong>Subject Name:</strong>
                     {{ $subject->name }}<br>
                 <div class="button"> <a class="btn btn-primary" href="{{ route('subjects.index') }}"> Back</a>
-                <a class="btn btn-success" href="{{ route('subject.quizzes', $subject->id) }}">Show Quiz</a> <!-- Add this line -->
+                <!-- <a class="btn btn-success" href="{{ route('subject.quizzes', $subject->id) }}">Show Quiz</a> Add this line -->
               </div>
               </div>
               <div class="sales-details">

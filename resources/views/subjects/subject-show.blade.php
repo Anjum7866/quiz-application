@@ -26,16 +26,7 @@
                         <br>
                         @endif
 
-                    <ul>
-                        <p>Click Below link to start quizz</p>
-                        @foreach ($subjectWithQuizzes->quizzes as $quiz)
-                            <li>
-                                <a href="{{ route('subject.quiz.show', ['subject' => $subjectWithQuizzes->id, 'quiz' => $quiz->id]) }}">
-                                    <strong>{{ $quiz->title }}</strong>
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
+                    
                 @endif
                 </div>
             </div>   

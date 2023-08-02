@@ -9,7 +9,7 @@
     <p>{{$subject->detail}}</p><br><br>
     @if($quiz)
     <p><strong>Take a quiz by clicking below link</strong><br></p>
-    <a class="btn btn-success" href="{{ route('subject.quizzes', $subject->id) }}">{{$quiz->title }} </a> <!-- Add this line -->
+    <a class="btn btn-success" href="{{ route('quiz.generate', $quiz->id) }}">{{$quiz->title }} </a> <!-- Add this line -->
     @endif              
 </div>
 

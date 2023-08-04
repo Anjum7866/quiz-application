@@ -62,7 +62,7 @@ font-size:medium;
       <strong>{{ $quiz->title }} Quiz</strong>
     </div>
     <div class="card-content">
-                <form  id="quizForm" data-quiz-id="{{ $quiz->id }}">
+                <form method="POST"  id="quizForm" data-quiz-id="{{ $quiz->id }}">
                     @csrf
                     @foreach ($quizQuestions as $key => $question)
                         <div class="question" id="question{{ $key + 1 }}" style="{{ $key === 0 ? '' : 'display: none' }}">
@@ -81,7 +81,7 @@ font-size:medium;
                         </div>
                     @endforeach
                     <button class="btn btn-primary next-btn" type="button">Next</button>
-                    <button class="btn btn-primary submit-btn" type="submit" style="display: none">Submit Quiz</button>
+                    <input class="btn btn-primary submit-btn" type="submit" value="Submit Quiz" style="display: none"/>
                 </form>
         </div>
         

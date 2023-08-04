@@ -8,14 +8,23 @@
 
             <div class="title">
                 <div class="button"> <a class="btn btn-primary" href="{{ route('topics.index') }}"> Back</a>
-                <a class="btn btn-success" href="{{ route('quiz.generate', $topic->id) }}">Show Quiz</a> <!-- Add this line -->
+                @if ($quiz)
+                    <a class="btn btn-success" href="{{ route('quiz.generate', $quiz->id) }}">Show Quiz</a>
+                @endif
                 </div>
             </div>
             <div class="sales-details">
               <div class="row">
               <p><strong>Subject Name:</strong> {{ $topic->subject->name }}</p>
               </div>
+             
             </div>
+            <div class="button">  <a href="{{ route('topic.createTopicQuiz', $topic->id) }}" class="btn btn-primary">
+                        <span class="icon text-white-50">
+                            <i class="fa fa-plus"></i>
+                        </span>
+                        <span class="text">{{ __('New quizz') }}</span>
+                    </a></div>
         </div>
 </div>
 <br>

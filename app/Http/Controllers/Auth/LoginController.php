@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {
@@ -38,5 +41,19 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    public function checkLoginStatus()
+    {
+        if (Auth::check()) {
+            return response()->json(true); // User is logged in
+        } else {
+            return response()->json(false); // User is not logged in
+        }
+    }
+    public function redirectTo()
+    {
+        return '/quiz/' . request()->segment(2); // Redirect to the quiz URL
+    }
+
+
     
 }

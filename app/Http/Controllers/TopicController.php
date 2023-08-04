@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use App\Models\Topic;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -32,10 +33,16 @@ class TopicController extends Controller
     public function show($id)
     {
         $topic = Topic::findOrFail($id);
-        
-        return view('topics.show', compact('topic'));
-    }
+        $quiz = Quiz::where('topic_id', $id)->first();
 
+        return view('topics.show', compact('topic','quiz'));
+    }
+    public function showQuizzes(Topic $topic)
+    {
+        // Get the subject and its quizzes
+        $topicWithQuizzes = $topic->load('quizzes');
+        return view('topics/topic-show', compact('topicWithQuizzes', 'topic'));
+    }
 
     // Store the newly created topic in the database
     public function store(Request $request, $subjectId)
@@ -171,4 +178,12 @@ class TopicController extends Controller
 
         return redirect()->route('topics.index')->with('success', 'Topic deleted successfully.');
     }
+    public function getDetails($topicId)
+    {
+        $topic = Topic::with('quizzes')->find($topicId);
+
+        // Return HTML content with the topic details
+        return view('topics.topic-details', ['topic' => $topic]);
+    }
+
 }

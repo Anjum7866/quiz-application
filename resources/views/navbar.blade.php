@@ -156,16 +156,12 @@ body:not(.dark-theme) .moon-icon {
        
                     </nav>
                     <label class="theme-switch">
-    <input type="checkbox" id="themeToggle" />
-    <span class="slider round" style="display:none"></span>
-    <i class="sun-icon fas fa-sun"></i>
-    <i class="moon-icon fas fa-moon"></i>
-  </label>
-
-
-
-
-</header>
+                <input type="checkbox" id="themeToggle" />
+                <span class="slider round" style="display:none"></span>
+                <i class="sun-icon fas fa-sun"></i>
+                <i class="moon-icon fas fa-moon"></i>
+              </label>
+        </header>
 
     <script>
     // JavaScript to toggle between dark and light themes

@@ -15,25 +15,25 @@
        
         @if(in_array(Auth::user()->role, ['admin', 'superadmin']))
         <li>
-          <a  href="{{ url('/subjects') }}">
+          <a  href="{{ url('/org/subjects') }}">
             <i class="bx bx-box"></i>
             <span class="links_name">Subjects</span>
           </a>
         </li>
         <li>
-          <a href="{{ url('/topics') }}">
+          <a href="{{ url('/org/topics') }}">
             <i class="bx bx-coin-stack"></i>
             <span class="links_name">Topics</span>
           </a>
         </li>
         <li>
-          <a href="{{ url('/quizzes') }}">
+          <a href="{{ url('/org/quizzes') }}">
             <i class="bx bx-list-ul"></i>
             <span class="links_name">Quiz</span>
           </a>
         </li>
         <li>
-          <a href="{{ url('/questions') }}">
+          <a href="{{ url('/org/questions') }}">
             <i class="bx bx-pie-chart-alt-2"></i>
             <span class="links_name">Question</span>
           </a>

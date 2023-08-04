@@ -1,3 +1,4 @@
+@extends('admin.layout.master')
 <style>
 .radiocontainer {
   background-color: #E7E9EB;
@@ -22,47 +23,15 @@
   background-color: #fff;
   border-radius: 50%;
 }
-.btn-primary{
-    background: #007BFF !important;
-font-size: 1.3rem;
-}
-        /* Card Header */
-        .card-header {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        /* Card Content */
-        .card-content {
-            margin-top: 10px;
-        }
-
-        /* Card Footer */
-        .card-footer {
-            margin-top: 20px;
-            text-align: right;
-        }
-
-        /* Button Styles (for Card Footer) */
-        .btn {
-            padding: 8px 12px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        p{
-font-size:medium;
-        }
   </style>
 
-
-        <div class="card-header">
-      <strong>{{ $quiz->title }} Quiz</strong>
-    </div>
-    <div class="card-content">
-                <form  id="quizForm" data-quiz-id="{{ $quiz->id }}">
+@section('content')
+<div class="sales-boxes">
+    <div class="recent-sales box">
+        <div class="title"><strong>{{ $quiz->title }} Quiz</strong></div>
+        <div class="sales-details">
+            <div class="row">
+                <form method="post" action="{{ route('quiz.submit') }}" id="quizForm">
                     @csrf
                     @foreach ($quizQuestions as $key => $question)
                         <div class="question" id="question{{ $key + 1 }}" style="{{ $key === 0 ? '' : 'display: none' }}">
@@ -83,31 +52,33 @@ font-size:medium;
                     <button class="btn btn-primary next-btn" type="button">Next</button>
                     <button class="btn btn-primary submit-btn" type="submit" style="display: none">Submit Quiz</button>
                 </form>
+            </div>
         </div>
-        
-   
- <script>
-   $(document).ready(function () {
-    let currentQuestion = 1;
-    const totalQuestions = {{ count($quizQuestions) }};
+    </div>
+</div>
 
-    $('.next-btn').click(function () {
-        showNextQuestion();
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let currentQuestion = 1;
+        const totalQuestions = {{ count($quizQuestions) }};
+
+        document.querySelector('.next-btn').addEventListener('click', function () {
+            showNextQuestion();
+        });
+
+        function showNextQuestion() {
+            document.querySelector(`#question${currentQuestion}`).style.display = 'none';
+            currentQuestion++;
+
+            if (currentQuestion <= totalQuestions) {
+                document.querySelector(`#question${currentQuestion}`).style.display = 'block';
+            }
+
+            if (currentQuestion === totalQuestions) {
+                document.querySelector('.next-btn').style.display = 'none';
+                document.querySelector('.submit-btn').style.display = 'block';
+            }
+        }
     });
-
-    function showNextQuestion() {
-        $(`#question${currentQuestion}`).hide();
-        currentQuestion++;
-
-        if (currentQuestion <= totalQuestions) {
-            $(`#question${currentQuestion}`).show();
-        }
-
-        if (currentQuestion === totalQuestions) {
-            $('.next-btn').hide();
-            $('.submit-btn').show();
-        }
-    }
-});
-
-    </script> 
+</script>
+@endsection

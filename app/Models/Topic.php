@@ -14,5 +14,10 @@ class Topic extends Model
     {
         return $this->belongsTo(Subject::class);
     }
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class);
+    }
+
 
 }

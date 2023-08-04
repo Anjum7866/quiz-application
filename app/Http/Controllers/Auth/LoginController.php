@@ -37,23 +37,52 @@ class LoginController extends Controller
      *
      * @return void
      */
+    public function index()
+    {
+        $isLoggedIn = Auth::check(); // Check if the user is logged in
+        if (Auth::check()) {
+            return redirect()->intended('/default-redirect-url'); // Use the default URL if no intended URL is available
+        }
+    
+        return response()->json(['isLoggedIn' => $isLoggedIn]);
+    }
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
-    public function checkLoginStatus()
+    public function checkLogin()
+{
+    $isLoggedIn = Auth::check(); // Check if the user is logged in
+
+    return response()->json(['isLoggedIn' => $isLoggedIn]);
+}
+
+    // public function checkLoginStatus()
+    // {
+    //     if (Auth::check()) {
+    //         return response()->json(true); // User is logged in
+    //     } else {
+    //         return response()->json(false); // User is not logged in
+    //     }
+    // }
+    public function showLoginForm()
     {
-        if (Auth::check()) {
-            return response()->json(true); // User is logged in
-        } else {
-            return response()->json(false); // User is not logged in
-        }
-    }
-    public function redirectTo()
-    {
-        return '/quiz/' . request()->segment(2); // Redirect to the quiz URL
+        return view('auth.login'); // Assuming your login view is at resources/views/auth/login.blade.php
     }
 
+    protected function authenticated(Request $request, $user)
+    {
+        // Check if there's an intended URL in the session
+        $intendedUrl = session('intendedUrl');
+dd($intendedUrl);
+        if ($intendedUrl) {
+            // Clear the intended URL from the session
+            session()->forget('intendedUrl');
+            return redirect()->to($intendedUrl); // Redirect to intended URL
+        }
+
+        return redirect()->intended($this->redirectPath());
+    }
 
     
 }

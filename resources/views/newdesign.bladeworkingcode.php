@@ -328,7 +328,7 @@
 
   <!-- Mobile dropdown menu -->
   <div class="mobile-menu" id="mobileMenu">
-      </div>
+  </div>
   <!-- <script>
     // Function to toggle the mobile menu
     function toggleMobileMenu() {

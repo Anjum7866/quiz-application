@@ -57,7 +57,27 @@
       justify-content: space-between;
       padding: 1rem 6%;
     }
+    img.image{
+      width:500px;
+      height:350px;
+    }
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
     @media (max-width: 768px){
+      .sub-header.hidden {
+  display: none;
+}
+
+
+      .hamburger {
+        display: block;
+      }
+      img.image{
+        width: 100%;
+        height: 100%;
+    }
         .navbar {
   position: absolute;
   top: 100%;
@@ -73,7 +93,6 @@
   background: black;
 }
 .sub-header {
-  display:none;
 }
 #menu {
   font-size: 1.5rem;
@@ -88,11 +107,27 @@
  .logo span {
   color: var(--pink);
 }
- .navbar a {
+.navbar a {
     font-weight:normal;
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
   font-size: 1.3rem;
-  color: #fff;
+  color: #fff !important;
+}
+.navbar.active a {
+    font-weight:normal;
+  /* margin-left: 2rem; */
+  font-size: 1.3rem;
+  color: #fff !important;
+  display:block;
+  text-align: center;
+margin: 10px;
+}
+ .sub-header a {
+    font-weight:normal;
+  /* margin-left: 2rem; */
+  font-size: medium;
+  font-weight:bold;
+  color: #fff !important;
 }
     .sub-header {
       background: var(--violet);
@@ -111,7 +146,7 @@
       width: 200px;
       height: 100%;
       position: fixed;
-      top: 115px;
+      top: 110px;
       left: 0;
       bottom: 0;
       /* overflow-y: auto; */
@@ -255,6 +290,10 @@
         body:not(.dark-theme) .moon-icon {
         display: none;
         }
+        .mobile-menu {
+        display: none;
+        }
+
 
     @media screen and (max-width: 768px) {
       .sidebar {
@@ -268,6 +307,7 @@
 
       .content {
         margin-left: 0;
+        margin-top: 150px;
       }
 
       .content, .sub-header {
@@ -277,12 +317,14 @@
       .mobile-menu {
         display: none;
         position: fixed;
-        top: 90px;
+        top: 140px;
         left: 0;
         width: 200px;
         background-color: var(--sidebar-background);
         color: var(--sidebar-text-color);
         z-index: 999;
+        padding: 10px;
+border-radius: 5px;
       }
 
       .mobile-menu.active {
@@ -298,7 +340,7 @@
 
       <div id="menu" class="fas fa-bars"></div>
 
-      <nav class="navbar" >
+      <nav class="navbar"  style="margin:auto">
           @if (Route::has('login'))
           @auth
               <a href="{{ url('/') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
@@ -332,7 +374,9 @@
       <i class="moon-icon fas fa-moon"></i>
       </label>
   </div>
-  <div class="sub-header" id="sub-header"> @foreach($subjects as $key => $subject)
+  <div class="sub-header" id="sub-header"> 
+  
+    @foreach($subjects as $key => $subject)
     <a class="subject-name" data-subject-id="{{ $subject->id }}" href="{{url('/', $subject->id)}}">{{ $subject->name }}</a>
       
     @endforeach</div>
@@ -341,6 +385,60 @@
     
     <div class="sidebar" id="sidebar">
       @if($singlesubject)
+        @if($singlesubject->topics->count() > 0)
+            @foreach($singlesubject->topics as $topic)
+                <p class="topic" data-topic-id="{{ $topic->id }}">{{ $topic->name }}</p>
+            @endforeach
+            @foreach($singlesubject->quizzes as $quiz)
+            <br> Take Subject Quiz By clicking link below<br/>
+            <a href='#' data-quiz-id="{{ $quiz->id }}">{{ $quiz->title }}</a><br><br>
+            @endforeach
+        @else
+            <p>No topics found for subject</p>
+        @endif
+      @else
+        @foreach($subjects as $subject)
+            @if($subject->topics->count() > 0)
+                <h2>{{ $subject->name }}</h2>
+                @foreach($subject->topics as $topic)
+                    <p class="topic" data-topic-id="{{ $topic->id }}"><strong>{{ $topic->name }}</strong></p>
+                @endforeach
+                @foreach($subject->quizzes as $quiz)
+                    <br> Take Subject Quiz By clicking link below<br/>
+                    <a href='#' data-quiz-id="{{ $quiz->id }}">{{ $quiz->title }}</a><br><br>
+            @endforeach
+            @endif
+        @endforeach
+      @endif
+    </div> 
+ 
+    <div class="content" >
+      <div class="card" id="topicContent">
+      @if ($singlesubject && $singlesubject->count() > 0)
+      <div class="subject">
+        <h4>{{ $singlesubject->name }}</h4>
+        <p>{{ $singlesubject->detail }}</p>
+        <img class="image" src="{{asset('assets/uploads/profile/'.$singlesubject->image_path)}}" alt="" >
+        <div class="topics">
+          @foreach($singlesubject->topics as $topic)
+            <strong>{{ $topic->name }}</strong>
+            <p>{{ $topic->description }}</p>
+            <img class="image" src="{{asset('assets/uploads/profile/'.$topic->content)}}" alt="" >
+            <br><br>
+            @foreach($topic->quizzes as $quiz)
+            <br> Take Quiz By clicking link below<br/>
+                <a href='#' data-quiz-id="{{ $quiz->id }}">{{ $quiz->title }}</a><br><br>
+            @endforeach
+
+          @endforeach
+    </div>
+      </div>
+      @endif
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+  @if($singlesubject)
         @if($singlesubject->topics->count() > 0)
             @foreach($singlesubject->topics as $topic)
                 <p class="topic" data-topic-id="{{ $topic->id }}">{{ $topic->name }}</p>
@@ -366,38 +464,13 @@
             @endif
         @endforeach
       @endif
-    </div> 
- 
-    <div class="content" >
-      <div class="card" id="topicContent">
-      @if ($singlesubject && $singlesubject->count() > 0)
-      <div class="subject">
-        <h4>{{ $singlesubject->name }}</h4>
-        <p>{{ $singlesubject->detail }}</p>
-        <img src="{{asset('assets/uploads/profile/'.$singlesubject->image_path)}}" alt="" height=300 width=400>
-        <ul class="topics">
-          @foreach($singlesubject->topics as $topic)
-            <li>{{ $topic->name }}</li>
-            <p>{{ $topic->description }}</p>
-            <img src="{{asset('assets/uploads/profile/'.$topic->content)}}" alt="" height=300 width=400>
-            @foreach($topic->quizzes as $quiz)
-            <br> Take Quiz By clicking link below<br/>
-                <a href='#' data-quiz-id="{{ $quiz->id }}">{{ $quiz->title }}</a><br><br>
-            @endforeach
-
-          @endforeach
-        </ul>
-      </div>
-      @endif
-    </div>
+    <!-- Add more mobile menu items here -->
   </div>
 
-  <div class="mobilemenu" id="mobilemenu" >
-   
-  </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+  
 $(document).ready(function () {
     $('.topic').click(function () {
         var topicId = $(this).data('topic-id');
@@ -424,18 +497,18 @@ $(document).ready(function () {
           $.ajax({
               type: 'GET',
               url: '/check-login',
-              success: function (isLoggedIn) {
-                  if (isLoggedIn) {
-                    //  console.log(quizId);
-                      loadQuiz(quizId);
-                  } else {
-                    var intendedUrl = window.location.href; // Current URL
+              success: function (response) {          
+                if (response.isLoggedIn) {
+                    loadQuiz(quizId);
+                } else {
+                    // Store the intended URL in the session
+                    var intendedUrl = window.location.href;
                     console.log(intendedUrl);
-                sessionStorage.setItem('intendedUrl', intendedUrl);
+                    sessionStorage.setItem('intendedUrl', intendedUrl);
+                    window.location.href =  '/custom-login';
+                }
+               },
 
-                      window.location.href = '/login'; 
-                  }
-              },
               error: function (xhr, status, error) {
                   console.error(error);
               }
@@ -455,7 +528,7 @@ $(document).ready(function () {
                     //  console.log(quizId);
                       loadQuiz(quizId);
                   } else {
-                      window.location.href = '/login'; 
+                      window.location.href = '/custom-login'; 
                   }
               },
               error: function (xhr, status, error) {
@@ -538,12 +611,26 @@ $(document).ready(function () {
   
   
   <script>
+    const menuIcon = document.getElementById('menu');
+const subHeader = document.getElementById('sub-header');
+
+menuIcon.addEventListener('click', () => {
+  subHeader.classList.toggle('hidden');
+});
+
     
     function toggleMobileMenu() {
-      var mobilemenu = document.getElementById('mobilemenu');
-      mobilemenu.classList.toggle('active');
+      var mobileMenu = document.getElementById('mobileMenu');
+      mobileMenu.classList.toggle('active');
     }
-    
+
+    const hamburgerIcons = document.querySelectorAll('.hamburger');
+    hamburgerIcons.forEach(icon => {
+      icon.addEventListener('click', () => {
+        // Toggle sidebar visibility or header dropdown here
+      });
+    });
+
     // JavaScript to toggle between dark and light themes
     const themeStylesheet = document.getElementById('theme-stylesheet');
     const themeToggleButton = document.getElementById('themeToggle');
@@ -573,6 +660,7 @@ $(document).ready(function () {
   let navbar = document.querySelector('.navbar');
 
   menu.onclick = () => {
+    console.log('menu')
     menu.classList.toggle('fa-times');
     navbar.classList.toggle('active');
   }
@@ -581,6 +669,7 @@ $(document).ready(function () {
     menu.classList.remove('fa-times');
     navbar.classList.remove('active');
   }
+  
 });
 
     </script>

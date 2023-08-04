@@ -31,6 +31,11 @@ use App\Http\Middleware\CheckRole;
 
 Route::resource('/', HomeController::class);
 Route::get('/get-topic-details/{topicId}', [TopicController::class,'getDetails']);
+Route::get('/custom-login', [LoginController::class,'showLoginForm'])->name('custom.login');
+// Route::get('/test-session', function () {
+//     $intendedUrl = request()->headers->get('referer');
+//     return redirect()->to($intendedUrl); 
+// });
 
 Route::get('/allsubjects',  [SubjectController::class,'showSubjects']);
 Route::get('/singlesubject/{subject}', [SubjectController::class,'showSingleSubject'])->name('subject.showSingleSubject');
@@ -135,10 +140,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-Route::get('/check-login', [LoginController::class,'checkLoginStatus']);
+Route::get('/check-login', [LoginController::class,'checkLogin']);
 
-Route::get('/login', function () { return view('user.login'); });
-    
+
+
+   
 Auth::routes();
 Route::get('/{id}',  [HomeController::class, 'subjects']);
 

@@ -7,6 +7,20 @@ menu.onclick = () =>{
   navbar.classList.toggle('active');
 }
 
+let mobileMenu = document.querySelector('#mobileMenu');
+let hamburger = document.querySelector('.hamburger');
+
+mobileMenu.onclick = () =>{
+  console.log('clicked');
+  mobileMenu.classList.toggle('fa-times');
+  hamburger.classList.toggle('active');
+}
+
+window.onscroll = () =>{
+  mobileMenu.classList.remove('fa-times');
+  hamburger.classList.remove('active');
+}
+
 window.onscroll = () =>{
   menu.classList.remove('fa-times');
   navbar.classList.remove('active');

@@ -420,7 +420,7 @@ $(document).ready(function () {
         quizLinks.click(function (event) {
           event.preventDefault(); 
           var quizId = $(this).data('quiz-id');
-          console.log('testing', quizId);
+          // console.log('testing', quizId);
           $.ajax({
               type: 'GET',
               url: '/check-login',
@@ -429,6 +429,10 @@ $(document).ready(function () {
                     //  console.log(quizId);
                       loadQuiz(quizId);
                   } else {
+                    var intendedUrl = window.location.href; // Current URL
+                    console.log(intendedUrl);
+                sessionStorage.setItem('intendedUrl', intendedUrl);
+
                       window.location.href = '/login'; 
                   }
               },
@@ -462,8 +466,8 @@ $(document).ready(function () {
        
        function loadQuiz(quizId) {
           $.ajax({
-              type: 'GET',
-              url: '/quiz/' + quizId, 
+              type: 'GET', 
+               url: '/quiz/' + quizId,
               success: function (data) {
                   $('#topicContent').html(data);
                   // submitQuiz(quizId);
@@ -473,12 +477,13 @@ $(document).ready(function () {
               }
           });
       }
+     
       $("#quizForm").submit(function(stay){
-        console.log('quizForm');
         var formdata = $(this).serialize(); // here $(this) refere to the form its submitting
-        $.ajax({
+        console.log(formdata);
+          $.ajax({
           type: 'POST',
-          url: '/quiz/submit', 
+          url: '{{route('quiz.submit')}}', 
           data: formdata, // here $(this) refers to the ajax object not form
           success: function (data) {
             alert();

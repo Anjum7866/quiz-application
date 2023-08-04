@@ -55,6 +55,14 @@ font-size: 1.3rem;
         p{
 font-size:medium;
         }
+        .option-box{
+            width:480px;
+        }
+        @media (max-width:767px){
+            .option-box{
+            width:95%;
+        }
+        }
   </style>
 
 
@@ -69,7 +77,7 @@ font-size:medium;
                             <p>Question {{ $key + 1 }} of {{ count($quizQuestions) }}: <br><br><strong>{{ $question->text }}</strong></p>
                             <div >
                                 @foreach ($question->options as $option)
-                                <div style="width:600px;">
+                                <div class="option-box">
                                     <label class="radiocontainer">
                                         <input type="radio" class="checkmark" name="answers[{{ $question->id }}]" value="{{ $option }}">
                                        <p style="margin-top: 10px;"> {{ $option->text }}<p>

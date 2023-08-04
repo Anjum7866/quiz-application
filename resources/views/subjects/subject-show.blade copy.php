@@ -1,3 +1,6 @@
+@extends('admin.layout.master')
+
+@section('content')
 <div class="sales-boxes">
         <div class="recent-sales box">
             <div class="title">{{ $subjectWithQuizzes->name }} Quizzes</h2>
@@ -30,3 +33,4 @@
         </div>
 </div>
 
+@endsection

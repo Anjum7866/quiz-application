@@ -131,7 +131,6 @@ class QuizController extends Controller
 
     public function submitQuiz(Request $request)
     {
-        dd('topicId');
         $userAnswers = $request->input('answers');
         $score = 0;
         $totalQuestions = 0;

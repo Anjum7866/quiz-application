@@ -32,6 +32,8 @@ use App\Http\Middleware\CheckRole;
 Route::resource('/', HomeController::class);
 Route::get('/get-topic-details/{topicId}', [TopicController::class,'getDetails']);
 Route::get('/custom-login', [LoginController::class,'showLoginForm'])->name('custom.login');
+Route::post('/store-intended-url', [LoginController::class, 'storeIntendedUrl']);
+
 // Route::get('/test-session', function () {
 //     $intendedUrl = request()->headers->get('referer');
 //     return redirect()->to($intendedUrl); 
@@ -147,4 +149,5 @@ Route::get('/check-login', [LoginController::class,'checkLogin']);
    
 Auth::routes();
 Route::get('/{id}',  [HomeController::class, 'subjects']);
+Route::post('/{id}', [QuizController::class, 'submitQuiz']);
 

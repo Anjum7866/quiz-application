@@ -69,12 +69,20 @@ class LoginController extends Controller
     {
         return view('auth.login'); // Assuming your login view is at resources/views/auth/login.blade.php
     }
+    public function storeIntendedUrl(Request $request)
+    {
+        $intendedUrl = $request->input('intendedUrl');
+        session(['intendedUrl' => $intendedUrl]);
+// dd($intendedUrl);
+        return response()->json(['message' => 'Intended URL stored successfully']);
+    }
+
 
     protected function authenticated(Request $request, $user)
     {
         // Check if there's an intended URL in the session
         $intendedUrl = session('intendedUrl');
-dd($intendedUrl);
+// dd($intendedUrl);
         if ($intendedUrl) {
             // Clear the intended URL from the session
             session()->forget('intendedUrl');

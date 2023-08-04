@@ -487,7 +487,12 @@ $(document).ready(function () {
         });
     });
      addQuizLinks();
-   
+     $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
     function addQuizLinks() {
         var quizLinks = $('#topicContent').find('a[data-quiz-id]');
         quizLinks.click(function (event) {
@@ -501,15 +506,21 @@ $(document).ready(function () {
                 if (response.isLoggedIn) {
                     loadQuiz(quizId);
                 } else {
-                    // Store the intended URL in the session
-                    var intendedUrl = window.location.href;
-                    console.log(intendedUrl);
-                    sessionStorage.setItem('intendedUrl', intendedUrl);
-                    window.location.href =  '/custom-login';
-                }
-               },
+                // var intendedUrl = window.location.href;
+                // $.ajax({
+                //     type: 'POST',
+                //     url: '/store-intended-url',
+                //     data: { intendedUrl: intendedUrl },
+                    // success: function (data) {
+                        // Redirect to the custom login page
+                        window.location.href = '/custom-login';
+                    // }
+                // });
+            }
+        },
 
-              error: function (xhr, status, error) {
+
+            error: function (xhr, status, error) {
                   console.error(error);
               }
           });
@@ -536,11 +547,33 @@ $(document).ready(function () {
               }
           });
       });
+      var submobquizLinks = $('#mobileMenu').find('a[data-quiz-id]');
+      submobquizLinks.click(function (event) {
+          event.preventDefault(); 
+          var quizId = $(this).data('quiz-id');
+          console.log('testing', quizId);
+          $.ajax({
+              type: 'GET',
+              url: '/check-login',
+              success: function (isLoggedIn) {
+                  if (isLoggedIn) {
+                    //  console.log(quizId);
+                      loadQuiz(quizId);
+                  } else {
+                      window.location.href = '/custom-login'; 
+                  }
+              },
+              error: function (xhr, status, error) {
+                  console.error(error);
+              }
+          });
+      });
        
        function loadQuiz(quizId) {
           $.ajax({
               type: 'GET', 
-               url: '/quiz/' + quizId,
+
+              url: '/quiz/' + quizId,
               success: function (data) {
                   $('#topicContent').html(data);
                   // submitQuiz(quizId);
@@ -567,20 +600,6 @@ $(document).ready(function () {
 
     
 
-      //   $('#quizForm').on('submit', function(event){
-      //       event.preventDefault();
-      //       $.ajax({
-      //         url:'{{route('quiz.submit')}}',
-      //           method:"POST",
-      //           data:new FormData(this),
-      //           dataType:'JSON',
-      //           contentType: false,
-      //           cache: false,
-      //           processData: false,
-      //           success:function(data){
-      //           }
-      //      })
-      //  })
 
         // $('#submitQuizBtn').click(function () {
         //     var quizId = $('#quizForm').data('quiz-id');
@@ -627,16 +646,12 @@ menuIcon.addEventListener('click', () => {
     const hamburgerIcons = document.querySelectorAll('.hamburger');
     hamburgerIcons.forEach(icon => {
       icon.addEventListener('click', () => {
-        // Toggle sidebar visibility or header dropdown here
       });
     });
 
-    // JavaScript to toggle between dark and light themes
     const themeStylesheet = document.getElementById('theme-stylesheet');
     const themeToggleButton = document.getElementById('themeToggle');
 
-    
-    // Check if the theme preference is stored in localStorage
     const storedTheme = localStorage.getItem('theme');
     if (storedTheme) {
       themeStylesheet.setAttribute('href', storedTheme);

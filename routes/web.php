@@ -31,7 +31,9 @@ use App\Http\Middleware\CheckRole;
 
 Route::resource('/', HomeController::class);
 Route::get('/get-topic-details/{topicId}', [TopicController::class,'getDetails']);
-Route::get('/custom-login', [LoginController::class,'showLoginForm'])->name('custom.login');
+Route::get('/user-login', [LoginController::class,'showLoginForm'])->name('user-login');
+Route::post('/user-login', [LoginController::class,'userlogin'])->name('user.userlogin');
+
 Route::post('/store-intended-url', [LoginController::class, 'storeIntendedUrl']);
 
 // Route::get('/test-session', function () {
@@ -110,6 +112,12 @@ Route::prefix('org')->middleware(CheckRole::class.':admin')->group(function () {
 Route::get('/admin/login', function () { return view('admin.login'); });
 Route::get('/admin/register', function () { return view('admin.register'); });
 
+Route::get('/check-login', [LoginController::class,'checkLogin']);
+
+
+
+      
+Auth::routes();
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -120,7 +128,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/profile/{profile}', [UserProfileController::class,'update'])->name('profile.update');
     Route::get('/change-password', [ChangePasswordController::class, 'edit'])->name('change.password');
     Route::post('/change-password', [ChangePasswordController::class, 'update']);
-    Route::get('/subjects/{subject}/quizzes', [SubjectController::class,'showQuizzes'])->name('subject.quizzes');
+    // Route::get('/subjects/{subject}/quizzes', [SubjectController::class,'showQuizzes'])->name('subject.quizzes');
     Route::get('/quizhistory', [QuizResultController::class,'index'])->name('subject.quizhistory');
     Route::get('/checkanswers/{quizId}/',[QuizResultController::class,'checkanswers'])->name('checkanswers');
     Route::get('/topics/{topic}/quizzes', [TopicController::class,'showQuizzes'])->name('topic.quizzes');
@@ -136,18 +144,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/quiz/{Id}', [QuizController::class, 'generateQuiz'])->name('quiz.generate');
     Route::post('/quiz/submit', [QuizController::class, 'submitQuiz'])->name('quiz.submit');
 
+    Route::get('/{id}',  [HomeController::class, 'subjects']);
+    Route::post('/{id}', [QuizController::class, 'submitQuiz']);
+    Route::get('/subjects/{subjectId}', [SubjectController::class,'showQuizzes'])->name('subject.quizzes');
     
 });
 
 
 
 
-Route::get('/check-login', [LoginController::class,'checkLogin']);
-
-
-
-   
-Auth::routes();
-Route::get('/{id}',  [HomeController::class, 'subjects']);
-Route::post('/{id}', [QuizController::class, 'submitQuiz']);
 

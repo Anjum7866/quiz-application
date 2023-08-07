@@ -7,7 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Models\Subject;
 
 class LoginController extends Controller
 {
@@ -46,6 +46,17 @@ class LoginController extends Controller
     
         return response()->json(['isLoggedIn' => $isLoggedIn]);
     }
+    // public function userlogin()
+    // {
+    //     $latestSubject = Subject::orderBy('id', 'desc')->first();
+    //     $subjectId=$latestSubject->id;
+    //     $subjects = Subject::with(['topics', 'quizzes'])->withCount('topics')->get();
+    //     $singlesubject = Subject::with(['topics.quizzes'])->withCount('topics')->find($subjectId);
+    //     $subjectCount = $subjects->count();
+      
+    //     return view('newdesign', compact('subjects', 'singlesubject', 'subjectCount'));
+    
+    // }
     public function __construct()
     {
         $this->middleware('guest')->except('logout');

@@ -89,7 +89,9 @@ font-size:medium;
                         </div>
                     @endforeach
                     <button class="btn btn-primary next-btn" type="button">Next</button>
-                    <input class="btn btn-primary submit-btn" type="submit" value="Submit Quiz" style="display: none"/>
+                    <input type="submit"  class="btn btn-primary submit-btn" value="Submit Quiz" style="display: none">
+
+                    <!-- <button class="btn btn-primary submit-btn" type="submit" id="submitbutton" style="display: none">Submit Quiz</button> -->
                 </form>
         </div>
         

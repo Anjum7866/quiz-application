@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="csrf-token" content="{{ csrf_token() }}"> 
-
+  
   <title>User Dashboard</title>
   <script src="{{ asset('assets/js/script.js') }}" ></script>
  
@@ -141,7 +141,8 @@ margin: 10px;
     }
 
     .sidebar {
-      background-color: var(--sidebar-background);
+      /* background-color: var(--sidebar-background); */
+      background-color:white;
       color: var(--sidebar-text-color);
       width: 200px;
       height: 100%;
@@ -188,6 +189,7 @@ margin: 10px;
       padding: 20px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
+      width: 80%;
     }
     .btn:hover{
         background:var(--gradient);
@@ -356,23 +358,23 @@ border-radius: 5px;
               <a href="{{ url('/price')}}">price</a>
               <a href="{{ url('/review') }}">review</a>
               <a href="{{ url('/contact') }}">contact</a>
-              <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+              <!-- <a href="{{ route('user-login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a> -->
               
 
-              @if (Route::has('register'))
+              <!-- @if (Route::has('register'))
                   <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-              @endif
+              @endif -->
           @endauth
 
           @endif
 
       </nav>
-      <label class="theme-switch">
+      <!-- <label class="theme-switch">
       <input type="checkbox" id="themeToggle" />
       <span class="slider round" style="display:none"></span>
       <i class="sun-icon fas fa-sun"></i>
       <i class="moon-icon fas fa-moon"></i>
-      </label>
+      </label> -->
   </div>
   <div class="sub-header" id="sub-header"> 
   
@@ -387,7 +389,7 @@ border-radius: 5px;
       @if($singlesubject)
         @if($singlesubject->topics->count() > 0)
             @foreach($singlesubject->topics as $topic)
-                <p class="topic" data-topic-id="{{ $topic->id }}">{{ $topic->name }}</p>
+                <p class="topic" data-topic-id="{{ $topic->id }}">&bull; {{ $topic->name }}</p>
             @endforeach
             @foreach($singlesubject->quizzes as $quiz)
             <br> Take Subject Quiz By clicking link below<br/>
@@ -431,10 +433,12 @@ border-radius: 5px;
             @endforeach
 
           @endforeach
-    </div>
+       </div>
       </div>
       @endif
     </div>
+    <div id="resultContent" style="display: none;">...</div>
+
   </div>
 
   <div class="mobile-menu" id="mobileMenu">
@@ -487,24 +491,20 @@ $(document).ready(function () {
         });
     });
      addQuizLinks();
-     $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+    
 
     function addQuizLinks() {
         var quizLinks = $('#topicContent').find('a[data-quiz-id]');
         quizLinks.click(function (event) {
           event.preventDefault(); 
           var quizId = $(this).data('quiz-id');
-          // console.log('testing', quizId);
           $.ajax({
               type: 'GET',
               url: '/check-login',
-              success: function (response) {          
-                if (response.isLoggedIn) {
-                    loadQuiz(quizId);
+              success: function (isLoggedIn) {
+                  if (isLoggedIn) {
+                    //  console.log(quizId);
+                      loadQuiz(quizId);
                 } else {
                 // var intendedUrl = window.location.href;
                 // $.ajax({
@@ -513,7 +513,7 @@ $(document).ready(function () {
                 //     data: { intendedUrl: intendedUrl },
                     // success: function (data) {
                         // Redirect to the custom login page
-                        window.location.href = '/custom-login';
+                        window.location.href = '/user-login';
                     // }
                 // });
             }
@@ -530,7 +530,6 @@ $(document).ready(function () {
       subquizLinks.click(function (event) {
           event.preventDefault(); 
           var quizId = $(this).data('quiz-id');
-          console.log('testing', quizId);
           $.ajax({
               type: 'GET',
               url: '/check-login',
@@ -539,7 +538,7 @@ $(document).ready(function () {
                     //  console.log(quizId);
                       loadQuiz(quizId);
                   } else {
-                      window.location.href = '/custom-login'; 
+                      window.location.href = '/user-login'; 
                   }
               },
               error: function (xhr, status, error) {
@@ -551,7 +550,6 @@ $(document).ready(function () {
       submobquizLinks.click(function (event) {
           event.preventDefault(); 
           var quizId = $(this).data('quiz-id');
-          console.log('testing', quizId);
           $.ajax({
               type: 'GET',
               url: '/check-login',
@@ -560,7 +558,7 @@ $(document).ready(function () {
                     //  console.log(quizId);
                       loadQuiz(quizId);
                   } else {
-                      window.location.href = '/custom-login'; 
+                      window.location.href = '/user-login'; 
                   }
               },
               error: function (xhr, status, error) {
@@ -572,7 +570,6 @@ $(document).ready(function () {
        function loadQuiz(quizId) {
           $.ajax({
               type: 'GET', 
-
               url: '/quiz/' + quizId,
               success: function (data) {
                   $('#topicContent').html(data);
@@ -583,59 +580,96 @@ $(document).ready(function () {
               }
           });
       }
-     
-      $("#quizForm").submit(function(stay){
-        var formdata = $(this).serialize(); // here $(this) refere to the form its submitting
-        console.log(formdata);
+      var tryagainLinks = $('#quizResult').find('a[data-quiz-id]');
+      tryagainLinks.click(function (event) {
+          event.preventDefault(); 
+          var quizId = $(this).data('quiz-id');
           $.ajax({
-          type: 'POST',
-          url: '{{route('quiz.submit')}}', 
-          data: formdata, // here $(this) refers to the ajax object not form
-          success: function (data) {
-            alert();
-          },
+              type: 'GET',
+              url: '/check-login',
+              success: function (isLoggedIn) {
+                  if (isLoggedIn) {
+                    //  console.log(quizId);
+                      loadQuiz(quizId);
+                  } else {
+                      window.location.href = '/user-login'; 
+                  }
+              },
+              error: function (xhr, status, error) {
+                  console.error(error);
+              }
+          });
       });
-      stay.preventDefault(); 
-    });
+   
+    $("#quizForm").submit(function(event) {
+    event.preventDefault(); 
+
+    var formdata = $(this).serialize(); 
+
+    $.ajax({
+    type: 'POST',
+    url: '{{ route('quiz.submit') }}',
+    data: formdata,
+    dataType :'json',
+    success: function(data) {
+    
+        var score = data.score;
+        var quizId = data.quizId;
+        var totalQuestions = data.totalQuestions;
+        var quizName = data.quizName;
+        var subjectId = data.subjectId;
+
+        var htmlContent = `<div>
+            <p>Score: ${score}</p>
+            <p>Quiz ID: ${quizId}</p>
+            <p>Total Questions: ${totalQuestions}</p>
+            <p>Quiz Name: ${quizName}</p>
+            <p>Subject ID: ${subjectId}</p></div>
+        `;
+        $('#resultContent').append(htmlContent);
+
+        // $('#resultContent').html(htmlContent);
+// Hide topicContent and show resultContent
+$('#topicContent').hide();
+$('#resultContent').show();
+
+    },
+    error: function(xhr, status, error) {
+        console.error(error);
+    }
+});
+});
+
+// function loadQuizResult(subjectId) {
+//     $.ajax({
+//         type: 'GET',
+//         url: '/subjects/' + subjectId,
+//         success: function(data) {
+//             console.log(subjectId);
+//             $('#topicContent').html(data);
+//         },
+//         error: function(xhr, status, error) {
+//             console.error(error);
+//         }
+//     });
+// }
 
     
 
-
-        // $('#submitQuizBtn').click(function () {
-        //     var quizId = $('#quizForm').data('quiz-id');
-        //     submitQuiz();
-        // });
-
-
-        // function submitQuiz() {
-        //   var quizId = $('#quizForm').data('quiz-id');
-        //   var formData = $('#quizForm').serialize();
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: '/quiz/submit', 
-        //         data: formData,
-        //         success: function (data) {
-        //           console.log('Submitting quiz with ID:', quizId);
-        //             $('#topicContent').html(data.submittedContent);
-        //         },
-        //         error: function (xhr, status, error) {
-        //             console.error(error);
-        //         }
-        //     });
-        // }
+    
 }
 
 });
 </script>
   
   
-  <script>
+<script>
     const menuIcon = document.getElementById('menu');
-const subHeader = document.getElementById('sub-header');
+  const subHeader = document.getElementById('sub-header');
 
-menuIcon.addEventListener('click', () => {
-  subHeader.classList.toggle('hidden');
-});
+  menuIcon.addEventListener('click', () => {
+    subHeader.classList.toggle('hidden');
+  });
 
     
     function toggleMobileMenu() {
@@ -667,10 +701,9 @@ menuIcon.addEventListener('click', () => {
       }
     });
    
-  </script>
+</script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-  // Your JavaScript code here, including the menu and navbar logic
+  document.addEventListener('DOMContentLoaded', function() {
   let menu = document.querySelector('#menu');
   let navbar = document.querySelector('.navbar');
 
@@ -685,8 +718,7 @@ menuIcon.addEventListener('click', () => {
     navbar.classList.remove('active');
   }
   
-});
-
-    </script>
+  });
+</script>
 </body>
 </html>

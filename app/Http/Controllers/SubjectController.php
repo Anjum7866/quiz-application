@@ -13,7 +13,9 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use App\Models\Quiz;
-
+use App\Models\QuizResult;
+use App\Models\Question;
+use Illuminate\Support\Facades\Auth;
 
 
 class SubjectController extends Controller
@@ -122,11 +124,25 @@ class SubjectController extends Controller
 
         return response()->noContent();
     }
-    public function showQuizzes(Subject $subject)
-    {
+    public function showQuizzes(Subject $subject, $subjectId)
+    { 
         // Get the subject and its quizzes
+        $userId = Auth::id(); 
         $subjectWithQuizzes = $subject->load('quizzes');
-        return view('subjects/subject-show', compact('subjectWithQuizzes', 'subject'));
+        $quiz = Quiz::where('subject_id', $subjectId)->first();
+         if ($quiz) {
+            $quizName = $quiz->title;
+        }
+        $quizId = $quiz->id; 
+        
+        $quizResult = QuizResult::where('quiz_id', $quizId)
+        ->where('user_id', $userId)
+        ->first();
+        $totalQuestions = Question::where('quiz_id', $quizId)->count();
+
+    
+    
+        return view('subjects/subject-show', compact('subjectWithQuizzes', 'subject','quizId','subjectId','totalQuestions', 'quizResult','quizName'));
     }
 
     public function showSubjects(): View

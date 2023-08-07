@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\Question; 
 use App\Models\Option; 
 use App\Models\Answer; 
@@ -10,8 +11,9 @@ use App\Models\Quiz;
 use App\Models\Subject; 
 use App\Models\Topic; 
 use App\Models\QuizResult; 
-use Illuminate\View\View;
+// use Illuminate\View\View;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\View;
 
 
 
@@ -75,7 +77,7 @@ class QuizController extends Controller
             'alert-type' => 'success'
         ]);
     }
-    public function show(Quiz $quiz): View
+    public function show(Quiz $quiz)
     {
         $questions = $quiz->questions()->latest()->get();
       return view('admin.quizz.show', compact('quiz', 'questions'));    
@@ -165,24 +167,31 @@ class QuizController extends Controller
             'user_id' => auth()->id(),
             'answered_at' => $answeredAt,
             'score' =>$score,
-            'quiz_id' =>$quizId
-        ]);
-        if ($subjectId) {
+            'quiz_id' =>$quizId,
             
-        return redirect()->route('subject.quizzes',  $subjectId)
-        ->with('score', $score)
-        ->with('quizId', $quizId)
-        ->with('totalQuestions', $totalQuestions);
-    } else {
-       
-        return redirect()->route('topic.quizzes',$topicId)
-        ->with('score', $score)
-        ->with('quizId', $quizId)
-        ->with('totalQuestions', $totalQuestions);
-    }
+        ]);
+      
+    if ($subjectId) {
+        $data = [
+            'score' => $score,
+            'quizId' => $quizId,
+            'totalQuestions' => $totalQuestions,
+            'quizName' => $quizName,
+            'subjectId' => $subjectId
+        ];
+        $jsonData = json_encode($data);
 
-    
-    
+return response($jsonData, Response::HTTP_OK)
+    ->header('Content-Type', 'application/json');
+
+        
+        // return response()->json($data, Response::HTTP_OK);
+        
+        // return view('subjects/subject-show', compact('score', 'quizId', 'totalQuestions', 'quizName', 'subjectId'));
+    } 
+     else {
+        return view('topics/topic-show', compact('score', 'quizId', 'totalQuestions', 'quizName', 'topicId'));
+    }
     }
     
 }

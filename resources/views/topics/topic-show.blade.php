@@ -9,13 +9,13 @@
            
             </div>
 
-            <div class="sales-details"  id="quizResult">
-                <div class="row">
+            <div class="sales-details"  >
+                <div class="row" id="quizResult">
          
                 @if ($quizId)
                 <p><strong>Results</strong></p><br/>
                         <p>Your score: {{ $score }}/{{ $totalQuestions }}</p><br>
-                 <a class="btn btn-primary" data-quiz-id="{{ $quizId }}"href="{{ route('quiz.generate',$quizId)}}">Try Again</a>
+                 <a class="try-again-button"  data-quiz-id="{{ $quizId }}" href="#">Try Again</a>
                 @endif
                 </div>
             </div>   

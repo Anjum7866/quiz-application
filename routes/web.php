@@ -142,10 +142,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/subjects/{subject}/quizzes/{quiz}', [QuizController::class, 'showQuizz'])->name('subject.quiz.show');
     Route::get('/quiz/history', 'QuizResultController@index')->name('quiz.history');
     Route::get('/quiz/{Id}', [QuizController::class, 'generateQuiz'])->name('quiz.generate');
-    Route::post('/quiz/submit', [QuizController::class, 'submitQuiz'])->name('quiz.submit');
+    // Route::post('/quiz/{Id}', [QuizController::class, 'submitQuiz'])->name('quiz.submit');
 
     Route::get('/{id}',  [HomeController::class, 'subjects']);
-    Route::post('/{id}', [QuizController::class, 'submitQuiz']);
+    Route::post('/{id}', [QuizController::class, 'submitQuiz'])->name('quiz.submit');
     Route::get('/subjects/{subjectId}', [SubjectController::class,'showQuizzes'])->name('subject.quizzes');
     
 });

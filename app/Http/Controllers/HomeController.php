@@ -23,6 +23,6 @@ class HomeController extends Controller
         $subjects = Subject::with(['topics', 'quizzes'])->withCount('topics')->get();
         $singlesubject = Subject::with(['topics.quizzes'])->withCount('topics')->find($subjectId);
         $subjectCount = $subjects->count();
-        return view('newdesign', compact('subjects', 'singlesubject', 'subjectCount'));
+        return view('subjectdata', compact('subjects', 'singlesubject', 'subjectCount'));
     }
 }

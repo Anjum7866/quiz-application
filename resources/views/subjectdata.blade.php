@@ -12,7 +12,6 @@
   <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        <link rel="stylesheet" href="{{ asset('assets/css/swiper-bundle.min.css') }}" />
   <style>
     :root{
       --violet:#6c5ce7;
@@ -339,42 +338,15 @@ border-radius: 5px;
   
   <div class="header" style="display:flex">
       <a href="#" class="logo">Tecnolynx<span>Global</span></a>
-
       <div id="menu" class="fas fa-bars"></div>
-
       <nav class="navbar"  style="margin:auto">
-          @if (Route::has('login'))
-          @auth
               <a href="{{ url('/') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
               <a href="{{ url('/allsubjects')}}">Subjects</a>
               <a href="{{ url('/teacher')}}">teacher</a>
               <a href="{{ url('/price')}}">price</a>
               <a href="{{ url('/review') }}">review</a>
-              <a href="{{ url('/contact') }}">contact</a>
-          @else
-          <a href="{{ url('/') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
-          <a href="{{ url('/allsubjects')}}">Subjects</a>
-              <a href="{{ url('/teacher')}}">teacher</a>
-              <a href="{{ url('/price')}}">price</a>
-              <a href="{{ url('/review') }}">review</a>
-              <a href="{{ url('/contact') }}">contact</a>
-              <!-- <a href="{{ route('user-login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a> -->
-              
-
-              <!-- @if (Route::has('register'))
-                  <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-              @endif -->
-          @endauth
-
-          @endif
-
+              <a href="{{ url('/contact') }}">contact</a>  
       </nav>
-      <!-- <label class="theme-switch">
-      <input type="checkbox" id="themeToggle" />
-      <span class="slider round" style="display:none"></span>
-      <i class="sun-icon fas fa-sun"></i>
-      <i class="moon-icon fas fa-moon"></i>
-      </label> -->
   </div>
   <div class="sub-header" id="sub-header"> 
   
@@ -442,7 +414,7 @@ border-radius: 5px;
   </div>
 
   <div class="mobile-menu" id="mobileMenu">
-  @if($singlesubject)
+     @if($singlesubject)
         @if($singlesubject->topics->count() > 0)
             @foreach($singlesubject->topics as $topic)
                 <p class="topic" data-topic-id="{{ $topic->id }}">{{ $topic->name }}</p>
@@ -478,6 +450,11 @@ border-radius: 5px;
 $(document).ready(function () {
     $('.topic').click(function () {
         var topicId = $(this).data('topic-id');
+        $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
      $.ajax({
             type: 'GET',
             url: '/get-topic-details/' + topicId, 
@@ -496,169 +473,122 @@ $(document).ready(function () {
     function addQuizLinks() {
         var quizLinks = $('#topicContent').find('a[data-quiz-id]');
         quizLinks.click(function (event) {
-          event.preventDefault(); 
-          var quizId = $(this).data('quiz-id');
-          $.ajax({
-              type: 'GET',
-              url: '/check-login',
-              success: function (isLoggedIn) {
-                  if (isLoggedIn) {
-                    //  console.log(quizId);
-                      loadQuiz(quizId);
+            event.preventDefault(); 
+            var quizId = $(this).data('quiz-id');
+            $.ajax({
+                type: 'GET',
+                url: '/check-login',
+                    success: function (isLoggedIn) {
+                        if (isLoggedIn) {
+                            loadQuiz(quizId);
+                        } else {
+                                window.location.href = '/user-login';
+                        }
+                    },
+                error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+            });
+        });
+    
+        var subquizLinks = $('#sidebar').find('a[data-quiz-id]');
+        subquizLinks.click(function (event) {
+        event.preventDefault(); 
+        var quizId = $(this).data('quiz-id');
+        $.ajax({
+            type: 'GET',
+            url: '/check-login',
+            success: function (isLoggedIn) {
+                if (isLoggedIn) {
+                    loadQuiz(quizId);
                 } else {
-                // var intendedUrl = window.location.href;
-                // $.ajax({
-                //     type: 'POST',
-                //     url: '/store-intended-url',
-                //     data: { intendedUrl: intendedUrl },
-                    // success: function (data) {
-                        // Redirect to the custom login page
-                        window.location.href = '/user-login';
-                    // }
-                // });
-            }
-        },
-
-
+                    window.location.href = '/user-login'; 
+                }
+            },
             error: function (xhr, status, error) {
-                  console.error(error);
-              }
-          });
-      });
-    
-      var subquizLinks = $('#sidebar').find('a[data-quiz-id]');
-      subquizLinks.click(function (event) {
-          event.preventDefault(); 
-          var quizId = $(this).data('quiz-id');
-          $.ajax({
-              type: 'GET',
-              url: '/check-login',
-              success: function (isLoggedIn) {
-                  if (isLoggedIn) {
-                    //  console.log(quizId);
-                      loadQuiz(quizId);
-                  } else {
-                      window.location.href = '/user-login'; 
-                  }
-              },
-              error: function (xhr, status, error) {
-                  console.error(error);
-              }
-          });
-      });
-      var submobquizLinks = $('#mobileMenu').find('a[data-quiz-id]');
-      submobquizLinks.click(function (event) {
-          event.preventDefault(); 
-          var quizId = $(this).data('quiz-id');
-          $.ajax({
-              type: 'GET',
-              url: '/check-login',
-              success: function (isLoggedIn) {
-                  if (isLoggedIn) {
-                    //  console.log(quizId);
-                      loadQuiz(quizId);
-                  } else {
-                      window.location.href = '/user-login'; 
-                  }
-              },
-              error: function (xhr, status, error) {
-                  console.error(error);
-              }
-          });
-      });
-       
-       function loadQuiz(quizId) {
-          $.ajax({
-              type: 'GET', 
-              url: '/quiz/' + quizId,
-              success: function (data) {
-                  $('#topicContent').html(data);
-                  // submitQuiz(quizId);
-              },
-              error: function (xhr, status, error) {
-                  console.error(error);
-              }
-          });
-      }
-      var tryagainLinks = $('#quizResult').find('a[data-quiz-id]');
-      tryagainLinks.click(function (event) {
-          event.preventDefault(); 
-          var quizId = $(this).data('quiz-id');
-          $.ajax({
-              type: 'GET',
-              url: '/check-login',
-              success: function (isLoggedIn) {
-                  if (isLoggedIn) {
-                    //  console.log(quizId);
-                      loadQuiz(quizId);
-                  } else {
-                      window.location.href = '/user-login'; 
-                  }
-              },
-              error: function (xhr, status, error) {
-                  console.error(error);
-              }
-          });
-      });
-   
-    $("#quizForm").submit(function(event) {
-      event.preventDefault(); 
-
-      var formdata = $(this).serialize(); 
-      var quizId = $(this).data('quiz-id'); 
-      $.ajax({
-        type: 'POST',
-        url: '/' + quizId,
-        data: formdata,
-        dataType :'json',
-        success: function(data) {
+                console.error(error);
+            }
+        });
+        });
+        var submobquizLinks = $('#mobileMenu').find('a[data-quiz-id]');
+        submobquizLinks.click(function (event) {
+        event.preventDefault(); 
+        var quizId = $(this).data('quiz-id');
+        $.ajax({
+            type: 'GET',
+            url: '/check-login',
+            success: function (isLoggedIn) {
+                if (isLoggedIn) {
+                    loadQuiz(quizId);
+                } else {
+                    window.location.href = '/user-login'; 
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+        });
         
-            var score = data.score;
-            var quizId = data.quizId;
-            var totalQuestions = data.totalQuestions;
-            var quizName = data.quizName;
-            var subjectId = data.subjectId;
+        // var tryagainLinks = $('#quizResult').find('a[data-quiz-id]');
+        // tryagainLinks.click(function (event) {
+        //     console.log('tryagainLinks');
+        // event.preventDefault(); 
+        // var quizId = $(this).data('quiz-id');
+        // $.ajax({
+        //     type: 'GET',
+        //     url: '/check-login',
+        //     success: function (isLoggedIn) {
+        //         if (isLoggedIn) {
+        //             loadQuiz(quizId);
+        //         } else {
+        //             window.location.href = '/user-login'; 
+        //         }
+        //     },
+        //     error: function (xhr, status, error) {
+        //         console.error(error);
+        //     }
+        // });
+        // });
 
-            var htmlContent = `<div>
-                <p>Score: ${score}</p>
-                <p>Quiz ID: ${quizId}</p>
-                <p>Total Questions: ${totalQuestions}</p>
-                <p>Quiz Name: ${quizName}</p>
-                <p>Subject ID: ${subjectId}</p></div>
-            `;
-            $('#resultContent').append(htmlContent);
+        function loadQuiz(quizId) {
+        $.ajax({
+            type: 'GET', 
+            url: '/quiz/' + quizId,
+            success: function (data) {
+                $('#topicContent').html(data);
+                $('#submitQuizButton').on('click', function() {
+                    var quizId = $(this).data('quiz-id'); // Get quizId from data attribute
+                submitQuiz(quizId);
+            });
 
-            // $('#resultContent').html(htmlContent);
-            // Hide topicContent and show resultContent
-            $('#topicContent').hide();
-            $('#resultContent').show();
-
-        },
-        error: function(xhr, status, error) {
-            console.error(error);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
         }
-      });
-    });
 
-// function loadQuizResult(subjectId) {
-//     $.ajax({
-//         type: 'GET',
-//         url: '/subjects/' + subjectId,
-//         success: function(data) {
-//             console.log(subjectId);
-//             $('#topicContent').html(data);
-//         },
-//         error: function(xhr, status, error) {
-//             console.error(error);
-//         }
-//     });
-// }
-
-    
-
-    
-}
-
+        function submitQuiz(quizId) {
+            var formdata = $('#quizForm').serialize();
+            $.ajax({
+            type: 'POST',
+            url: '/' + quizId,
+            data: formdata,
+            success: function(data) {
+                $('#topicContent').html(data);
+                $('#quizResult a[data-quiz-id]').on('click', function(event) {         
+                event.preventDefault();
+                var quizId = $(this).data('quiz-id');
+                loadQuiz(quizId);
+                })
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+            });
+        }
+    }
 });
 </script>
   

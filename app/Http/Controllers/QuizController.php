@@ -131,7 +131,7 @@ class QuizController extends Controller
         return view('admin.quizz.quiz', compact('quizQuestions', 'quiz'));
     }
 
-    public function submitQuiz(Request $request)
+    public function submitQuiz(Request $request, $id)
     {
         $userAnswers = $request->input('answers');
         $score = 0;
@@ -172,22 +172,7 @@ class QuizController extends Controller
         ]);
       
     if ($subjectId) {
-        $data = [
-            'score' => $score,
-            'quizId' => $quizId,
-            'totalQuestions' => $totalQuestions,
-            'quizName' => $quizName,
-            'subjectId' => $subjectId
-        ];
-        $jsonData = json_encode($data);
-
-return response($jsonData, Response::HTTP_OK)
-    ->header('Content-Type', 'application/json');
-
-        
-        // return response()->json($data, Response::HTTP_OK);
-        
-        // return view('subjects/subject-show', compact('score', 'quizId', 'totalQuestions', 'quizName', 'subjectId'));
+        return view('subjects/subject-show', compact('score', 'quizId', 'totalQuestions', 'quizName', 'subjectId'));
     } 
      else {
         return view('topics/topic-show', compact('score', 'quizId', 'totalQuestions', 'quizName', 'topicId'));

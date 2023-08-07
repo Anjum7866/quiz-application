@@ -89,9 +89,9 @@ font-size:medium;
                         </div>
                     @endforeach
                     <button class="btn btn-primary next-btn" type="button">Next</button>
-                    <input type="submit"  class="btn btn-primary submit-btn" value="Submit Quiz" style="display: none">
+                    <!-- <input type="submit"  class="btn btn-primary submit-btn" data-quiz-id="{{ $quiz->id }}" value="Submit Quiz" id="submitQuizButton" style="display: none"> -->
 
-                    <!-- <button class="btn btn-primary submit-btn" type="submit" id="submitbutton" style="display: none">Submit Quiz</button> -->
+                    <button class="btn btn-primary submit-btn" type="button" data-quiz-id="{{ $quiz->id }}" id="submitQuizButton" style="display: none">Submit Quiz</button>
                 </form>
         </div>
         

@@ -35,4 +35,13 @@ class DashboardController extends Controller
         return view('admin.dashboard', compact('subjects', 'subjectCount','topics','topicCount','userCount','quizzes', 'quizCount'));
 
     }
+    public function user()
+    { 
+        $subjects = Subject::with(['topics', 'quizzes'])->withCount('topics')->get();
+        $subjectId =Subject::max('id');
+        $singlesubject = Subject::with(['topics.quizzes'])->withCount('topics')->find($subjectId);
+        $subjectCount = $subjects->count();
+        
+        return view('subjectdata', compact('subjects', 'singlesubject', 'subjectCount'));
+    }
 }

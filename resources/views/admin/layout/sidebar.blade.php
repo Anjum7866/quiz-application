@@ -7,7 +7,7 @@
       </div>
       <ul class="nav-links">
         <li>
-          <a href="{{ url('/home') }}" class="active">
+          <a href="{{ url('/org/admin/dashboard') }}" class="active">
             <i class="bx bx-grid-alt"></i>
             <span class="links_name">Dashboard</span>
           </a>

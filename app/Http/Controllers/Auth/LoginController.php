@@ -46,17 +46,9 @@ class LoginController extends Controller
     
         return response()->json(['isLoggedIn' => $isLoggedIn]);
     }
-    // public function userlogin()
-    // {
-    //     $latestSubject = Subject::orderBy('id', 'desc')->first();
-    //     $subjectId=$latestSubject->id;
-    //     $subjects = Subject::with(['topics', 'quizzes'])->withCount('topics')->get();
-    //     $singlesubject = Subject::with(['topics.quizzes'])->withCount('topics')->find($subjectId);
-    //     $subjectCount = $subjects->count();
-      
-    //     return view('newdesign', compact('subjects', 'singlesubject', 'subjectCount'));
     
-    // }
+
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -68,40 +60,51 @@ class LoginController extends Controller
     return response()->json(['isLoggedIn' => $isLoggedIn]);
 }
 
-    // public function checkLoginStatus()
-    // {
-    //     if (Auth::check()) {
-    //         return response()->json(true); // User is logged in
-    //     } else {
-    //         return response()->json(false); // User is not logged in
-    //     }
-    // }
-    public function showLoginForm()
-    {
-        return view('auth.login'); // Assuming your login view is at resources/views/auth/login.blade.php
+public function authenticated(Request $request, $user)
+{
+    if ($user->role === 'admin') {
+        return redirect()->route('admin.dashboard'); // Redirect to admin dashboard
+    } elseif ($user->role === 'user') {
+        return redirect()->route('user.dashboard'); // Redirect to user dashboard
     }
+}
+
     public function storeIntendedUrl(Request $request)
     {
         $intendedUrl = $request->input('intendedUrl');
         session(['intendedUrl' => $intendedUrl]);
-// dd($intendedUrl);
         return response()->json(['message' => 'Intended URL stored successfully']);
     }
 
-
-    protected function authenticated(Request $request, $user)
+    public function showAdminLoginForm()
     {
-        // Check if there's an intended URL in the session
-        $intendedUrl = session('intendedUrl');
-// dd($intendedUrl);
-        if ($intendedUrl) {
-            // Clear the intended URL from the session
-            session()->forget('intendedUrl');
-            return redirect()->to($intendedUrl); // Redirect to intended URL
-        }
-
-        return redirect()->intended($this->redirectPath());
+        return view('admin.login');
     }
+    
+    public function showUserLoginForm()
+    {
+        return view('auth.login');
+    }
+    public function showUserRegisterForm()
+    {
+        return view('auth.register');
+    }
+    
+      
+
+    
+    // protected function authenticated(Request $request, $user)
+    // {
+    //     $intendedUrl = session('intendedUrl');
+
+    //     if ($intendedUrl) {
+    //         // Clear the intended URL from the session
+    //         session()->forget('intendedUrl');
+    //         return redirect()->to($intendedUrl); // Redirect to intended URL
+    //     }
+
+    //     return redirect()->intended($this->redirectPath());
+    // }
 
     
 }

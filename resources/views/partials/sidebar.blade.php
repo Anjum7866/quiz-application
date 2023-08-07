@@ -10,7 +10,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{ request()->is('admin/dashboard') || request()->is('admin/dashboard') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.dashboard.index') }}">
+                <a class="nav-link" href="{{ route('admin.dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>{{ __('Dashboard') }}</span></a>
             </li>

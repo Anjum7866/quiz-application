@@ -63,6 +63,30 @@ body {
 	box-sizing: border-box;
 	font-family: var(--font-family-poppins);
 }
+.flex{
+display:flex;
+}
+.content-left{
+	width:50%;
+	margin:auto; 
+	margin-right:50px
+}
+.content-right{
+	width:50%
+}
+@media (max-width: 825px) {
+	.flex{
+display:block;
+}
+.content-left{
+	width:100%;
+	margin:auto; 
+}
+.content-right{
+	width:100%;
+	margin:auto; 
+}
+}
 h3{
   font-family: 'Pacifico', cursive;
   color: transparent;

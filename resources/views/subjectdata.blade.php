@@ -345,7 +345,13 @@ border-radius: 5px;
               <a href="{{ url('/teacher')}}">teacher</a>
               <a href="{{ url('/price')}}">price</a>
               <a href="{{ url('/review') }}">review</a>
-              <a href="{{ url('/contact') }}">contact</a>  
+              <a href="{{ url('/contact') }}">contact</a> 
+              <a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              @csrf
+          </form> 
       </nav>
   </div>
   <div class="sub-header" id="sub-header"> 

@@ -112,9 +112,8 @@
 
 </section>
 
-<h1 class="heading"> student's review </h1>
+<!-- <h1 class="heading"> student's review </h1>
 
-<!-- review section  -->
 <section class="review">
 <div class=" swiper">
       <div class="slide-container">
@@ -182,11 +181,9 @@
        
         </div>
       </div>
-      <!-- <div class="swiper-button-next swiper-navBtn"></div>
-      <div class="swiper-button-prev swiper-navBtn"></div> -->
       <div class="swiper-pagination" style="margin-top:20px"></div>
     </div>
-</section>
+</section> -->
 
    
 

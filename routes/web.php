@@ -12,6 +12,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuizResultController;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -31,9 +32,6 @@ use App\Http\Middleware\CheckRole;
 
 Route::resource('/', HomeController::class);
 Route::get('/get-topic-details/{topicId}', [TopicController::class,'getDetails']);
-Route::get('/user-login', [LoginController::class,'showLoginForm'])->name('user-login');
-Route::post('/user-login', [LoginController::class,'userlogin'])->name('user.userlogin');
-
 Route::post('/store-intended-url', [LoginController::class, 'storeIntendedUrl']);
 
 // Route::get('/test-session', function () {
@@ -76,6 +74,9 @@ Route::prefix('org')->middleware(CheckRole::class.':admin')->group(function () {
     Route::get('/admin', function () {
         return 'Welcome, Admin!';
     });
+        Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    
+    
     Route::get('/admin/users', [AdminUserController::class, 'manageUsers']);
     Route::resource('admin_users', AdminUserController::class);
    Route::get('/admin-users', [AdminUserController::class,'index'])->name('admin.users.index');
@@ -109,12 +110,15 @@ Route::prefix('org')->middleware(CheckRole::class.':admin')->group(function () {
 
    
 });
-Route::get('/admin/login', function () { return view('admin.login'); });
-Route::get('/admin/register', function () { return view('admin.register'); });
 
 Route::get('/check-login', [LoginController::class,'checkLogin']);
 
 
+Route::get('admin/login',  [LoginController::class,'showAdminLoginForm'])->name('admin.login');
+Route::get('/admin/register', function () { return view('admin.register'); });
+
+Route::get('user/login', [LoginController::class,'showUserLoginForm'])->name('user.login');
+// Route::get('user/register', [LoginController::class,'showUserRegisterForm'])->name('user.register');
 
       
 Auth::routes();
@@ -122,7 +126,7 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
    
-    Route::get('/home', [App\Http\Controllers\DashboardController::class, 'index'])->name('home');
+    Route::get('/user/dashboard', [App\Http\Controllers\DashboardController::class, 'user'])->name('user.dashboard');
     Route::get('/profile/{profile}', [UserProfileController::class,'show'])->name('profile.show');
     Route::get('/profile/{profile}/edit', [UserProfileController::class,'edit'])->name('profile.edit');
     Route::put('/profile/{profile}', [UserProfileController::class,'update'])->name('profile.update');

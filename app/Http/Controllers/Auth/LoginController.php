@@ -55,17 +55,17 @@ class LoginController extends Controller
     }
     public function checkLogin()
 {
-    $isLoggedIn = Auth::check(); // Check if the user is logged in
+    $isLoggedIn = Auth::check(); 
 
     return response()->json(['isLoggedIn' => $isLoggedIn]);
 }
 
 public function authenticated(Request $request, $user)
 {
-    if ($user->role === 'admin') {
-        return redirect()->route('admin.dashboard'); // Redirect to admin dashboard
+    if (in_array($user->role, ['admin', 'superadmin', 'teacher'])) {
+        return redirect()->route('admin.dashboard'); 
     } elseif ($user->role === 'user') {
-        return redirect()->route('user.dashboard'); // Redirect to user dashboard
+        return redirect()->route('user.dashboard'); 
     }
 }
 

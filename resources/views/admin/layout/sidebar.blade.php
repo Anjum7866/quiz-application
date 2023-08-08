@@ -13,7 +13,7 @@
           </a>
         </li>
        
-        @if(in_array(Auth::user()->role, ['admin', 'superadmin']))
+        @if(in_array(Auth::user()->role, ['admin', 'superadmin','teacher']))
         <li>
           <a  href="{{ url('/org/subjects') }}">
             <i class="bx bx-box"></i>
@@ -39,49 +39,27 @@
           </a>
         </li>
         @endif
-        @if(Auth::user()->role === 'superadmin')
+        @if(in_array(Auth::user()->role, ['admin', 'superadmin']))
           <li>
             <a href="{{ url('/admin_users') }}">
-              <i class="bx bx-heart"></i>
+            <i class="bx bx-user"></i>
               <span class="links_name">Admin</span>
             </a>
           </li>
         @endif
+        @if(Auth::user()->quizResults->count() > 0)
+          <li>
+              <a href="{{ route('org.answered-quiz-history') }}">
+                  <i class="bx bx-box"></i>
+                  <span class="links_name">Quiz History</span>
+              </a>
+          </li>
+      @endif
+
         <li>
-          <a href="{{ route('answered-quiz-history') }}" >
-            <i class="bx bx-box"></i>
-            <span class="links_name">Quiz History</span>
-          </a>
-        </li>
-        <!-- <li>
-          <a href="#">
-            <i class="bx bx-coin-stack"></i>
-            <span class="links_name">Stock</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="bx bx-book-alt"></i>
-            <span class="links_name">Total order</span>
-          </a>
-        </li> -->
-        <li>
-          <a href="#">
-            <i class="bx bx-user"></i>
-            <span class="links_name">Team</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="bx bx-message"></i>
-            <span class="links_name">Messages</span>
-          </a>
-        </li>
-        
-        <li>
-          <a href="#">
+          <a  href="{{ route('adminprofile.edit', Auth::user()->profile->id) }}">
             <i class="bx bx-cog"></i>
-            <span class="links_name">Settings</span>
+            <span class="links_name" >Settings</span>
           </a>
         </li>
         <li class="log_out">

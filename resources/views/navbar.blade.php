@@ -34,6 +34,9 @@
   overflow: hidden;
   box-shadow: 0 0 0 2px var(--gradient);
 }
+.navbar {
+  margin-left: auto;
+}
 /* Toggle switch styles */
 .theme-switch {
   position: relative;
@@ -117,7 +120,58 @@ body.dark-theme .sun-icon {
 body:not(.dark-theme) .moon-icon {
   display: none;
 }
+nav{
+  position: relative;
+}
+ul{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+.display-picture{
+  margin-left: auto;
+}
+.display-picture img{
+  width: 50px;
+  border-radius: 50%;
+  border:2px solid #fff;
+}
+.display-picture img:hover{
+border:2px solid #E78341;
+}
+.profile-card{
+  transition: 0.5s ease;
+}
 
+.profile-card ul{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  background: #E78341;
+  position: absolute;
+  /* top: 4rem; */
+  right:0rem;
+border-radius: 10px;
+padding: 10px 50px 10px 20px;
+}
+.profile-card ul li{
+ 
+  padding: 5px 0;
+  color: #FFF;
+  font-size: 14px;
+}
+.hidden{
+  display: none;
+}
+a{
+  text-decoration: none !important;
+  color:#fff;
+  font-size: medium;
+}
+
+
+   
 </style>
         <!-- <link rel="stylesheet" href="https://altonaviation.com/wp-content/themes/twentytwentyone/css/owl.carousel.min.css"> -->
     </head>
@@ -155,6 +209,37 @@ body:not(.dark-theme) .moon-icon {
                         @endif
        
                     </nav>
+                    @auth
+                    <nav>
+                      <ul>
+                      @if (Auth::user()->profile->avatar) 
+                      <a href="#" class="display-picture">
+                      <img src="{{asset('assets/uploads/profile/'.Auth::user()->profile->avatar)}}" style="width: 50px;" class="rounded-circle img-fluid" alt="avatar">
+                      </a>
+                      @else
+                      <a href="#" class="display-picture"><img src="https://i.pravatar.cc/85" alt=""></a><!--Profile Image-->
+                       
+                    @endif
+                        </ul>
+                        <div class="profile-card hidden">
+                          <ul>
+                            <li><a style="color:white; !important" href="{{ route('profile.edit', Auth::user()->profile->id) }}">Manage Profile</li></a>
+                            <li><a style="color:white; !important" href="{{ route('change.password', Auth::user()->id) }}">Change Password</li></a>
+                            @if(Auth::user()->quizResults->count() > 0)
+                                <li><a style="color: white !important;" href="{{ route('answered-quiz-history') }}">Quiz History</a></li>
+                            @endif
+
+                            <li><a style="color:white; !important" href="{{ route('logout') }}"
+                                                        onclick="event.preventDefault();
+                                                                      document.getElementById('logout-form').submit();">Log Out</li></a>
+                          </ul>
+                          <!-- Logout Form -->
+                          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                              @csrf
+                          </form>
+                        </div>
+                    </nav>
+                    @endauth
                     <label class="theme-switch">
                 <input type="checkbox" id="themeToggle" />
                 <span class="slider round" style="display:none"></span>
@@ -186,3 +271,12 @@ body:not(.dark-theme) .moon-icon {
     });
    
   </script>
+  <script>
+  let card = document.querySelector(".profile-card"); 
+let displayPicture = document.querySelector(".display-picture"); 
+
+displayPicture.addEventListener("click", function() { 
+  console.log('clicked');
+card.classList.toggle("hidden");})
+  </script>
+

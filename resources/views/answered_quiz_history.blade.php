@@ -1,8 +1,16 @@
   <title>Quiz History</title>
-  @extends('admin.layout.master')
-  
-  @section('content')
-    <div class="sales-boxes">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+<style>
+    .card{
+    width:80%;
+    margin:auto;
+    font-size: medium !important;
+    padding:2rem;
+}
+
+    </style>
+  @include('navbar')
+    <div class="card">
         <div class="recent-sales box">
        <div class="title">Answered Quiz History</div>
            
@@ -56,5 +64,4 @@
          
         </div>   
     </div>       
-    @endsection
-   
+    

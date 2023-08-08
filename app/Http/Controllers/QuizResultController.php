@@ -30,5 +30,14 @@ class QuizResultController extends Controller
     public function checkanswers(){
         dd('testing');
     }
+    public function adminquizhistory()
+    {
+        $QuizResult = QuizResult::where('user_id', auth()->id())
+        ->orderByDesc('created_at')
+        ->get();
+        
+        return view('admin/answered_quiz_history', compact('QuizResult'));
+
+    } 
 
 }

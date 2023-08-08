@@ -55,28 +55,10 @@ Route::get('/review', function () {
     return view('review');
 })->name('review');
 
-Route::middleware(CheckRole::class.':superadmin')->group(function () {
+Route::middleware(CheckRole::class.':superadmin,admin')->group(function () {
     Route::get('/superadmin', function () {
         return 'Welcome, SuperAdmin!';
     });
-    Route::get('/admin/users', [AdminUserController::class, 'manageUsers']);
-     Route::resource('admin_users', AdminUserController::class);
-    Route::get('/admin-users', [AdminUserController::class,'index'])->name('admin.users.index');
-    Route::get('/admin-users/create', [AdminUserController::class,'create'])->name('admin.users.create');
-    Route::post('/admin-users', [AdminUserController::class,'store'])->name('admin.users.store');
-    Route::get('/admin-users/{id}', [AdminUserController::class,'show'])->name('admin.users.show');
-    Route::get('/admin-users/{id}/edit', [AdminUserController::class,'edit'])->name('admin.users.edit');
-    Route::put('/admin-users/{id}', [AdminUserController::class,'update'])->name('admin.users.update');
-    Route::delete('/admin-users/{id}', [AdminUserController::class,'destroy'])->name('admin.users.destroy');
-});
-
-Route::prefix('org')->middleware(CheckRole::class.':admin')->group(function () {
-    Route::get('/admin', function () {
-        return 'Welcome, Admin!';
-    });
-        Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    
-    
     Route::get('/admin/users', [AdminUserController::class, 'manageUsers']);
     Route::resource('admin_users', AdminUserController::class);
    Route::get('/admin-users', [AdminUserController::class,'index'])->name('admin.users.index');
@@ -86,7 +68,24 @@ Route::prefix('org')->middleware(CheckRole::class.':admin')->group(function () {
    Route::get('/admin-users/{id}/edit', [AdminUserController::class,'edit'])->name('admin.users.edit');
    Route::put('/admin-users/{id}', [AdminUserController::class,'update'])->name('admin.users.update');
    Route::delete('/admin-users/{id}', [AdminUserController::class,'destroy'])->name('admin.users.destroy');
+});
 
+Route::prefix('org')->middleware(CheckRole::class.':superadmin,admin,teacher')->group(function () {
+    Route::get('/admin', function () {
+        return 'Welcome, Admin!';
+    });
+        Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    
+        Route::get('/answered-quiz-history', [QuizResultController::class, 'adminquizhistory'])->name('org.answered-quiz-history');
+    
+    
+   Route::get('/profile/{profile}', [AdminUserController::class,'showprofile'])->name('adminprofile.show');
+   Route::get('/profile/{profile}/edit', [AdminUserController::class,'editprofile'])->name('adminprofile.edit');
+   Route::put('/profile/{profile}', [AdminUserController::class,'updateprofile'])->name('adminprofile.update');
+   Route::get('/change-password', [ChangePasswordController::class, 'editpassword'])->name('adminchange.password');
+   Route::post('/change-password', [ChangePasswordController::class, 'updatepassword']);
+   // Route::get('/subjects/{subject}/quizzes', [SubjectController::class,'showQuizzes'])->name('subject.quizzes');
+   Route::get('/quizhistory', [QuizResultController::class,'index'])->name('subject.quizhistory');
     Route::get('/subject/{subject}', [SubjectController::class,'showSingle'])->name('subject.showSingle');
     Route::resource('subjects', SubjectController::class);
     Route::resource('topics', TopicController::class);
@@ -151,7 +150,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/{id}',  [HomeController::class, 'subjects']);
     Route::post('/{id}', [QuizController::class, 'submitQuiz'])->name('quiz.submit');
     Route::get('/subjects/{subjectId}', [SubjectController::class,'showQuizzes'])->name('subject.quizzes');
-    
+    // Route::get('/profile/view', [ProfileController::class, 'view'])->name('profile.view');
+    // Route::get('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+
 });
 
 

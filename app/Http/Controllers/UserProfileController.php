@@ -74,7 +74,7 @@ class UserProfileController extends Controller
              $user->email = $request->input('email');
              $user->save();     
 
-               return redirect()->route('profile.edit', $profile->user_id)
+               return redirect()->route('profile.edit', $profile->id)
             ->with('success', 'Profile updated successfully!');
     }
 }

@@ -33,4 +33,28 @@ class ChangePasswordController extends Controller
             return redirect()->route('change.password')->with('error', 'Current password is incorrect.');
         }
     }
+    public function editpassword()
+    {
+        return view('admin.profile.change-password');
+    }
+
+    public function updatepassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required', new PasswordCheckRule],
+            'password' => 'required|min:8|confirmed',
+        ]);
+        $user =  Auth::user();
+       
+        if (Hash::check($request->current_password, $user->password)) {
+            $user->update([
+                'password' => Hash::make($request->password),
+            ]);
+
+            return redirect()->route('adminchange.password')->with('success', 'Password updated successfully!');
+        } else {
+            return redirect()->route('adminchange.password')->with('error', 'Current password is incorrect.');
+        }
+    }
+
 }

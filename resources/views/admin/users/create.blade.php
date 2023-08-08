@@ -41,8 +41,10 @@
                         <div class="form-group">
                             <label for="role">Role</label>
                             <select name="role" id="role" class="form-control" required>
+                                <option value="teacher">Teacher</option>    
                                 <option value="admin">Admin</option>
                                 <option value="superadmin">Superadmin</option>
+                                
                             </select>
                         </div>
                         <br>

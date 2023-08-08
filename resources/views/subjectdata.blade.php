@@ -108,13 +108,13 @@
 }
 .navbar a {
     font-weight:normal;
-  /* margin-left: 2rem; */
+  margin-left: 0.7rem;
   font-size: 1.3rem;
   color: #fff !important;
 }
 .navbar.active a {
     font-weight:normal;
-  /* margin-left: 2rem; */
+  margin-left: 0.5rem;
   font-size: 1.3rem;
   color: #fff !important;
   display:block;
@@ -136,7 +136,7 @@ margin: 10px;
       top: 70px;
       left: 0;
       right: 0;
-      z-index: 100;
+      /* z-index: 100; */
     }
 
     .sidebar {
@@ -215,10 +215,13 @@ margin: 10px;
         width: 40px;
         height: 20px;
         }
-        a{
-            font-weight: bold;
-        font-size: 18px;
-        margin: 5px;
+        .navbar{
+          margin-left: auto;
+margin-top: auto;
+margin-bottom: auto;
+        }
+        .profile-card  a{
+        font-size: medium;
         }
         .theme-switch input {
         opacity: 0;
@@ -294,6 +297,54 @@ margin: 10px;
         .mobile-menu {
         display: none;
         }
+        nav{
+  position: relative;
+}
+ul{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+.display-picture{
+  margin-left: auto;
+}
+.display-picture img{
+  width: 50px;
+  border-radius: 50%;
+  border:2px solid #fff;
+}
+.display-picture img:hover{
+border:2px solid #E78341;
+}
+.profile-card{
+  transition: 0.5s ease;
+}
+
+.profile-card ul{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  background: #E78341;
+  position: absolute;
+  /* top: 4rem; */
+  right:0rem;
+border-radius: 10px;
+padding: 10px 50px 10px 20px;
+}
+.profile-card ul li{
+ 
+  padding: 5px 0;
+  color: #FFF;
+  font-size: 14px;
+}
+.hidden{
+  display: none;
+}
+a{
+  text-decoration: none;
+  color:#fff;
+}
 
 
     @media screen and (max-width: 768px) {
@@ -339,20 +390,58 @@ border-radius: 5px;
   <div class="header" style="display:flex">
       <a href="#" class="logo">Tecnolynx<span>Global</span></a>
       <div id="menu" class="fas fa-bars"></div>
-      <nav class="navbar"  style="margin:auto">
+      <nav class="navbar"  >
               <a href="{{ url('/') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
               <a href="{{ url('/allsubjects')}}">Subjects</a>
               <a href="{{ url('/teacher')}}">teacher</a>
               <a href="{{ url('/price')}}">price</a>
               <a href="{{ url('/review') }}">review</a>
               <a href="{{ url('/contact') }}">contact</a> 
+        
+              <!-- <div class="dropdown-content">
+              <a  href="{{ route('profile.edit', Auth::user()->profile->id) }}">Manage Accounts</a>
+              <a href="{{ route('change.password', Auth::user()->id) }}">Change Password</a>
               <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
               @csrf
-          </form> 
+          </form>
+            </div> -->
+           
+       
+
+       
       </nav>
+      <nav>
+    <ul>
+    @if (Auth::user()->profile->avatar) 
+                      <a href="#" class="display-picture">
+                      <img src="{{asset('assets/uploads/profile/'.Auth::user()->profile->avatar)}}" style="width: 50px;" class="rounded-circle img-fluid" alt="avatar">
+                      </a>
+                      @else
+                      <a href="#" class="display-picture"><img src="https://i.pravatar.cc/85" alt=""></a><!--Profile Image-->
+                       
+                    @endif
+                    </ul>
+      <div class="profile-card hidden">
+        <ul>
+          <li><a href="{{ route('profile.edit', Auth::user()->profile->id) }}">Manage Profile</li></a>
+          <li><a href="{{ route('change.password', Auth::user()->id) }}">Change Password</li></a>
+          @if(Auth::user()->quizResults->count() > 0)
+                                <li><a style="color: white !important;" href="{{ route('answered-quiz-history') }}">Quiz History</a></li>
+                            @endif
+          <li><a href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Log Out</li></a>
+        </ul>
+         <!-- Logout Form -->
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+      </div>
+  </nav>
+    
   </div>
   <div class="sub-header" id="sub-header"> 
   
@@ -367,11 +456,11 @@ border-radius: 5px;
       @if($singlesubject)
         @if($singlesubject->topics->count() > 0)
             @foreach($singlesubject->topics as $topic)
-                <p class="topic" data-topic-id="{{ $topic->id }}">&bull; {{ $topic->name }}</p>
+                <a class="topic" data-topic-id="{{ $topic->id }}" style="color:black" href='#'> &bull;{{ $topic->name }}</a><br><br>
             @endforeach
             @foreach($singlesubject->quizzes as $quiz)
             <br> Take Subject Quiz By clicking link below<br/>
-            <a href='#' data-quiz-id="{{ $quiz->id }}">{{ $quiz->title }}</a><br><br>
+            <a href='#' data-quiz-id="{{ $quiz->id }}" style="color:black"><strong>{{ $quiz->title }}</strong></a><br><br>
             @endforeach
         @else
             <p>No topics found for subject</p>
@@ -407,7 +496,7 @@ border-radius: 5px;
             <br><br>
             @foreach($topic->quizzes as $quiz)
             <br> Take Quiz By clicking link below<br/>
-                <a href='#' data-quiz-id="{{ $quiz->id }}">{{ $quiz->title }}</a><br><br>
+                <a href='#' data-quiz-id="{{ $quiz->id }}" style="color:black"><strong>*{{ $quiz->title }}*</strong></a><br><br>
             @endforeach
 
           @endforeach
@@ -415,19 +504,18 @@ border-radius: 5px;
       </div>
       @endif
     </div>
-    <div id="resultContent" style="display: none;">...</div>
-
+   
   </div>
 
   <div class="mobile-menu" id="mobileMenu">
      @if($singlesubject)
         @if($singlesubject->topics->count() > 0)
             @foreach($singlesubject->topics as $topic)
-                <p class="topic" data-topic-id="{{ $topic->id }}">{{ $topic->name }}</p>
+                <a class="topic" style="color:black" data-topic-id="{{ $topic->id }}" href="#">&bull;{{ $topic->name }}</a><br><br>
             @endforeach
             @foreach($singlesubject->quizzes as $quiz)
             <br> Take Subject Quiz By clicking link below<br/>
-            <a href='#' data-quiz-id="{{ $quiz->id }}">{{ $quiz->title }}</a><br><br>
+            <a href='#' style="color:black" data-quiz-id="{{ $quiz->id }}"><strong>{{ $quiz->title }}</strong></a><br><br>
             @endforeach
         @else
             <p>No topics found for subject</p>
@@ -656,5 +744,13 @@ $(document).ready(function () {
   
   });
 </script>
+<script>
+  let card = document.querySelector(".profile-card"); 
+let displayPicture = document.querySelector(".display-picture"); 
+
+displayPicture.addEventListener("click", function() { 
+  console.log('clicked');
+card.classList.toggle("hidden");})
+  </script>
 </body>
 </html>

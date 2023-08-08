@@ -1,9 +1,50 @@
 <title>Change Password</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+<style>
+    .card{
+    width:80%;
+    margin:auto;
+    font-size: medium !important;
+    padding: 2rem;
+}
+.mt-3 {
+  margin-top: 1rem !important;
+  margin: auto;
+ 
+}
+.form-control{
+    font-size:medium;
+}
+.profile-button {
+    background: rgb(99, 39, 120) !important;
+    box-shadow: none;
+    border: none;
+    font-size: medium;
+}
 
-@extends('admin.layout.master')
+.profile-button:hover {
+    background: #682773
+}
 
-@section('content')
-<div class="sales-boxes">
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+
+    </style>
+@include('navbar')
+<div class="card">
         <div class="recent-sales box">
             <div class="title">Change Password</h2>
             </div>
@@ -63,7 +104,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary profile-button">
                                     {{ __('Change Password') }}
                                 </button>
                             </div>
@@ -73,4 +114,3 @@
             </div>   
         </div>   
     </div>    
-@endsection

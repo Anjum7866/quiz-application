@@ -16,7 +16,7 @@ return new class extends Migration
         DB::table('admin_users')->insert([
             'name' => 'Superadmin Name',
             'email' => 'superadmin@example.com',
-            'password' => Hash::make('superadmin'), // Replace 'password' with the actual password you want to set
+            'password' => Hash::make('superadmin'), 
             'role' => 'superadmin',
             'created_at' => now(),
             'updated_at' => now(),
@@ -27,7 +27,7 @@ return new class extends Migration
         DB::table('users')->insert([
             'name' => 'Superadmin Name',
             'email' => 'superadmin@example.com',
-            'password' => Hash::make('superadmin'), // Replace 'password' with the actual password you want to set
+            'password' => Hash::make('superadmin'), 
             'role' => 'superadmin',
             'adminuser_id' => $superadminUserId,
             'created_at' => now(),

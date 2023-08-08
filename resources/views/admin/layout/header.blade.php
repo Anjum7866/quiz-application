@@ -21,8 +21,8 @@
 
             <i class="bx bx-chevron-down"></i>
             <div class="dropdown-content">
-              <a  href="{{ route('profile.edit', Auth::user()->profile->id) }}">Manage Accounts</a>
-              <a href="{{ route('change.password', Auth::user()->id) }}">Change Password</a>
+              <a  href="{{ route('adminprofile.edit', Auth::user()->profile->id) }}">Manage Accounts</a>
+              <a href="{{ route('adminchange.password', Auth::user()->id) }}">Change Password</a>
               <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a>

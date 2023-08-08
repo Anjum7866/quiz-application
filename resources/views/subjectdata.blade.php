@@ -42,6 +42,16 @@
       padding: 0;
       background-color: var(--background);
     }
+    .topic {
+    display: block;
+    padding: 10px;
+      }
+
+      .active-topic {
+          font-weight: bold;
+          color: white !important;
+background-color: var(--background)
+      }
 
     .header {
       background-color:#000;
@@ -57,8 +67,8 @@
       padding: 1rem 6%;
     }
     img.image{
-      width:500px;
-      height:350px;
+      width:70%;
+      height:70%;
     }
     .hamburger {
       display: none;
@@ -109,7 +119,7 @@
 .navbar a {
     font-weight:normal;
   margin-left: 0.7rem;
-  font-size: 1.3rem;
+  font-size: larger;
   color: #fff !important;
 }
 .navbar.active a {
@@ -123,7 +133,7 @@ margin: 10px;
 }
  .sub-header a {
     font-weight:normal;
-  /* margin-left: 2rem; */
+    margin-left: 1rem !important;
   font-size: medium;
   font-weight:bold;
   color: #fff !important;
@@ -143,7 +153,7 @@ margin: 10px;
       /* background-color: var(--sidebar-background); */
       background-color:white;
       color: var(--sidebar-text-color);
-      width: 200px;
+      width: 250px;
       height: 100%;
       position: fixed;
       top: 110px;
@@ -151,8 +161,7 @@ margin: 10px;
       bottom: 0;
       /* overflow-y: auto; */
       overflow-y: scroll;
-      padding: 10px;
-
+     padding-top: 10px;
     }
 
     .hamburger {
@@ -176,7 +185,7 @@ margin: 10px;
 
 
     .content {
-      margin-left: 220px;
+      margin-left: 260px;
       margin-top: 110px;
       padding: 20px;
       overflow-y: auto;
@@ -188,7 +197,7 @@ margin: 10px;
       padding: 20px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
-      width: 80%;
+      width: 90%;
     }
     .btn:hover{
         background:var(--gradient);
@@ -345,12 +354,28 @@ a{
   text-decoration: none;
   color:#fff;
 }
+h4{
+  font-size: large;
+}
+hr {
+    border-top: 1px solid #ccc;
+ }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  img.image {
+  width: 100%;
+  height:100%
+ }
+}
 
 
     @media screen and (max-width: 768px) {
       .sidebar {
         display: none;
       }
+      .card {
+      width: 100%;
+    }
 
       .hamburger {
         display: block;
@@ -363,7 +388,7 @@ a{
       }
 
       .content, .sub-header {
-        padding-left: 60px; 
+        padding-left: 25px;
       }
 
       .mobile-menu {
@@ -371,8 +396,8 @@ a{
         position: fixed;
         top: 140px;
         left: 0;
-        width: 200px;
-        background-color: var(--sidebar-background);
+        width: 220px;
+        background-color: white;
         color: var(--sidebar-text-color);
         z-index: 999;
         padding: 10px;
@@ -383,6 +408,28 @@ border-radius: 5px;
         display: block;
       }
     }
+    #sidebar a[data-quiz-id] {
+    color: #007bff !important; 
+    text-decoration: none;
+    font-weight: bold; 
+}
+
+#sidebar a[data-quiz-id]:hover {
+    color: #0056b3 !important; 
+    text-decoration: underline; 
+}
+#topicContent a[data-quiz-id] {
+    color: #007bff !important; 
+    text-decoration: none; 
+    font-weight: bold; 
+}
+
+#topicContent a[data-quiz-id]:hover {
+    color: #0056b3 !important; 
+    text-decoration: underline; 
+}
+
+
   </style>
 </head>
 <body>
@@ -397,21 +444,6 @@ border-radius: 5px;
               <a href="{{ url('/price')}}">price</a>
               <a href="{{ url('/review') }}">review</a>
               <a href="{{ url('/contact') }}">contact</a> 
-        
-              <!-- <div class="dropdown-content">
-              <a  href="{{ route('profile.edit', Auth::user()->profile->id) }}">Manage Accounts</a>
-              <a href="{{ route('change.password', Auth::user()->id) }}">Change Password</a>
-              <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-              @csrf
-          </form>
-            </div> -->
-           
-       
-
-       
       </nav>
       <nav>
     <ul>
@@ -455,12 +487,13 @@ border-radius: 5px;
     <div class="sidebar" id="sidebar">
       @if($singlesubject)
         @if($singlesubject->topics->count() > 0)
+       <h4 style="margin-left: 10px !important;margin: auto; "> <strong>{{$singlesubject->name}} Topics</strong></h4>
             @foreach($singlesubject->topics as $topic)
-                <a class="topic" data-topic-id="{{ $topic->id }}" style="color:black" href='#'> &bull;{{ $topic->name }}</a><br><br>
+                <a class="topic" data-topic-id="{{ $topic->id }}" style="color:black" href='#'> &bull;{{ $topic->name }}</a>
             @endforeach
             @foreach($singlesubject->quizzes as $quiz)
-            <br> Take Subject Quiz By clicking link below<br/>
-            <a href='#' data-quiz-id="{{ $quiz->id }}" style="color:black"><strong>{{ $quiz->title }}</strong></a><br><br>
+            <p style="padding:10px"> Take Subject Quiz By clicking link below</p>
+            <a href='#' data-quiz-id="{{ $quiz->id }}" style="color:black; padding:10px"><strong>{{ $quiz->title }}</strong></a><br><br>
             @endforeach
         @else
             <p>No topics found for subject</p>
@@ -468,19 +501,19 @@ border-radius: 5px;
       @else
         @foreach($subjects as $subject)
             @if($subject->topics->count() > 0)
-                <h2>{{ $subject->name }}</h2>
+                <h4>{{ $subject->name }}</h4>
                 @foreach($subject->topics as $topic)
                     <p class="topic" data-topic-id="{{ $topic->id }}"><strong>{{ $topic->name }}</strong></p>
                 @endforeach
                 @foreach($subject->quizzes as $quiz)
-                    <br> Take Subject Quiz By clicking link below<br/>
-                    <a href='#' data-quiz-id="{{ $quiz->id }}">{{ $quiz->title }}</a><br><br>
+                     <p style="padding:10px">Take Subject Quiz By clicking link below<p>
+                    <a href='#' data-quiz-id="{{ $quiz->id }}" style="padding:10px">{{ $quiz->title }}</a><br><br>
             @endforeach
             @endif
         @endforeach
       @endif
     </div> 
- 
+    
     <div class="content" >
       <div class="card" id="topicContent">
       @if ($singlesubject && $singlesubject->count() > 0)
@@ -495,8 +528,9 @@ border-radius: 5px;
             <img class="image" src="{{asset('assets/uploads/profile/'.$topic->content)}}" alt="" >
             <br><br>
             @foreach($topic->quizzes as $quiz)
+            <hr>
             <br> Take Quiz By clicking link below<br/>
-                <a href='#' data-quiz-id="{{ $quiz->id }}" style="color:black"><strong>*{{ $quiz->title }}*</strong></a><br><br>
+                <a href='#' data-quiz-id="{{ $quiz->id }}" style="color:black"><strong>{{ $quiz->title }}</strong></a><br><br>
             @endforeach
 
           @endforeach
@@ -511,7 +545,7 @@ border-radius: 5px;
      @if($singlesubject)
         @if($singlesubject->topics->count() > 0)
             @foreach($singlesubject->topics as $topic)
-                <a class="topic" style="color:black" data-topic-id="{{ $topic->id }}" href="#">&bull;{{ $topic->name }}</a><br><br>
+                <a class="topic" style="color:black" data-topic-id="{{ $topic->id }}" href="#">&bull;{{ $topic->name }}</a>
             @endforeach
             @foreach($singlesubject->quizzes as $quiz)
             <br> Take Subject Quiz By clicking link below<br/>
@@ -523,7 +557,7 @@ border-radius: 5px;
       @else
         @foreach($subjects as $subject)
             @if($subject->topics->count() > 0)
-                <h2>{{ $subject->name }}</h2>
+                <h4>{{ $subject->name }}</h4>
                 @foreach($subject->topics as $topic)
                     <p class="topic" data-topic-id="{{ $topic->id }}">{{ $topic->name }}</p>
                 @endforeach
@@ -543,6 +577,10 @@ border-radius: 5px;
   
 $(document).ready(function () {
     $('.topic').click(function () {
+      $('.topic').removeClass('active-topic');
+    $(this).addClass('active-topic');
+    
+
         var topicId = $(this).data('topic-id');
         $.ajaxSetup({
   headers: {
@@ -586,6 +624,8 @@ $(document).ready(function () {
         });
     
         var subquizLinks = $('#sidebar').find('a[data-quiz-id]');
+    
+
         subquizLinks.click(function (event) {
         event.preventDefault(); 
         var quizId = $(this).data('quiz-id');
@@ -624,26 +664,7 @@ $(document).ready(function () {
         });
         });
         
-        // var tryagainLinks = $('#quizResult').find('a[data-quiz-id]');
-        // tryagainLinks.click(function (event) {
-        //     console.log('tryagainLinks');
-        // event.preventDefault(); 
-        // var quizId = $(this).data('quiz-id');
-        // $.ajax({
-        //     type: 'GET',
-        //     url: '/check-login',
-        //     success: function (isLoggedIn) {
-        //         if (isLoggedIn) {
-        //             loadQuiz(quizId);
-        //         } else {
-        //             window.location.href = '/user-login'; 
-        //         }
-        //     },
-        //     error: function (xhr, status, error) {
-        //         console.error(error);
-        //     }
-        // });
-        // });
+     
 
         function loadQuiz(quizId) {
         $.ajax({
@@ -685,7 +706,6 @@ $(document).ready(function () {
     }
 });
 </script>
-  
   
 <script>
     const menuIcon = document.getElementById('menu');

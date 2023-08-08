@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Subject;
 use App\Models\Topic;
 use App\Models\Quiz;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,9 @@ class HomeController extends Controller
 
        $singlesubject = Subject::with(['topics.quizzes'])->withCount('topics')->find($firstSubjectId );
         $subjectCount = $subjects->count();
-        return view('welcome', compact('subjects', 'subjectCount', 'singlesubject'));
+        $teachers = User::where('role', 'teacher')->get();
+
+        return view('welcome', compact('subjects', 'subjectCount', 'singlesubject', 'teachers'));
     }
     public function subjects($subjectId)
     {

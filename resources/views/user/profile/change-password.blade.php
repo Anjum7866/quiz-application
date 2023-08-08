@@ -7,6 +7,9 @@
     font-size: medium !important;
     padding: 2rem;
 }
+.form-group {
+    margin: 10px;
+}
 .mt-3 {
   margin-top: 1rem !important;
   margin: auto;
@@ -19,7 +22,8 @@
     background: rgb(99, 39, 120) !important;
     box-shadow: none;
     border: none;
-    font-size: medium;
+    font-size: medium !important;
+    padding: 0.8rem 2rem !important;
 }
 
 .profile-button:hover {

@@ -23,6 +23,8 @@
     box-shadow: none;
     border: none;
     font-size: medium;
+    padding: 0.8rem 2rem !important;
+border-radius: 2rem;
 }
 
 .profile-button:hover {

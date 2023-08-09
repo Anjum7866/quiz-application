@@ -16,7 +16,6 @@
     :root{
       --violet:#6c5ce7;
       --pink:#FC427B;
-      /* --gradient:linear-gradient(90deg, var(--violet), var(--pink)); */
       --gradient:linear-gradient(108deg,#46d3ff .14%,#6178ff 24.02%,#a750ff 39.05%,#ff1ec0 56.82%,#ff784b 77.82%,#ffce51 95.45%);
       --background: #333;
       --header-background: #222;
@@ -28,7 +27,6 @@
 
     *{
       font-family: 'Nunito', sans-serif;
-      /* margin:0; padding:0; */
       box-sizing: border-box;
       outline: none; border:none;
       text-decoration: none;
@@ -47,11 +45,11 @@
     padding: 10px;
       }
 
-      .active-topic {
-          font-weight: bold;
-          color: white !important;
-background-color: var(--background)
-      }
+    .active-topic {
+        font-weight: bold;
+        color: white !important;
+        background-color: var(--background)
+    }
 
     .header {
       background-color:#000;
@@ -76,68 +74,66 @@ background-color: var(--background)
     }
     @media (max-width: 768px){
       .sub-header.hidden {
-  display: none;
-}
-
-
+      display: none;
+      }
       .hamburger {
         display: block;
       }
       img.image{
         width: 100%;
         height: 100%;
-    }
+       }
         .navbar {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: #fff;
-  border-top: .1rem solid rgba(0,0,0,.2);
-  border-bottom: .1rem solid rgba(0,0,0,.2);
-  clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-} 
-.navbar.active {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  background: black;
-}
-.sub-header {
-}
-#menu {
-  font-size: 1.5rem;
-  }
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: .1rem solid rgba(0,0,0,.2);
+        border-bottom: .1rem solid rgba(0,0,0,.2);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+      } 
+      .navbar.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        background: black;
+      }
+      .sub-header {
+      }
+      #menu {
+        font-size: 1.5rem;
+        }
     }
   
     .logo {
-  font-size: 2.0rem;
-  color: var(--violet);
-  font-weight: bold;
-}
- .logo span {
-  color: var(--pink);
-}
-.navbar a {
-    font-weight:normal;
-  margin-left: 0.7rem;
-  font-size: larger;
-  color: #fff !important;
-}
-.navbar.active a {
-    font-weight:normal;
-  margin-left: 0.5rem;
-  font-size: 1.3rem;
-  color: #fff !important;
-  display:block;
-  text-align: center;
-margin: 10px;
-}
- .sub-header a {
-    font-weight:normal;
-    margin-left: 1rem !important;
-  font-size: medium;
-  font-weight:bold;
-  color: #fff !important;
-}
+      font-size: 2.0rem;
+      color: var(--violet);
+      font-weight: bold;
+    }
+    .logo span {
+      color: var(--pink);
+    }
+    .navbar a {
+        font-weight:normal;
+      margin-left: 0.7rem;
+      font-size: larger;
+      color: #fff !important;
+    }
+    .navbar.active a {
+        font-weight:normal;
+      margin-left: 0.5rem;
+      font-size: 1.3rem;
+      color: #fff !important;
+      display:block;
+      text-align: center;
+    margin: 10px;
+    }
+    .sub-header a {
+        font-weight:normal;
+        margin-left: 1rem !important;
+      font-size: medium;
+      font-weight:bold;
+      color: #fff !important;
+    }
     .sub-header {
       background: var(--violet);
       color: white;
@@ -146,11 +142,9 @@ margin: 10px;
       top: 70px;
       left: 0;
       right: 0;
-      /* z-index: 100; */
     }
 
     .sidebar {
-      /* background-color: var(--sidebar-background); */
       background-color:#E7E9EB;
       color: var(--sidebar-text-color);
       width: 250px;
@@ -159,7 +153,6 @@ margin: 10px;
       top: 110px;
       left: 0;
       bottom: 0;
-      /* overflow-y: auto; */
       overflow-y: scroll;
      padding-top: 10px;
     }
@@ -193,8 +186,8 @@ margin: 10px;
     .btn {
       padding: 6px 12px !important;
       font-weight: bold;
-  font-size: large !important;
-}
+      font-size: large !important;
+    }
 
     .card {
       /* background-color: azure;
@@ -231,8 +224,8 @@ margin: 10px;
         }
         .navbar{
           margin-left: auto;
-margin-top: auto;
-margin-bottom: auto;
+          margin-top: auto;
+          margin-bottom: auto;
         }
         .profile-card  a{
         font-size: medium;
@@ -312,69 +305,69 @@ margin-bottom: auto;
         display: none;
         }
         nav{
-  position: relative;
-}
-ul{
-  list-style: none;
-  display: flex;
-  align-items: center;
-  margin: auto;
-}
-.display-picture{
-  margin-left: auto;
-}
-.display-picture img{
-  width: 50px;
-  border-radius: 50%;
-  border:2px solid #fff;
-}
-.display-picture img:hover{
-border:2px solid #E78341;
-}
-.profile-card{
-  transition: 0.5s ease;
-}
+          position: relative;
+        }
+        ul{
+          list-style: none;
+          display: flex;
+          align-items: center;
+          margin: auto;
+        }
+        .display-picture{
+          margin-left: auto;
+        }
+        .display-picture img{
+          width: 50px;
+          border-radius: 50%;
+          border:2px solid #fff;
+        }
+        .display-picture img:hover{
+        border:2px solid #E78341;
+        }
+        .profile-card{
+          transition: 0.5s ease;
+        }
 
-.profile-card ul{
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  background: cornsilk;
-  position: absolute;
-  /* top: 4rem; */
-  right:0rem;
-border-radius: 10px;
-padding: 10px 50px 10px 20px;
-}
-.profile-card ul li{
- 
-  padding: 5px 0;
-  color: #FFF;
-  font-size: 14px;
-}
-.hidden{
-  display: none;
-}
-a{
-  text-decoration: none;
-  color:#fff;
-}
-h4{
-  font-size: large;
-}
-hr {
-    border-top: 1px solid #ccc;
- }
+        .profile-card ul{
+          display: flex;
+          align-items: flex-start;
+          flex-direction: column;
+          background: cornsilk;
+          position: absolute;
+          /* top: 4rem; */
+          right:0rem;
+        border-radius: 10px;
+        padding: 10px 50px 10px 20px;
+        }
+        .profile-card ul li{
+        
+          padding: 5px 0;
+          color: #FFF;
+          font-size: 14px;
+        }
+        .hidden{
+          display: none;
+        }
+        a{
+          text-decoration: none;
+          color:#fff;
+        }
+        h4{
+          font-size: large;
+        }
+        hr {
+            border-top: 1px solid #ccc;
+        }
 
-@media (min-width: 768px) and (max-width: 991px) {
-  img.image {
-  width: 100%;
-  height:100%
- }
- .sidebar{
-  top: 130px;
- }
-}
+        @media (min-width: 768px) and (max-width: 991px) {
+          img.image {
+          width: 100%;
+          height:100%
+        }
+        .sidebar{
+          top: 130px;
+        }
+        }
 
 
     @media screen and (max-width: 768px) {
@@ -382,8 +375,8 @@ hr {
         display: none;
       }
       .card {
-      width: 100%;
-    }
+        width: 100%;
+      }
 
       .hamburger {
         display: block;
@@ -409,7 +402,7 @@ hr {
         color:white;
         z-index: 999;
         padding: 10px;
-border-radius: 5px;
+        border-radius: 5px;
       }
 
       .mobile-menu.active {
@@ -420,24 +413,22 @@ border-radius: 5px;
     color: #007bff !important; 
     text-decoration: none;
     font-weight: bold; 
-}
+    }
 
-#sidebar a[data-quiz-id]:hover {
-    color: #0056b3 !important; 
-    text-decoration: underline; 
-}
-#topicContent a[data-quiz-id] {
-    color: #007bff !important; 
-    text-decoration: none; 
-    font-weight: bold; 
-}
+      #sidebar a[data-quiz-id]:hover {
+          color: #0056b3 !important; 
+          text-decoration: underline; 
+      }
+      #topicContent a[data-quiz-id] {
+          color: #007bff !important; 
+          text-decoration: none; 
+          font-weight: bold; 
+      }
 
-#topicContent a[data-quiz-id]:hover {
-    color: #0056b3 !important; 
-    text-decoration: underline; 
-}
-
-
+      #topicContent a[data-quiz-id]:hover {
+          color: #0056b3 !important; 
+          text-decoration: underline; 
+      }
   </style>
 </head>
 <body>
@@ -449,22 +440,19 @@ border-radius: 5px;
               <a href="{{ url('/') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
               <a href="{{ url('/allsubjects')}}">Subjects</a>
               <a href="{{ url('/teacher')}}">teacher</a>
-              <!-- <a href="{{ url('/price')}}">price</a>
-              <a href="{{ url('/review') }}">review</a> -->
               <a href="{{ url('/contact') }}">contact us</a>
               <a href="{{ url('/contact') }}">about us</a>
       </nav>
       <nav>
     <ul>
-    @if (Auth::user()->profile->avatar) 
-                      <a href="#" class="display-picture">
-                      <img src="{{asset('assets/uploads/profile/'.Auth::user()->profile->avatar)}}" style="width: 50px;height: 50px;" class="rounded-circle img-fluid" alt="avatar">
-                      </a>
-                      @else
-                      <a href="#" class="display-picture"><img src="https://i.pravatar.cc/85" alt=""></a><!--Profile Image-->
-                       
-                    @endif
-                    </ul>
+        @if (Auth::user()->profile->avatar) 
+        <a href="#" class="display-picture">
+        <img src="{{asset('assets/uploads/profile/'.Auth::user()->profile->avatar)}}" style="width: 50px;height: 50px;" class="rounded-circle img-fluid" alt="avatar">
+        </a>
+        @else
+        <a href="#" class="display-picture"><img src="https://i.pravatar.cc/85" alt=""></a>  
+        @endif
+      </ul>
       <div class="profile-card hidden">
         <ul>
           <li><a style="color: black !important;" href="{{ route('profile.edit', Auth::user()->profile->id) }}">Manage Profile</li></a>
@@ -476,7 +464,7 @@ border-radius: 5px;
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Log Out</li></a>
         </ul>
-         <!-- Logout Form -->
+      
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
             @csrf
         </form>
@@ -577,7 +565,7 @@ border-radius: 5px;
             @endif
         @endforeach
       @endif
-    <!-- Add more mobile menu items here -->
+   
   </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -672,8 +660,6 @@ $(document).ready(function () {
             }
         });
         });
-        
-     
 
         function loadQuiz(quizId) {
         $.ajax({
@@ -682,7 +668,7 @@ $(document).ready(function () {
             success: function (data) {
                 $('#topicContent').html(data);
                 $('#submitQuizButton').on('click', function() {
-                    var quizId = $(this).data('quiz-id'); // Get quizId from data attribute
+                    var quizId = $(this).data('quiz-id'); 
                 submitQuiz(quizId);
             });
 
@@ -718,13 +704,12 @@ $(document).ready(function () {
   
 <script>
     const menuIcon = document.getElementById('menu');
-  const subHeader = document.getElementById('sub-header');
+    const subHeader = document.getElementById('sub-header');
 
   menuIcon.addEventListener('click', () => {
     subHeader.classList.toggle('hidden');
   });
 
-    
     function toggleMobileMenu() {
       var mobileMenu = document.getElementById('mobileMenu');
       mobileMenu.classList.toggle('active');

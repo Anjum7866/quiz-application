@@ -2,30 +2,24 @@
 
 @include('navbar')
   
-<!-- home section  -->
 
 <section class="home">
-
     <div class="content">
         <h3>E-learning is a better way of learning</h3>
         <p>E-learning allows learners to access educational content anytime and anywhere, providing the flexibility to study at their own pace and convenience.
-
         E-learning platforms often offer a wide range of multimedia resources, such as videos, interactive quizzes, simulations, and e-books, catering to different learning styles and enhancing engagement.</p>
         <a href="{{ route('register') }}" class="btn">get started</a>
     </div>
-
     <div class="image">
         <img src="assets/images/teacher.png" alt="">
     </div>
-
 </section>
 
-<!-- course section  -->
 <h1 class="heading"> Popular Subjects </h1>
       
 <section class="course">
     @foreach($subjects as $key => $subject)
-        @if($key < 6) <!-- Limit to 6 boxes -->
+        @if($key < 6) 
             <div class="box">
                 <span class="amount">Free</span>
                 <img src="{{asset('assets/uploads/profile/'.$subject->image_path)}}" alt="">
@@ -51,110 +45,31 @@
     @endforeach
 </section>
 
-   <div style="text-align: center;"> <a href="{{ url('/allsubjects')}}" class="btn" style="text-align:center">View All Subjects</a></div>
+<div style="text-align: center;"> <a href="{{ url('/allsubjects')}}" class="btn" style="text-align:center">View All Subjects</a></div>
 
 
-<!-- teacher section  -->
 <h1 class="heading"> Experienced Teachers </h1>
 <section class="teacher">
-@foreach ($teachers->take(4) as $teacher)
+    @foreach ($teachers->take(4) as $teacher)
 
-    <div class="box">
-        <img src="assets/images/teacher-1.png" alt="">
-        <h3>    {{ $teacher->name }}</h3>
-        <span>    {{ $teacher->role }}</span>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, nobis.</p>
-        <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
-            <a href="#" class="fab fa-twitter"></a>
-            <a href="#" class="fab fa-instagram"></a>
-            <a href="#" class="fab fa-linkedin"></a>
+        <div class="box">
+            <img src="assets/images/teacher-1.png" alt="">
+            <h3>    {{ $teacher->name }}</h3>
+            <span>    {{ $teacher->role }}</span>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, nobis.</p>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+            </div>
         </div>
-    </div>
 
-@endforeach    
-
+    @endforeach    
 </section>
 
-<!-- <h1 class="heading"> student's review </h1>
-
-<section class="review">
-<div class=" swiper">
-      <div class="slide-container">
-        <div class="card-wrapper swiper-wrapper">
-          <div class="swiper-slide">
-            <div class="box">
-                <div class="student">
-                    <div class="student-info">
-                        <img src="assets/images/student-1.png" alt="">
-                        <div class="info">
-                            <h3>john deo</h3>
-                            <span>student</span>
-                        </div>
-                    </div>
-                    <i class="fas fa-quote-right"></i>
-                </div>
-                    <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. A molestiae ipsa mollitia. Dolore sapiente animi ab eligendi voluptatum ipsa omnis.</p>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="box">
-            <div class="student">
-                <div class="student-info">
-                    <img src="assets/images/student-2.png" alt="">
-                    <div class="info">
-                        <h3>john deo</h3>
-                        <span>student</span>
-                    </div>
-                </div>
-                <i class="fas fa-quote-right"></i>
-            </div>
-                <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. A molestiae ipsa mollitia. Dolore sapiente animi ab eligendi voluptatum ipsa omnis.</p>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="box">
-                <div class="student">
-                        <div class="student-info">
-                            <img src="assets/images/student-2.png" alt="">
-                            <div class="info">
-                                <h3>john deo</h3>
-                                <span>student</span>
-                            </div>
-                        </div>
-                        <i class="fas fa-quote-right"></i>
-                    </div>
-                    <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. A molestiae ipsa mollitia. Dolore sapiente animi ab eligendi voluptatum ipsa omnis.</p>
-            </div>
-          </div>
-          <div class="swiper-slide">          
-            <div class="box">
-                    <div class="student">
-                        <div class="student-info">
-                            <img src="assets/images/student-4.png" alt="">
-                            <div class="info">
-                                <h3>john deo</h3>
-                                <span>student</span>
-                            </div>
-                        </div>
-                        <i class="fas fa-quote-right"></i>
-                    </div>
-                    <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. A molestiae ipsa mollitia. Dolore sapiente animi ab eligendi voluptatum ipsa omnis.</p>
-                </div>
-            </div>
-       
-        </div>
-      </div>
-      <div class="swiper-pagination" style="margin-top:20px"></div>
-    </div>
-</section> -->
-
-   
-
-<!-- contact section  -->
 <h1 class="heading"> Contact Us </h1>
 <section class="contact">
-
     <div class="image">
         <img src="assets/images/contact1.png" alt="">
     </div>
@@ -173,10 +88,10 @@
         <input type="submit" class="btn" value="send">
 
     </form>
-
 </section>
+
 <script src="assets/js/swiper-bundle.min.js"></script>
-    <script src="assets/js/script.js"></script>
+<script src="assets/js/script.js"></script>
 @include('footer')
 
 

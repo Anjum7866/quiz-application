@@ -4,7 +4,6 @@
 
 <h1 class="heading"> experienced teachers </h1>
 
-<!-- teacher section  -->
 
 <section class="teacher">
 

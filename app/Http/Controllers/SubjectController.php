@@ -64,9 +64,7 @@ class SubjectController extends Controller
       return view('subjects.show', compact('subject', 'topics'));    
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(Subject $subject): View
     {
         $topics = $subject->topics;
@@ -75,9 +73,7 @@ class SubjectController extends Controller
     
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+  
     public function update(Request $request, $id): RedirectResponse
     {
         $request->validate([
@@ -108,9 +104,7 @@ class SubjectController extends Controller
                         ->with('success','Subject updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+   
     public function destroy(Subject $subject): RedirectResponse
     {
         $subject->delete();

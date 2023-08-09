@@ -13,7 +13,7 @@
             color: black;
             font-family: 'Montserrat', sans-serif;
             font-size: 24px;
-            text-align: center;
+            text-align: center !important;
         }
 
         .container {
@@ -29,6 +29,7 @@
             font-size: 32px;
             font-weight: bold;
             margin-top: 20px;
+            text-align:center;
         }
 
         .marquee {
@@ -36,11 +37,13 @@
             font-size: 48px;
             font-weight: bold;
             margin: 20px;
+            text-align:center;
         }
 
         .assignment {
             margin: 20px;
             font-size: 28px;
+            text-align:center;
         }
 
         .person {
@@ -54,6 +57,7 @@
         .reason {
             margin: 20px;
             font-size: 28px;
+            text-align:center;
         }
 
         .signature {
@@ -92,18 +96,30 @@
         </div>
 
         <div class="person">
-            {{Auth::user()->name }}
+        {{Auth::user()->name }}
            
-             with Score:  {{$score}}/{{$totalQuestions}}
-
-        </div>
+           with Score:  {{$score}}/{{$totalQuestions}}
+      </div>
 
         <div class="reason">
-           which is very good.
+            @php
+            $percentage = ($score / $totalQuestions) * 100;
+                if ($percentage >= 90) {
+                    $reason = "which is Excellent!";
+                } elseif ($percentage >= 70) {
+                    $reason = "which is Very good!";
+                } elseif ($percentage >= 50) {
+                    $reason = "which is Good!";
+                } else {
+                    $reason = "Keep practicing!";
+                }
+            @endphp
+            {{ $reason }}
         </div>
 
+
         <div class="signature">
-            <span>John Doe</span><br>
+            <span>Geo</span><br><br>
             CEO, TecnolynxGlobal
         </div>
     </div>

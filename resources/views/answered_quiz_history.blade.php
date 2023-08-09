@@ -57,8 +57,7 @@
         @else
             <p>No Quiz History found for last 3 days.</p>
         @endif
-      
-            </div>
-        </div>   
+        </div>
+       </div>   
     </div>       
     

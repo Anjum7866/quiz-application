@@ -148,7 +148,7 @@ border:2px solid #E78341;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  background: #E78341;
+  background: cornsilk;
   position: absolute;
   /* top: 4rem; */
   right:0rem;
@@ -188,16 +188,18 @@ a{
                             <a href="{{ url('/') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
                             <a href="{{ url('/allsubjects')}}">Subjects</a>
                             <a href="{{ url('/teacher')}}">teacher</a>
-                            <a href="{{ url('/price')}}">price</a>
-                            <a href="{{ url('/review') }}">review</a>
-                            <a href="{{ url('/contact') }}">contact</a>
+                            <!-- <a href="{{ url('/price')}}">price</a>
+                            <a href="{{ url('/review') }}">review</a> -->
+                            <a href="{{ url('/contact') }}">contact us</a>
+                            <a href="{{ url('/contact') }}">about us</a>
                         @else
                         <a href="{{ url('/') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
                         <a href="{{ url('/allsubjects')}}">Subjects</a>
                             <a href="{{ url('/teacher')}}">teacher</a>
-                            <a href="{{ url('/price')}}">price</a>
-                            <a href="{{ url('/review') }}">review</a>
-                            <a href="{{ url('/contact') }}">contact</a>
+                            <!-- <a href="{{ url('/price')}}">price</a>
+                            <a href="{{ url('/review') }}">review</a> -->
+                            <a href="{{ url('/contact') }}">contact us</a>
+                            <a href="{{ url('/contact') }}">about us</a>
                             <a href="{{ route('user.login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
                             
 
@@ -214,7 +216,7 @@ a{
                       <ul>
                       @if (Auth::user()->profile->avatar) 
                       <a href="#" class="display-picture">
-                      <img src="{{asset('assets/uploads/profile/'.Auth::user()->profile->avatar)}}" style="width: 50px;" class="rounded-circle img-fluid" alt="avatar">
+                      <img src="{{asset('assets/uploads/profile/'.Auth::user()->profile->avatar)}}" style="width: 50px;height: 50px;" class="rounded-circle img-fluid" alt="avatar">
                       </a>
                       @else
                       <a href="#" class="display-picture"><img src="https://i.pravatar.cc/85" alt=""></a><!--Profile Image-->
@@ -223,13 +225,13 @@ a{
                         </ul>
                         <div class="profile-card hidden">
                           <ul>
-                            <li><a style="color:white; !important" href="{{ route('profile.edit', Auth::user()->profile->id) }}">Manage Profile</li></a>
-                            <li><a style="color:white; !important" href="{{ route('change.password', Auth::user()->id) }}">Change Password</li></a>
+                            <li><a style="color:black; !important" href="{{ route('profile.edit', Auth::user()->profile->id) }}">Manage Profile</li></a>
+                            <li><a style="color:black; !important" href="{{ route('change.password', Auth::user()->id) }}">Change Password</li></a>
                             @if(Auth::user()->quizResults->count() > 0)
-                                <li><a style="color: white !important;" href="{{ route('answered-quiz-history') }}">Quiz History</a></li>
+                                <li><a style="color: black !important;" href="{{ route('answered-quiz-history') }}">Quiz History</a></li>
                             @endif
 
-                            <li><a style="color:white; !important" href="{{ route('logout') }}"
+                            <li><a style="color:black; !important" href="{{ route('logout') }}"
                                                         onclick="event.preventDefault();
                                                                       document.getElementById('logout-form').submit();">Log Out</li></a>
                           </ul>

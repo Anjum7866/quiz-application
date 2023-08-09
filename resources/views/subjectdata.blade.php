@@ -40,7 +40,7 @@
       font-size: 100%;
       margin: 0;
       padding: 0;
-      background-color: var(--background);
+      background-color: white;
     }
     .topic {
     display: block;
@@ -151,7 +151,7 @@ margin: 10px;
 
     .sidebar {
       /* background-color: var(--sidebar-background); */
-      background-color:white;
+      background-color:#E7E9EB;
       color: var(--sidebar-text-color);
       width: 250px;
       height: 100%;
@@ -190,14 +190,19 @@ margin: 10px;
       padding: 20px;
       overflow-y: auto;
     }
+    .btn {
+      padding: 6px 12px !important;
+      font-weight: bold;
+  font-size: large !important;
+}
 
     .card {
-      background-color: #fff;
-      border-radius: 8px;
+      /* background-color: azure;
+      border-radius: 8px; */
       padding: 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-      width: 90%;
+      /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px; */
+      width: 80%;
     }
     .btn:hover{
         background:var(--gradient);
@@ -334,7 +339,7 @@ border:2px solid #E78341;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  background: #E78341;
+  background: cornsilk;
   position: absolute;
   /* top: 4rem; */
   right:0rem;
@@ -365,6 +370,9 @@ hr {
   img.image {
   width: 100%;
   height:100%
+ }
+ .sidebar{
+  top: 130px;
  }
 }
 
@@ -397,8 +405,8 @@ hr {
         top: 140px;
         left: 0;
         width: 220px;
-        background-color: white;
-        color: var(--sidebar-text-color);
+        background-color: black;
+        color:white;
         z-index: 999;
         padding: 10px;
 border-radius: 5px;
@@ -441,15 +449,16 @@ border-radius: 5px;
               <a href="{{ url('/') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
               <a href="{{ url('/allsubjects')}}">Subjects</a>
               <a href="{{ url('/teacher')}}">teacher</a>
-              <a href="{{ url('/price')}}">price</a>
-              <a href="{{ url('/review') }}">review</a>
-              <a href="{{ url('/contact') }}">contact</a> 
+              <!-- <a href="{{ url('/price')}}">price</a>
+              <a href="{{ url('/review') }}">review</a> -->
+              <a href="{{ url('/contact') }}">contact us</a>
+              <a href="{{ url('/contact') }}">about us</a>
       </nav>
       <nav>
     <ul>
     @if (Auth::user()->profile->avatar) 
                       <a href="#" class="display-picture">
-                      <img src="{{asset('assets/uploads/profile/'.Auth::user()->profile->avatar)}}" style="width: 50px;" class="rounded-circle img-fluid" alt="avatar">
+                      <img src="{{asset('assets/uploads/profile/'.Auth::user()->profile->avatar)}}" style="width: 50px;height: 50px;" class="rounded-circle img-fluid" alt="avatar">
                       </a>
                       @else
                       <a href="#" class="display-picture"><img src="https://i.pravatar.cc/85" alt=""></a><!--Profile Image-->
@@ -458,12 +467,12 @@ border-radius: 5px;
                     </ul>
       <div class="profile-card hidden">
         <ul>
-          <li><a href="{{ route('profile.edit', Auth::user()->profile->id) }}">Manage Profile</li></a>
-          <li><a href="{{ route('change.password', Auth::user()->id) }}">Change Password</li></a>
+          <li><a style="color: black !important;" href="{{ route('profile.edit', Auth::user()->profile->id) }}">Manage Profile</li></a>
+          <li><a style="color: black !important;" href="{{ route('change.password', Auth::user()->id) }}">Change Password</li></a>
           @if(Auth::user()->quizResults->count() > 0)
-                                <li><a style="color: white !important;" href="{{ route('answered-quiz-history') }}">Quiz History</a></li>
+                                <li><a style="color: black !important;" href="{{ route('answered-quiz-history') }}">Quiz History</a></li>
                             @endif
-          <li><a href="{{ route('logout') }}"
+          <li><a style="color: black !important;" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">Log Out</li></a>
         </ul>
@@ -545,11 +554,11 @@ border-radius: 5px;
      @if($singlesubject)
         @if($singlesubject->topics->count() > 0)
             @foreach($singlesubject->topics as $topic)
-                <a class="topic" style="color:black" data-topic-id="{{ $topic->id }}" href="#">&bull;{{ $topic->name }}</a>
+                <a class="topic"  data-topic-id="{{ $topic->id }}" href="#">&bull;{{ $topic->name }}</a>
             @endforeach
             @foreach($singlesubject->quizzes as $quiz)
             <br> Take Subject Quiz By clicking link below<br/>
-            <a href='#' style="color:black" data-quiz-id="{{ $quiz->id }}"><strong>{{ $quiz->title }}</strong></a><br><br>
+            <a href='#' data-quiz-id="{{ $quiz->id }}"><strong>{{ $quiz->title }}</strong></a><br><br>
             @endforeach
         @else
             <p>No topics found for subject</p>

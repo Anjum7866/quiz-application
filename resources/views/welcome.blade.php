@@ -27,7 +27,7 @@
     @foreach($subjects as $key => $subject)
         @if($key < 6) <!-- Limit to 6 boxes -->
             <div class="box">
-                <span class="amount">$59.99</span>
+                <span class="amount">Free</span>
                 <img src="{{asset('assets/uploads/profile/'.$subject->image_path)}}" alt="">
                 
                 <div class="stars">

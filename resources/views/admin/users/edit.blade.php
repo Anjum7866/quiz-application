@@ -37,8 +37,10 @@
                         <div class="form-group">
                             <label for="role">Role</label>
                             <select name="role" id="role" class="form-control" required>
-                                <option value="admin" @if($adminUser->role === 'admin') selected @endif>Admin</option>
-                                <option value="superadmin" @if($adminUser->role === 'superadmin') selected @endif>Superadmin</option>
+                            <option value="teacher" @if($adminUser->role === 'teacher') selected @endif>Teacher</option>
+                                  
+                            <option value="admin" @if($adminUser->role === 'admin') selected @endif>Admin</option>
+                            <option value="superadmin" @if($adminUser->role === 'superadmin') selected @endif>Superadmin</option>
                             </select>
                         </div><br>
                         <button type="submit" class="btn btn-primary">Update</button>

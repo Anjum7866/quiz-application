@@ -4,7 +4,7 @@
 @section('content')
 
 
-        <!-- <div class="overview-boxes">
+         <div class="overview-boxes">
           <div class="box">
             <div class="right-side">
               <div class="box-topic">Total Subjects</div>
@@ -49,8 +49,9 @@
             </div>
           
           </div>
-        </div> -->
-        <div class="card" style="background:none">
+        </div> 
+        
+        <!-- <div class="card" style="background:none">
         <h1 style="text-align: center;font-size: x-large;">All Quizes</h1>
         <div class="overview-boxes">
             @foreach($quizzes as $quiz)
@@ -70,7 +71,8 @@
         
     
         </div> 
-</div>
+        </div> -->
+
         <div class="sales-boxes">
           <div class="top-sales box">
             <div class="title">Top Subjects</div>

@@ -13,7 +13,7 @@
 				<div class="form__title">
 					<h1>register</h1>
 				</div>
-        <div class="form-group">
+        <div class="form__field">
         <label for="name" class="form__label">name</label>
               <input type="name" name="name" class="form__input" placeholder="{{ __('Name') }}">
         @error('name')

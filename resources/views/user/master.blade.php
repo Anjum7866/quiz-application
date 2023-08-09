@@ -74,6 +74,7 @@ display:flex;
 .content-right{
 	width:50%
 }
+
 @media (max-width: 825px) {
 	.flex{
 display:block;
@@ -87,6 +88,17 @@ display:block;
 	margin:auto; 
 }
 }
+@media (max-width: 480px) {
+.content-left{
+	width:80% !important;
+	margin:auto; 
+	
+}
+.content-right{
+	width: 80% !important;
+}
+}
+
 h3{
   font-family: 'Pacifico', cursive;
   color: transparent;

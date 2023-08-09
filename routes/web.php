@@ -83,7 +83,7 @@ Route::prefix('org')->middleware(CheckRole::class.':superadmin,admin,teacher')->
    Route::get('/profile/{profile}/edit', [AdminUserController::class,'editprofile'])->name('adminprofile.edit');
    Route::put('/profile/{profile}', [AdminUserController::class,'updateprofile'])->name('adminprofile.update');
    Route::get('/change-password', [ChangePasswordController::class, 'editpassword'])->name('adminchange.password');
-   Route::post('/change-password', [ChangePasswordController::class, 'updatepassword']);
+   Route::post('/change-password', [ChangePasswordController::class, 'updatepassword'])->name('adminupdate.password');
    // Route::get('/subjects/{subject}/quizzes', [SubjectController::class,'showQuizzes'])->name('subject.quizzes');
    Route::get('/quizhistory', [QuizResultController::class,'index'])->name('subject.quizhistory');
     Route::get('/subject/{subject}', [SubjectController::class,'showSingle'])->name('subject.showSingle');

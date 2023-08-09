@@ -8,7 +8,7 @@
 @foreach($subjects as $subject)
     
     <div class="box">
-        <span class="amount">$59.99</span>
+        <span class="amount">Free</span>
         <img src="{{asset('assets/uploads/profile/'.$subject->image_path)}}" alt="">
         <div class="stars">
             <i class="fas fa-star"></i>

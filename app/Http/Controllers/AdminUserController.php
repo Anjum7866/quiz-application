@@ -27,7 +27,8 @@ class AdminUserController extends Controller
     
     public function index()
     {
-        $adminUsers = AdminUser::all();
+        $adminUsers = AdminUser::latest()->get();
+
         return view('admin.users.index', compact('adminUsers'));
     }
 
@@ -111,7 +112,7 @@ class AdminUserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:admin_users,email,' . $id,
-            'role' => 'required|in:admin,superadmin',
+            'role' => 'required|in:teacher,admin,superadmin',
         ]);
 
         $adminUser = AdminUser::findOrFail($id);

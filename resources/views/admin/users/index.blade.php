@@ -32,7 +32,9 @@
                                             <a href="{{ route('admin.users.edit', $adminUser->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></a>&nbsp;
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" >Delete</button>
+                                                
+                                             <button  type="submit"><a class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></button>
+      
                                             </form>
                                         </div>
                                     </td>

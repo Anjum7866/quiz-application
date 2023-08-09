@@ -20,9 +20,9 @@
                 
             
             <div class="sales-details">
-                <form method="POST" action="{{ route('change.password') }}">
+                <form method="POST" action="{{ route('adminchange.password') }}">
                     @csrf
-                    <form method="POST" action="{{ route('password.update') }}">
+                    <form method="POST" action="{{ route('adminupdate.password') }}">
                         @csrf
 
                         <div class="form-group row">

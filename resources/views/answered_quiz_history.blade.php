@@ -7,6 +7,11 @@
         font-size: medium !important;
         padding:2rem;
         }
+        @media (max-width: 480px) {
+            .card{
+            width:100%;
+            }   
+        }
     </style>
   @include('navbar')
     <div class="card">
@@ -21,6 +26,7 @@
                         <th>Quiz</th>
                         <th>Score</th>
                         <th>Time Taken</th>
+                        <th>Certificate</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,7 +38,7 @@
                         $answeredAt = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $result->answered_at);
                         $hoursAgo = $answeredAt->diffInHours(now());
                         @endphp
-                        @if ($hoursAgo <= 72) {{-- Show results for the last 3 days --}}
+                        @if ($hoursAgo <= 72) 
                             <tr class="topic">
                                 <td class="font-weight-medium">{{ $rowNumber }}</td>
                                 <td>{{ $result->quiz->title }}</td>
@@ -45,6 +51,9 @@
                                             {{ $hoursAgo }} hours ago
                                         @endif
                                     </span>
+                                </td>
+                                <td>
+                                <a class="certificate" style="color:007bff;"href="{{ route('certificate.download', ['subject' => $subjectId, 'score' =>$score, 'totalQuestions' => $totalQuestions]) }}">Download Certificate</a>   
                                 </td>
                             </tr>
                             @php

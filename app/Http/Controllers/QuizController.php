@@ -59,7 +59,6 @@ class QuizController extends Controller
     }
 
     public function storequiz(Request $request, $topicId){
-       
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -72,7 +71,8 @@ class QuizController extends Controller
         $quizzes->description = $request->input('description');
         $quizzes->topic_id = $topicId;
         $quizzes->save();
-        return redirect()->route('quizzes.index', compact('quizzes'))->with([
+        $topic = Topic::findOrFail($topicId);
+        return redirect()->route('topics.show', compact('quizzes', 'topic'))->with([
             'message' => 'successfully created !',
             'alert-type' => 'success'
         ]);
@@ -117,8 +117,9 @@ class QuizController extends Controller
 
     public function destroy(Quiz $quiz)
     {
+        $topic = $quiz->topic; 
         $quiz->delete();
-        return redirect()->route('quizzes.index')->with('success', 'Quiz deleted successfully!');
+        return redirect()->route('topics.show', 'topic')->with('success', 'Quiz deleted successfully!');
     }
 
     public function generateQuiz($Id)

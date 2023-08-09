@@ -4,9 +4,10 @@
 
 @section('content')
 <div class="sales-boxes">
+          
         <div class="recent-sales box">
+            <a class="btn btn-primary" href="{{ route('subjects.show', $topic->subject_id) }}"> <i class="fas fa-arrow-left"></i></a>
             <div class="title">
-                <div class="button"> <a class="btn btn-primary" href="{{ route('topics.index') }}"> Back</a></div>
             </div>
             @if ($errors->any())
                     <div class="alert alert-danger">
@@ -25,16 +26,6 @@
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        <label for="subject_id">Select Subject:</label>
-                        <select name="subject_id" id="subject_id" class="form-control">
-                            @foreach ($subjects as $subject)
-                            <option value="{{ $subject->id }}" {{ $topic->subject_id == $subject->id ? 'selected' : '' }}>
-                                {{ $subject->name }}
-                            </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="row">
                         <label for="name">Topic Name:</label>
                         <input type="text" name="name" id="name" class="form-control" value="{{ $topic->name }}" >
                     </div>
@@ -43,13 +34,12 @@
                         <textarea name="description" id="description" class="form-control">{{ $topic->description }}</textarea>
                     </div>
                     <div class="row">
-                    @if ($topic->content)
-                    <p><strong>Topic Image:</strong></p> <br>  
-                    <img src="{{asset('assets/uploads/profile/'.$topic->content)}}" width="100px" height="100px" class="category-img" alt="Topic Image">
-                    @endif
+                        @if ($topic->content)
+                        <p><strong>Topic Image:</strong></p> <br>  
+                        <img src="{{asset('assets/uploads/profile/'.$topic->content)}}" width="100px" height="100px" class="category-img" alt="Topic Image">
+                        @endif
                     </div>
-                    <div class="row">
-                
+                    <div class="row">          
                         <label for="content">Upload Image:</label>
                         <input type="file" name="content"  id="content"  class="form-control">
                         @error('content')
@@ -57,14 +47,14 @@
                         @enderror
                     </div>
                     <div class="row">
-                    @if ($topic->video_path) 
+                        @if ($topic->video_path) 
                         <p><strong>Topic Video:</strong></p> <br>                                          
                         <video controls  style="width: 200px; height:200px">
                             <source src="{{asset('assets/uploads/profile/'.$topic->video_path)}}" type="video/mp4"  >             
                         </video>
-                    @endif       
+                        @endif       
                     </div>
-                    <div class="col-md-6 form-group">
+                    <div class="row">
                         <label>Upload Video:</label>
                         <input type="file" name="video_path" class="form-control"/>
                         @if($errors->has('video'))
@@ -74,7 +64,7 @@
                     @if ($topic->file_path)
                     <img src="{{asset('assets/uploads/profile/'.$topic->file_path)}}" width="100px" height="100px" class="category-img" alt="Topic File">
                     @endif
-                    <div class="col-md-6 form-group">
+                    <div class="row">
                         <label>Upload File:</label>
                         <input type="file" name="file_path" class="form-control"/>
                         @if($errors->has('file_path'))

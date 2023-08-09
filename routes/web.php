@@ -91,10 +91,12 @@ Route::prefix('org')->middleware(CheckRole::class.':superadmin,admin,teacher')->
     Route::resource('topics', TopicController::class);
     Route::resource('quizzes', QuizController::class);
     Route::get('/quizzes/create/{quizId}', [QuizController::class,'createTopicQuiz'])->name('topic.createTopicQuiz');
-    Route::post('/topicquizzes/{quizId}', [QuizController::class, 'storequiz'])->name('topics.storequiz');
+    Route::post('/topic/quizzes/{topicId}', [QuizController::class, 'storequiz'])->name('topics.storequiz');
     
     Route::resource('questions', QuestionController::class);
     Route::get('/subjects/{subject}', [SubjectController::class,'show'])->name('subjects.show');
+    Route::get('/topics/{topic}', [TopicController::class,'show'])->name('topics.show');
+    
     Route::get('{id}/questions/create', [App\Http\Controllers\QuestionController::class, 'create'])->name('questions.create');
     Route::post('{id}/questions', [App\Http\Controllers\QuestionController::class, 'store'])->name('questions.store');
     
@@ -134,7 +136,7 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::get('/subjects/{subject}/quizzes', [SubjectController::class,'showQuizzes'])->name('subject.quizzes');
     Route::get('/quizhistory', [QuizResultController::class,'index'])->name('subject.quizhistory');
     Route::get('/checkanswers/{quizId}/',[QuizResultController::class,'checkanswers'])->name('checkanswers');
-    Route::get('/topics/{topic}/quizzes', [TopicController::class,'showQuizzes'])->name('topic.quizzes');
+    Route::get('/topics/{topicId}/quizzes', [TopicController::class,'showQuizzes'])->name('topic.quizzes');
     
     Route::get('/certificate', function () { return view('certificate'); });
     Route::get('/answered-quiz-history', [QuizResultController::class, 'index'])->name('answered-quiz-history');

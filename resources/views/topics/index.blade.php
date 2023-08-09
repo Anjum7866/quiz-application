@@ -48,7 +48,7 @@
                 @else
                 <p>No topics found.</p>
                 @endif
-                </div>
+            </div>
         </div>
 </div>
 @endsection

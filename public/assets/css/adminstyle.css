@@ -269,12 +269,15 @@
   
   /* left box */
   .home-content .sales-boxes .recent-sales{
-    width: 65%;
+    width: 100%;
     background: #fff;
     padding: 20px 30px;
     margin: 0 20px;
     border-radius: 12px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  .modal-body {
+    padding: 25px !important;
   }
   .home-content .sales-boxes .sales-details{
     display: flex;
@@ -282,10 +285,18 @@
     justify-content: space-between;
   }
   .sales-boxes .box .title{
+    display:flex; 
+    /* margin-bottom:25px; */
     font-size: 24px;
     font-weight: 500;
-    /* margin-bottom: 10px; */
+    margin-bottom: 10px;
   }
+ .sales-boxes .salesheading{
+  width: 100%;
+  padding: 20px 30px;
+  margin: 0 20px;
+ }
+  
   .sales-boxes .sales-details li.topic tr.topic{
     font-size: 20px;
     font-weight: 500;
@@ -301,10 +312,11 @@
     text-decoration: none;
   }
   .sales-boxes .box .button{
-    width: 100%;
+    text-align: right;
+    margin-left: auto !important;
     /* display: flex; */
     justify-content: flex-end;
-    margin: 10px;
+    /* margin: 10px; */
   }
   .sales-boxes .box .button a  {
     color: #fff;
@@ -322,7 +334,7 @@
   
   .sales-boxes .box .btn-primary {
     color: #fff;
-    padding: 4px 12px;
+    padding: 6px 12px;
     font-size: 15px;
     font-weight: 400;
     border-radius: 4px;

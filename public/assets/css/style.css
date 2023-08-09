@@ -514,7 +514,6 @@ border-color: rgba(0, 0, 0, 0.3); /* Change the border color on hover */
   border-color: #80bdff;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
-
 .sales-boxes .sales-details .form-control option:first-child {
   font-style: italic;
   color: #808080;

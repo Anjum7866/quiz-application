@@ -30,17 +30,18 @@ class TopicController extends Controller
         return view('topics.create', compact('subject'));
     }
 
-    public function show($id)
+    public function show(Topic $topic,)
     {
-        $topic = Topic::findOrFail($id);
-        $quiz = Quiz::where('topic_id', $id)->first();
+    
+        $quiz = Quiz::where('topic_id', $topic->id)->first();
 
         return view('topics.show', compact('topic','quiz'));
     }
-    public function showQuizzes(Topic $topic)
+    public function showQuizzes($topicId)
     {
         // Get the subject and its quizzes
-        $topicWithQuizzes = $topic->load('quizzes');
+        $topic = Topic::where('id', $topicId)->first();
+        $topicWithQuizzes = $topic->quizzes; 
         return view('topics/topic-show', compact('topicWithQuizzes', 'topic'));
     }
 
@@ -66,7 +67,10 @@ class TopicController extends Controller
             $filename = time().'.'.$ext;
             $file->move('assets/uploads/profile/', $filename);
             $topic->content = $filename;
+        } else {
+            $topic->content = null; 
         }
+        
         
         if ($request->hasFile('video')) {
             $video = $request->file('video');
@@ -119,10 +123,11 @@ class TopicController extends Controller
           ]);
       
         $topic = Topic::findOrFail($id);
+        $subjectId= $topic->subject_id;
         // Update the topic with the new values
         $topic->name = $request->input('name');
         $topic->description = $request->input('description');
-        $topic->subject_id = $request->input('subject_id');
+        $topic->subject_id = $subjectId;
         if($request->hasFile('content'))
         {
             $path = 'assets/uploads/profile/'.$topic->content;
@@ -165,18 +170,24 @@ class TopicController extends Controller
     
         // Save the updated topic to the database
         $topic->save();
+        $subject = Subject::findOrFail($subjectId);
 
+        $topics = $subject->topics;
         // Redirect to the topics index page with a success message
-        return redirect()->route('topics.index')->with('success', 'Topic updated successfully.');
+        return redirect()->route('subjects.show', compact('subject', 'topics'))->with('success', 'Topic created successfully.');
     }
 
     // Delete the topic from the database
     public function destroy( $topicId)
     {
         $topic = Topic::find($topicId);
+        if ($topic) {
+            $subject = $topic->subject; 
+        }
+        $topics = $subject->topics;
         $topic->delete();
 
-        return redirect()->route('topics.index')->with('success', 'Topic deleted successfully.');
+        return redirect()->route('subjects.show', compact('subject', 'topics'))->with('success', 'Topic deleted successfully.');
     }
     public function getDetails($topicId)
     {

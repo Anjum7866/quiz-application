@@ -1,18 +1,16 @@
 <title>Subjects</title>
- 
 
 @extends('admin.layout.master')
 @section('content')
 <div class="sales-boxes">
         <div class="recent-sales box">
-            <div class="title" >Subjects</h2>
+            <div class="title" >Subjects
                 <div class="button">
                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
                 </div>   
             </div>
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -121,20 +119,15 @@
                         </table>
                         @else
                         <p>No subjects found.</p>
-                        @endif
-                    
-                <!-- <ul class="details">
-                    <li class="topic">Date</li>
-                    <li><a href="#">02 Jan 2021</a></li>
-                    <li><a href="#">02 Jan 2021</a></li>
-                    <li><a href="#">02 Jan 2021</a></li>
-                    <li><a href="#">02 Jan 2021</a></li>
-                    <li><a href="#">02 Jan 2021</a></li>
-                    <li><a href="#">02 Jan 2021</a></li>
-                    <li><a href="#">02 Jan 2021</a></li>
-                </ul> -->
+                        @endif      
+            </div>
+            <div class="row">
+            <div class="pagination">
+            {!! $subjects->links() !!}
             </div>
         </div>
+        </div>
 </div>
+
 
 @endsection

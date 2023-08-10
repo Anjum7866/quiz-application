@@ -174,7 +174,7 @@ class TopicController extends Controller
 
         $topics = $subject->topics;
         // Redirect to the topics index page with a success message
-        return redirect()->route('subjects.show', compact('subject', 'topics'))->with('success', 'Topic created successfully.');
+        return redirect()->route('subjects.show', compact('subject', 'topics'))->with('success', 'Topic updated successfully.');
     }
 
     // Delete the topic from the database

@@ -20,7 +20,7 @@
             <span class="links_name">Subjects</span>
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="{{ url('/org/topics') }}" class="{{ request()->is('org/topics') ? 'active' : '' }}">
             <i class="bx bx-coin-stack"></i>
             <span class="links_name">Topics</span>
@@ -37,7 +37,7 @@
             <i class="bx bx-pie-chart-alt-2"></i>
             <span class="links_name">Question</span>
           </a>
-        </li>
+        </li> -->
         @endif
         @if(in_array(Auth::user()->role, ['admin', 'superadmin']))
           <li>

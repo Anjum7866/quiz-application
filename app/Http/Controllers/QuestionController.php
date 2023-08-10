@@ -64,18 +64,16 @@ class QuestionController extends Controller
             'text' => 'required|string',
         ]);
 
-        // Find the topic by its ID
         $question = Question::findOrFail($id);
-
-        // Update the question with the new values
         $question->text = $request->input('text');
         $question->subject_id = $request->input('subject_id');
-
-        // Save the updated topic to the database
         $question->save();
+        $quizzId= $question->quiz_id;
+        $quiz = Quiz::findOrFail($quizzId);
 
+        $questions = $quiz->questions;
      
-        return redirect()->route('questions.index')->with([
+        return redirect()->route('quizzes.show', compact('quiz', 'questions'))->with([
             'message' => 'successfully updated !',
             'alert-type' => 'info'
         ]);
@@ -83,9 +81,12 @@ class QuestionController extends Controller
 
     public function destroy(Question $question): RedirectResponse
     {
+        $quizzId= $question->quiz_id;
+        $quiz = Quiz::findOrFail($quizzId);
+        $questions = $quiz->questions;
         $question->delete();
 
-        return back()->with([
+        return redirect()->route('quizzes.show', compact('quiz', 'questions'))->with([
             'message' => 'successfully deleted !',
             'alert-type' => 'danger'
         ]);

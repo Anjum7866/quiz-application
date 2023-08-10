@@ -5,8 +5,9 @@
 @section('content')
 <div class="sales-boxes">
         <div class="recent-sales box">
+        <a href="{{ route('quizzes.show', $question->quiz->id) }}" class="btn btn-primary btn-sm shadow-sm"><i class="fas fa-arrow-left"></i></a>
             <div class="title">
-                <div class="button">     <a href="{{ route('questions.index') }}" class="btn btn-primary btn-sm shadow-sm">{{ __('Go Back') }}</a>
+                <div class="button">   
                </div>
             </div>
             @if ($errors->any())

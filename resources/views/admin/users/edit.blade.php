@@ -4,9 +4,9 @@
 @section('content')
 <div class="sales-boxes">
         <div class="recent-sales box">
+        <a href="{{ route('admin.users.index') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a><br><br>
+            
             <div class="title">Edit Admin User
-            <br>
-            <a href="{{ route('admin.users.index') }}" class="btn btn-primary">Back</a><br><br>
                
             </div>
             @if ($errors->any())

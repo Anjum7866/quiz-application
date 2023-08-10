@@ -28,27 +28,28 @@ class QuizController extends Controller
         return view('admin.quizz.index', compact('quizzes'));
     }
 
-    public function create()
+    public function create($subjectId)
     {
-        $subjects = Subject::all();
-        return view('admin.quizz.create', compact('subjects'));
+        $subject = Subject::where('id', $subjectId)->first();
+        return view('admin.quizz.create', compact('subject'));
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request, $subjectId)
+    {     
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'subject_id'=>'required|string'
-            
-        ]);
-       
+            'description' => 'nullable|string',  
+        ]); 
         $quizzes = new Quiz;
         $quizzes->title = $request->input('title');
         $quizzes->description = $request->input('description');
-        $quizzes->subject_id = $request->input('subject_id');
+        $quizzes->subject_id = $subjectId;
         $quizzes->save();
-        return redirect()->route('quizzes.index', compact('quizzes'))->with([
+       
+        $subject = Subject::findOrFail($subjectId);
+        $topics = $subject->topics;
+       
+        return redirect()->route('subjects.show', compact('quizzes','subject', 'topics'))->with([
             'message' => 'successfully created !',
             'alert-type' => 'success'
         ]);
@@ -99,27 +100,48 @@ class QuizController extends Controller
         return view('admin.quizz.edit', compact('quiz'));
     }
 
-    public function update(Request $request, Quiz $quiz)
+    public function update(Request $request, $quizId)
     {
+        
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
          ]);
 
+        $quiz = Quiz::findOrFail($quizId);
         $quiz->title = $request->input('title');
         $quiz->description = $request->input('description');
 
         $quiz->save();
 
-     
-        return redirect()->route('quizzes.index')->with('success', 'Quiz updated successfully!');
+        if ($quiz->subject) {
+            $subject = $quiz->subject;
+            $topics = $subject->topics; // Assuming you want to pass topics related to the subject
+    
+            return redirect()->route('subjects.show', compact('subject', 'topics'))->with('success', 'Quiz updated successfully!');
+        } else {
+            $topicId=  $quiz->topic->id;
+        $topic = Topic::findOrFail($topicId);
+        return redirect()->route('topics.show', compact('quiz', 'topic'))->with([
+            'message' => 'successfully created !',
+            'alert-type' => 'success'
+        ]);}
+    
+       
+        return redirect()->route('subjects.show', compact('subject', 'topics'))->with('success', 'Quiz updated successfully!');
     }
 
     public function destroy(Quiz $quiz)
     {
-        $topic = $quiz->topic; 
-        $quiz->delete();
-        return redirect()->route('topics.show', 'topic')->with('success', 'Quiz deleted successfully!');
+        if ($quiz->subject) {
+            $subject = $quiz->subject;
+            $quiz->delete();
+            return redirect()->route('subjects.show', compact('subject'))->with('success', 'Quiz deleted successfully!');
+        } else {
+            $topic = $quiz->topic;
+            $quiz->delete();
+            return redirect()->route('topics.show', $topic)->with('success', 'Quiz deleted successfully!');
+        }
     }
 
     public function generateQuiz($Id)

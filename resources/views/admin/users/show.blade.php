@@ -4,9 +4,9 @@
 @section('content')
 <div class="sales-boxes" >
         <div class="recent-sales box" >
-
+        <a href="{{ route('admin.users.index') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i></a><br>
+          
             <div class="title">Admin User Details<br>
-            <a href="{{ route('admin.users.index') }}" class="btn btn-primary">Back</a><br>
                
           </div>
               <div class="sales-details">

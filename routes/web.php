@@ -15,6 +15,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuizResultController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\SearchController;
 
 use App\Http\Middleware\CheckRole;
 
@@ -77,8 +78,10 @@ Route::prefix('org')->middleware(CheckRole::class.':superadmin,admin,teacher')->
         Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     
         Route::get('/answered-quiz-history', [QuizResultController::class, 'adminquizhistory'])->name('org.answered-quiz-history');
-    
-    
+        Route::get('/search', [SearchController::class,'index'])->name('search');
+
+        Route::post('/search', [SearchController::class, 'redirectToSearch'])->name('search.submit');
+        
    Route::get('/profile/{profile}', [AdminUserController::class,'showprofile'])->name('adminprofile.show');
    Route::get('/profile/{profile}/edit', [AdminUserController::class,'editprofile'])->name('adminprofile.edit');
    Route::put('/profile/{profile}', [AdminUserController::class,'updateprofile'])->name('adminprofile.update');
@@ -90,6 +93,9 @@ Route::prefix('org')->middleware(CheckRole::class.':superadmin,admin,teacher')->
     Route::resource('subjects', SubjectController::class);
     Route::resource('topics', TopicController::class);
     Route::resource('quizzes', QuizController::class);
+    Route::get('/quizzes/create/{subjectId}', [QuizController::class,'create'])->name('quizzes.create');
+    Route::post('/subject/quizzes/{subjectId}', [QuizController::class, 'store'])->name('quizzes.store');
+   
     Route::get('/quizzes/create/{quizId}', [QuizController::class,'createTopicQuiz'])->name('topic.createTopicQuiz');
     Route::post('/topic/quizzes/{topicId}', [QuizController::class, 'storequiz'])->name('topics.storequiz');
     

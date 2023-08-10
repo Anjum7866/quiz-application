@@ -5,8 +5,9 @@
 @section('content')
 <div class="sales-boxes">
         <div class="recent-sales box">
+        <a class="btn btn-primary" href="{{ route('subjects.index') }}"> <i class="fas fa-arrow-left"></i></a>
             <div class="title">
-                <div class="button"><a class="btn btn-primary" href="{{ route('subjects.index') }}"> <i class="fas fa-arrow-left"></i></a></div>
+                <div class="button"></div>
             </div>
             @if ($errors->any())
                     <div class="alert alert-danger">

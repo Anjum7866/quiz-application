@@ -20,11 +20,15 @@ use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
+        $query = $request->input('query');
+
         $subjects = Subject::with(['topics' => function ($query) {
             $query->orderBy('created_at', 'desc');
-        }])->orderBy('created_at', 'desc')->get();
+        }])
+        ->where('name', 'LIKE', "%$query%")
+        ->orderBy('created_at', 'desc')->paginate(10);
     
         return view('subject', compact('subjects'));
     }

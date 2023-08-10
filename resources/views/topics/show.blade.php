@@ -90,7 +90,7 @@
                         @php
                             $counter = 1;
                         @endphp
-                        @foreach($topic->quizzes as $quiz)
+                        @foreach ($topic->quizzes->sortByDesc('created_at') as $quiz)
                         <tr>
                             <td>{{ $counter }}</td>
                             <td>{{ $quiz->title }}</td>

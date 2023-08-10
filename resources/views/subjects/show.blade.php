@@ -77,18 +77,14 @@
             <br>
             @endif
             <br>
-            <div class="button">  <a href="{{ route('quizzes.create') }}" class="btn btn-primary">
-                        <span class="icon text-white-50">
-                            <i class="fa fa-plus"></i>
-                        </span>
-                        <span class="text">{{ __('New quizz') }}</span>
-                    </a></div>
+           
         </div>
       </div>
             
     <div class="sales-details" style="display:flex">
+    <div style="width:50%">
                 @if(count($topics) > 0)
-                <table class="table table-striped" style="width:50%">
+                <table class="table table-striped" >
                     <thead>
                         <tr>
                             <th>#</th>
@@ -132,9 +128,16 @@
                 @else
                 <p>No topics found.</p>
                 @endif
-
+    </div>
+    <div style="width:50%">
+    <div class="button">  <a href="{{ route('quizzes.create', $subject->id) }}" class="btn btn-primary">
+                        <span class="icon text-white-50">
+                            <i class="fa fa-plus"></i>
+                        </span>
+                        <span class="text">{{ __('New quizz') }}</span>
+                    </a></div>
                 @if(count($subject->quizzes) > 0)
-                <table class="table table-striped" style="width:50%">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -178,7 +181,8 @@
                 @else
                 <p>No quizzes found.</p>
                 @endif
-    </div>      
+    </div> 
+    </div>     
 </div>
 </div>
          

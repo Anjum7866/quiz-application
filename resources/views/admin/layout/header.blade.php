@@ -5,7 +5,7 @@
 
         </div>
         <div class="search-box">
-            <form action="{{ route('search.submit') }}" method="POST">
+            <form id="search-form" method="POST">
                   @csrf 
                   <input type="text" id="search-input" name="query" placeholder="Search..." />
               <button type="submit"><i class="bx bx-search"></i></button>
@@ -35,30 +35,45 @@
             </div>
           </div>
         </div>
-
       </nav>
-      <script>
+      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="searchModalLabel">Search Results</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Search results will be displayed here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+  <script>
     function setPageTitle(title) {
-      const pageTitleElement = document.querySelector(".page-title");
-      if (pageTitleElement) {
-        pageTitleElement.textContent = title;
+        const pageTitleElement = document.querySelector(".page-title");
+        if (pageTitleElement) {
+          pageTitleElement.textContent = title;
+        }
       }
-    }
-  setPageTitle(document.title);
+    setPageTitle(document.title);
   </script>
   <script>
     const searchInput = document.getElementById('search-input');
-const suggestionsContainer = document.getElementById('suggestions-container');
+  const suggestionsContainer = document.getElementById('suggestions-container');
 
-searchInput.addEventListener('input', () => {
-   const query = searchInput.value;
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value;
 
-   if (query.length >= 2) {
-      fetchSuggestions(query);
-   } else {
-      clearSuggestions();
-   }
-});
+    if (query.length >= 2) {
+        fetchSuggestions(query);
+    } else {
+        clearSuggestions();
+    }
+  });
 
 function fetchSuggestions(query) {
    fetch(`/api/suggestions?query=${query}`)
@@ -89,4 +104,33 @@ function clearSuggestions() {
 
 }
 
-    </script>
+</script>
+<script>
+$(document).ready(function() {
+    $('#search-form').submit(function(e) {
+      console.log('testing');
+        e.preventDefault();
+        
+        var formData = $(this).serialize();
+        $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+        $.ajax({
+            type: 'POST',
+            url: '{{ route('search.submit') }}',
+            data: formData,
+            success: function(response) {
+                // Update the modal's content with the search results HTML
+                $('#searchModal .modal-body').html(response);
+                
+                // Open the modal
+                $('#searchModal').modal('show');
+            }
+        });
+    });
+});
+
+
+  </script>

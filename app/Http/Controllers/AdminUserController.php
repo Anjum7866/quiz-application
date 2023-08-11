@@ -171,21 +171,22 @@ class AdminUserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'Admin user deleted successfully.');
     }
 
-    public function showprofile(UserProfile $profile)
-    { 
-           return view('admin.profile.show', compact('profile'));
-    }
+    // public function showprofile(UserProfile $profile)
+    // { 
+    //        return view('admin.profile.show', compact('profile'));
+    // }
     
     public function editprofile(UserProfile $profile)
     {
         return view('admin.profile.edit', compact('profile'));
     }
     
-    public function updateprofile(Request $request, UserProfile $profile)
+    public function updateprofile(Request $request, $id)
     {
+       
         $request->validate([
             'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string',
+            'last_name' => 'nullable|string',
             'bio' => 'nullable|string|max:255',
             'email' => 'required|string',
             'phone' => 'nullable|string|max:255',
@@ -197,8 +198,8 @@ class AdminUserController extends Controller
             'twitter_url' => 'nullable|string',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif',
           ]);
-      
-        // $profile = Profile::findOrFail($id);
+     
+        $profile = UserProfile::findOrFail($id);
         $profile->first_name = $request->input('first_name');
         $profile->last_name = $request->input('last_name');
         $profile->bio = $request->input('bio');
@@ -227,13 +228,12 @@ class AdminUserController extends Controller
             // Save the updated profile to the database
              $profile->save();
 
-            
              $user = User::where('id', $profile->user_id)->first();
              $user->name = $request->input('first_name');
              $user->email = $request->input('email');
              $user->save();     
 
-               return redirect()->route('adminprofile.edit', $profile->user_id)
+               return redirect()->route('adminprofile.edit', $profile->id)
             ->with('success', 'Profile updated successfully!');
     }
 

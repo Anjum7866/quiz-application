@@ -73,7 +73,16 @@ public function index(Request $request)
         ->orderBy('created_at', 'desc')
         ->get();
 
-    return view('search_result', compact('query','subjects', 'topics', 'quizzes', 'questions'));
+        // $data = [
+        //     'query' => $query,
+        //     'subjects' => $subjects,
+        //     'topics' => $topics,
+        //     'quizzes' => $quizzes,
+        //     'questions' => $questions,
+        // ];
+    
+        // return response()->json($data);
+     return view('search_result', compact('query','subjects', 'topics', 'quizzes', 'questions'));
 }
 
 

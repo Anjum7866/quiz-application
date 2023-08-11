@@ -59,8 +59,25 @@
         <div class="sales-details">
     <div class="row">
         <div class="col-md-4 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
-        </div>
+        @if ($profile->avatar) 
+                      <div class="col-6 mt-3">
+                      <img src="{{asset('assets/uploads/profile/'.$profile->avatar)}}" style="width: 150px;" class="rounded-circle img-fluid" alt="avatar">
+                     <br><br>
+                      <input type="file" name="avatar"  id="avatar"  >   
+                      </div>
+                      @else
+                      <div class="col-6 mt-3">
+                          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                          class="rounded-circle img-fluid" style="width: 150px;">
+                          <br><br>
+                          <input type="file" name="avatar"  id="avatar"  >
+                          @error('avatar')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                          @enderror
+                      </div>
+                    @endif
+             
+      </div>
         <div class="col-md-8 border-right">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">

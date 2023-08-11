@@ -32,6 +32,8 @@ use App\Http\Middleware\CheckRole;
 
 
 Route::resource('/', HomeController::class);
+Route::get('/landing', [HomeController::class,'landingpage']);
+
 Route::get('/get-topic-details/{topicId}', [TopicController::class,'getDetails']);
 Route::post('/store-intended-url', [LoginController::class, 'storeIntendedUrl']);
 
@@ -82,9 +84,9 @@ Route::prefix('org')->middleware(CheckRole::class.':superadmin,admin,teacher')->
 
         Route::post('/search', [SearchController::class, 'redirectToSearch'])->name('search.submit');
         
-   Route::get('/profile/{profile}', [AdminUserController::class,'showprofile'])->name('adminprofile.show');
+//    Route::get('/profile/{profile}', [AdminUserController::class,'showprofile'])->name('adminprofile.show');
    Route::get('/profile/{profile}/edit', [AdminUserController::class,'editprofile'])->name('adminprofile.edit');
-   Route::put('/profile/{profile}', [AdminUserController::class,'updateprofile'])->name('adminprofile.update');
+   Route::put('/profile/{profileId}', [AdminUserController::class,'updateprofile'])->name('adminprofile.update');
    Route::get('/change-password', [ChangePasswordController::class, 'editpassword'])->name('adminchange.password');
    Route::post('/change-password', [ChangePasswordController::class, 'updatepassword'])->name('adminupdate.password');
    // Route::get('/subjects/{subject}/quizzes', [SubjectController::class,'showQuizzes'])->name('subject.quizzes');

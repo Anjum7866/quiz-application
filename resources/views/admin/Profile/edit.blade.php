@@ -72,7 +72,7 @@
          
         <div class="recent-sales box">
         <div class="sales-details">
-        <form action="{{ route('adminprofile.update', $profile->user_id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('adminprofile.update', $profile->id) }}" method="POST" enctype="multipart/form-data">
                           @csrf
                           @method('PUT')
              

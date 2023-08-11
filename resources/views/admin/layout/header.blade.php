@@ -3,7 +3,6 @@
           <i class="bx bx-menu sidebarBtn"></i>
           <span class="page-title">Dashboard</span>
 
-          <!-- <span class="dashboard">Dashboard</span> -->
         </div>
         <div class="search-box">
             <form action="{{ route('search.submit') }}" method="POST">

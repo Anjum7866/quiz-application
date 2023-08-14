@@ -1,7 +1,7 @@
 
 
 @include('navbar')
-  
+  <title>E-learning is a better way of learning</title>
 
 <section class="home">
     <div class="content">
@@ -92,6 +92,7 @@
 
 <script src="assets/js/swiper-bundle.min.js"></script>
 <script src="assets/js/script.js"></script>
+</body>
 @include('footer')
 
 

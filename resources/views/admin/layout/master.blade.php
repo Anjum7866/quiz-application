@@ -28,8 +28,8 @@
    
     @include('admin.layout.header')
     <div class="home-content">
-   @yield('content')
-</div>
+      @yield('content')
+    </div>
     </section>
 
     <script>

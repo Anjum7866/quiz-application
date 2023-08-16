@@ -1,14 +1,5 @@
-<title>Admin User</title>
-
-@extends('admin.layout.master')
-
-@section('content')
-<div class="sales-boxes">
-        <div class="recent-sales box">
-            <div class="title">Admin Users List
-            <div class="button"> 
+<div class="button"> 
                 <button type="button" id="add-button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><i class="fas fa-plus"></i></button>
-            </div>
             </div>
             <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -64,44 +55,10 @@
                 </div> 
             </div>
         </div>
-            <div class="sales-details">
-                @if ($adminUsers->count() > 0)
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($adminUsers as $adminUser)
-                                <tr>
-                                    <td>{{ $adminUser->name }}</td>
-                                    <td>{{ $adminUser->email }}</td>
-                                    <td>{{ $adminUser->role }}</td>
-                                    <td>
-                                        <div class="row">
-                                            <form action="{{ route('admin.users.destroy', $adminUser->id) }}" method="POST" class="d-inline">
-                                            <a href="{{ route('admin.users.show', $adminUser->id) }}" class="btn btn-info "><i class="fas fa-eye"></i></a>
-                                            <a href="{{ route('admin.users.edit', $adminUser->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></a>&nbsp;
-                                                @csrf
-                                                @method('DELETE')
-                                                
-                                             <button  type="submit"><a class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></button>
-      
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <p>No admin users found.</p>
-                @endif
-            </div>
-        </div>
-</div>
-@endsection
+<!-- <form action="{{ url('/contact') }}" method="post">
+    @csrf
+    <input type="text" name="name" placeholder="Name">
+    <input type="email" name="email" placeholder="Email">
+    <textarea name="message" placeholder="Message"></textarea>
+    <button type="submit">Submit</button>
+</form> -->

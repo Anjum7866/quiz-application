@@ -3,24 +3,24 @@
         "level": "SEVERE",
         "message": "https:\/\/fonts.bunny.net\/css?family=figtree:400,600&display=swap - Failed to load resource: net::ERR_CONNECTION_TIMED_OUT",
         "source": "network",
-        "timestamp": 1692005600178
+        "timestamp": 1692005575574
     },
     {
         "level": "SEVERE",
         "message": "http:\/\/127.0.0.1:8000\/ 234:15 Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')",
         "source": "javascript",
-        "timestamp": 1692005600190
+        "timestamp": 1692005575611
     },
     {
         "level": "SEVERE",
         "message": "http:\/\/127.0.0.1:8000\/assets\/js\/script.js 12:19 Uncaught TypeError: Cannot set properties of null (setting 'onclick')",
         "source": "javascript",
-        "timestamp": 1692005600196
+        "timestamp": 1692005575615
     },
     {
         "level": "SEVERE",
         "message": "http:\/\/127.0.0.1:8000\/assets\/js\/script.js 0:0 Uncaught SyntaxError: Identifier 'menu' has already been declared",
         "source": "javascript",
-        "timestamp": 1692005600196
+        "timestamp": 1692005575615
     }
 ]

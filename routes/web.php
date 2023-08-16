@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\QuizResultController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ContactController;
 
 use App\Http\Middleware\CheckRole;
 
@@ -168,4 +169,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
+Route::get('/contact', [ContactController::class ,'showForm']);
+Route::post('/contact', [ContactController::class, 'submitForm']);
 

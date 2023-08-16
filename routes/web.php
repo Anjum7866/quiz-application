@@ -33,6 +33,9 @@ use App\Http\Middleware\CheckRole;
 
 
 Route::resource('/', HomeController::class);
+Route::get('/dusk', function () {
+    return view('dusk');
+});
 Route::get('/landing', [HomeController::class,'landingpage']);
 
 Route::get('/get-topic-details/{topicId}', [TopicController::class,'getDetails']);

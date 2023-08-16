@@ -63,4 +63,15 @@ abstract class DuskTestCase extends BaseTestCase
         return isset($_SERVER['DUSK_START_MAXIMIZED']) ||
                isset($_ENV['DUSK_START_MAXIMIZED']);
     }
+
+    // protected function setUp(): void
+    // {
+    //     parent::setUp();
+
+    //     Browser::macro('scrollToElement', function ($selector) {
+    //         $this->script("document.querySelector('$selector').scrollIntoView();");
+    //     });
+    // }
+
+   
 }

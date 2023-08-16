@@ -14,42 +14,40 @@ class ExampleTest extends DuskTestCase
     public function testBasicExample(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/');
-            // ->assertSeeIn('h3','E-learning is a better way of learning'); 
+            $browser->visit('/dusk')
+            ->assertSeeIn('h1','Welcome to Laravel Dusk Responsive Test');                 
         });
     }
     public function testScreenshot(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')
+            $browser->visit('/dusk')
             ->screenshot('homepage_screenshot') 
-            ->storeConsoleLog('console_output');
-            // ->assertSeeIn('h3','E-learning is a better way of learning'); 
+            ->storeConsoleLog('console_output')
+            ->assertSeeIn('h1','Welcome to Laravel Dusk Responsive Test');                   
         });
     }
-    public function testFormSubmission()
+    
+    public function testResponsiveDesign()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/contact')
-                    ->type('name', 'John Doe')
-                    ->type('email', 'john@example.com')
-                    ->type('password', 'password')
-                    ->type('password_confirmation', 'password')
-                    ->select('role', 'admin')
-                    ->press('Create Admin User'); 
+            $browser->resize(1024, 768);
+
+            $browser->visit('/dusk')
+                     ->assertSeeIn('h1','Welcome to Laravel Dusk Responsive Test')
+                    ->assertVisible('@navigation'); 
         });
     }
-    public function testCreateAdminUser()
+   
+    public function testScrollToElement()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admins')
-                    ->type('name', 'John Doe')
-                    ->type('email', 'john@example.com')
-                    ->type('password', 'password')
-                    ->type('password_confirmation', 'password')
-                    ->select('role', 'admin')
-                    ->press('Create Admin User'); 
+            $browser->visit('/dusk')
+                    ->scrollToElement('@navigation') // Replace with your element's selector
+                    ->assertSeeIn('h1', 'Welcome to Laravel Dusk Responsive Test');
         });
     }
+
+
 
 }

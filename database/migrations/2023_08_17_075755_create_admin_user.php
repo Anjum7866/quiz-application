@@ -29,7 +29,7 @@ return new class extends Migration
             'name' => 'Admin User',
             'email' => 'admin@example.com',
             'password' => Hash::make('password'), 
-            'role' => 'admin',
+             'role' => 'admin',
             'adminuser_id' => $admin_UserId,
             'created_at' => now(),
             'updated_at' => now(),

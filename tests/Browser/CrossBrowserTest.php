@@ -12,7 +12,6 @@ class CrossBrowserTest extends DuskTestCase
 
         foreach ($browsers as $browserType) {
             $this->browse(function (Browser $browser) use ($browserType) {
-                $browser->driver->manage()->deleteAllCookies();
                 $this->runResponsivewithScreenshotTest($browser, $browserType);
             });
         }

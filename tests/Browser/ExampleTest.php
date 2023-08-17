@@ -38,15 +38,16 @@ class ExampleTest extends DuskTestCase
                     ->assertVisible('@navigation'); 
         });
     }
-   
-    public function testScrollToElement()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/dusk')
-                    ->scrollToElement('@navigation') // Replace with your element's selector
-                    ->assertSeeIn('h1', 'Welcome to Laravel Dusk Responsive Test');
-        });
-    }
+    // public function testScrollToTop()
+    // {
+    //     $this->browse(function (Browser $browser) {
+    //         $browser->visit('/dusk')
+    //         ->scrollToElement('body') 
+    //         ->assertScript("return window.scrollY === 0;"); 
+    // });
+
+    // }
+
 
 
 

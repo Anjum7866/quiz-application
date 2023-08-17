@@ -36,6 +36,14 @@ Route::resource('/', HomeController::class);
 Route::get('/dusk', function () {
     return view('dusk');
 });
+
+Route::get('/formsubmit', function () {
+     return view('form-submit'); 
+});
+Route::get('/radio-buttons', function () {
+    return view('radio-buttons'); 
+});
+
 Route::get('/landing', [HomeController::class,'landingpage']);
 
 Route::get('/get-topic-details/{topicId}', [TopicController::class,'getDetails']);
@@ -174,4 +182,3 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('/contact', [ContactController::class ,'showForm']);
 Route::post('/contact', [ContactController::class, 'submitForm']);
-

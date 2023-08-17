@@ -13,9 +13,6 @@
 <div class="sales-boxes">
         <div class="recent-sales box">
             <div class="title"><strong>{{ $quizName }} Quizzes</strong></h2>
-            <!-- @if(in_array(Auth::user()->role, ['admin', 'superadmin']))
-                <div class="button"><a class="btn btn-primary" href="{{ route('subjects.show', $subject->id) }}"> Back</a></div>
-               @endif -->
            
             </div>
 

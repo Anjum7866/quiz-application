@@ -15,7 +15,7 @@
 				</div>
 				<div class="form__field">
 					<label for="email" class="form__label">email</label>
-					<input id="email" type="email" class="form__input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"
+					<input id="email" type="email" class="form__input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="{{ __('Email') }}" required autocomplete="email"
                     autofocus>
              @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -25,7 +25,7 @@
 				</div>
 				<div class="form__field">
 					<label for="password" class="form__label">password</label>
-          <input id="password" type="password" class="form__input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+          <input id="password" type="password" class="form__input @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}" name="password" required autocomplete="current-password">
           @error('password')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>

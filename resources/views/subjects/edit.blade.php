@@ -27,7 +27,7 @@
                     @method('PUT')
             
                     <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div >
                             <div class="form-group">
                                 <strong>Name:</strong>
                                 <input type="text" name="name" value="{{ $subject->name }}" class="form-control" placeholder="Name">
@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div >
                             <div class="form-group">
                                 <strong>Detail:</strong>
                                 <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $subject->detail }}</textarea>
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="row">    
-                        <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div >
                         <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>

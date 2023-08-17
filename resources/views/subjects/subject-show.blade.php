@@ -45,7 +45,7 @@
                 @endif
 
 
-                <a class="certificate" style="color:007bff;"href="{{ route('certificate.download', ['subject' => $subjectId, 'score' =>$score, 'totalQuestions' => $totalQuestions]) }}">Download Certificate</a>   
+                <a class="certificate" style="color:#007bff !important;"href="{{ route('certificate.download', ['subject' => $subjectId, 'score' =>$score, 'totalQuestions' => $totalQuestions]) }}">Download Certificate</a>   
                 @endif
                 </div>
             </div>   

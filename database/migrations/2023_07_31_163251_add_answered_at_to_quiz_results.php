@@ -22,7 +22,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        $table->dropColumn('answered_at'); // If you need to rollback, this will remove the column
+        Schema::table('quiz_results', function (Blueprint $table) {
+            $table->dropColumn('answered_at'); // If you need to rollback, this will remove the column
     
+
+        });
+       
     }
 };

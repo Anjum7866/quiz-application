@@ -14,20 +14,37 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $user = new User();
-        $user->name = 'Admin User';
-        $user->email = 'admin@example.com';
-        $user->password = Hash::make('password');
-        $user->save();
+        DB::table('admin_users')->insert([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('password'), 
+            'role' => 'admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+       
+        $admin_UserId = DB::table('admin_users')->where('email', 'admin@example.com')->value('id');
 
-        // Create an admin user (if it doesn't exist already)
-        $adminUser = new AdminUser();
-        $adminUser->name = 'Admin User';
-        $adminUser->email = 'admin@example.com';
-        $adminUser->password = Hash::make('password');
-        $adminUser->role = 'admin';
-        $adminUser->save();
-    
+        DB::table('users')->insert([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('password'), 
+            'role' => 'admin',
+            'adminuser_id' => $admin_UserId,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $UserId = DB::table('users')->where('adminuser_id', $admin_UserId)->value('id');
+        
+        DB::table('user_profiles')->insert([
+            'user_id' => $UserId,
+            'first_name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        
     }
 
     /**

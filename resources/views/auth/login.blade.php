@@ -19,7 +19,7 @@
                     autofocus>
              @error('email')
                     <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
+                        <strong style="color: white;">{{ $message }}</strong>
                     </span>
                 @enderror
 				</div>
@@ -28,7 +28,7 @@
           <input id="password" type="password" class="form__input @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}" name="password" required autocomplete="current-password">
           @error('password')
             <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
+                <strong style="color: white;">{{ $message }}</strong>
             </span>
         @enderror
 				</div>

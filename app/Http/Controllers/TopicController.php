@@ -92,28 +92,21 @@ class TopicController extends Controller
         $subject = Subject::findOrFail($subjectId);
 
         $topics = $subject->topics;
-        // Redirect to the topics index page with a success message
         return redirect()->route('subjects.show', compact('subject', 'topics'))->with('success', 'Topic created successfully.');
     }
 
-    // Show the form to edit an existing topic
     public function edit($id)
     {
-        // Find the topic by its ID and retrieve the associated subject
         $topic = Topic::findOrFail($id);
         $subject = $topic->subject;
-
-        // Retrieve all subjects to populate the dropdown
         $subjects = Subject::all();
 
         return view('topics.edit', compact('topic', 'subjects', 'subject'));
     }
 
 
-    // Update the topic in the database
     public function update(Request $request, $id)
     {
-        
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -124,7 +117,6 @@ class TopicController extends Controller
       
         $topic = Topic::findOrFail($id);
         $subjectId= $topic->subject_id;
-        // Update the topic with the new values
         $topic->name = $request->input('name');
         $topic->description = $request->input('description');
         $topic->subject_id = $subjectId;
@@ -168,16 +160,13 @@ class TopicController extends Controller
           $topic->file_path =$filename;
      }
     
-        // Save the updated topic to the database
         $topic->save();
         $subject = Subject::findOrFail($subjectId);
 
         $topics = $subject->topics;
-        // Redirect to the topics index page with a success message
         return redirect()->route('subjects.show', compact('subject', 'topics'))->with('success', 'Topic updated successfully.');
     }
 
-    // Delete the topic from the database
     public function destroy( $topicId)
     {
         $topic = Topic::find($topicId);
@@ -193,7 +182,6 @@ class TopicController extends Controller
     {
         $topic = Topic::with('quizzes')->find($topicId);
 
-        // Return HTML content with the topic details
         return view('topics.topic-details', ['topic' => $topic]);
     }
 

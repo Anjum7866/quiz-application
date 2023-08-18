@@ -67,8 +67,6 @@ class UserProfileController extends Controller
     
             // Save the updated profile to the database
              $profile->save();
-
-            
              $user = User::where('id', $profile->user_id)->first();
              $user->name = $request->input('first_name');
              $user->email = $request->input('email');

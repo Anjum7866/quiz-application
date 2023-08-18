@@ -24,7 +24,9 @@
 
             <i class="bx bx-chevron-down"></i>
             <div class="dropdown-content">
+              @if(Auth::user()->profile)
               <a  href="{{ route('adminprofile.edit', Auth::user()->profile->id) }}">Manage Accounts</a>
+              @endif
               <a href="{{ route('adminchange.password', Auth::user()->id) }}">Change Password</a>
               <a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

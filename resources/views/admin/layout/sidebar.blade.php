@@ -55,13 +55,14 @@
           </a>
           </li>
       @endif
-
+        @if( Auth::user()->profile)
         <li>
           <a  href="{{ route('adminprofile.edit', Auth::user()->profile->id) }}" class="{{ url()->current() == route('adminprofile.edit', Auth::user()->profile->id) ? 'active' : '' }}">
             <i class="bx bx-cog"></i>
             <span class="links_name" >Settings</span>
           </a>
         </li>
+        @endif
         <li class="log_out">
           <a  href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

@@ -51,7 +51,7 @@
         background-color: var(--background)
     }
 
-    .header {
+    /* .header {
       background-color:#000;
       color:  var(--header-text-color);
       padding: 10px;
@@ -63,7 +63,22 @@
       height:70px;
       justify-content: space-between;
       padding: 1rem 6%;
-    }
+    } */
+    .header {
+  background-color: #000;
+  color: var(--header-text-color);
+  padding: 1rem 6%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
     img.image{
       width:70%;
       height:70%;
@@ -150,7 +165,7 @@
       width: 250px;
       height: 100%;
       position: fixed;
-      top: 110px;
+      /* top: 110px; */
       left: 0;
       bottom: 0;
       overflow-y: scroll;
@@ -364,9 +379,7 @@
           width: 100%;
           height:100%
         }
-        .sidebar{
-          top: 130px;
-        }
+       
         }
 
 
@@ -469,7 +482,7 @@
             @csrf
         </form>
       </div>
-  </nav>
+    </nav>
     
   </div>
   <div class="sub-header" id="sub-header"> 
@@ -477,7 +490,8 @@
     @foreach($subjects as $key => $subject)
     <a class="subject-name" data-subject-id="{{ $subject->id }}" href="{{url('/', $subject->id)}}">{{ $subject->name }}</a>
       
-    @endforeach</div>
+    @endforeach
+  </div>
 
     <div class="hamburger"  onclick="toggleMobileMenu()">&#9776;</div>
     
@@ -534,9 +548,9 @@
        </div>
       </div>
       @endif
-    </div>
+      </div>
    
-  </div>
+    </div>
 
   <div class="mobile-menu" id="mobileMenu">
      @if($singlesubject)
@@ -758,6 +772,21 @@ $(document).ready(function () {
   
   });
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const header = document.querySelector('.header');
+    const subHeader = document.querySelector('.sub-header');
+    const sidebar = document.querySelector('.sidebar');
+  
+    const headerHeight = header.clientHeight;
+    const subHeaderHeight = subHeader.clientHeight;
+    const totalHeight = headerHeight + subHeaderHeight;
+  
+    sidebar.style.top = `${totalHeight}px`;
+  });
+</script>
+
+
 <script>
   let card = document.querySelector(".profile-card"); 
 let displayPicture = document.querySelector(".display-picture"); 

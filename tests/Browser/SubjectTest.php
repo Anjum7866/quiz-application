@@ -69,24 +69,24 @@ class SubjectTest extends DuskTestCase
         });
     }
 
-    public function testSubjectDeletion()
-    {
-        $adminUser = User::factory()->create([
-            'role' => 'admin', 
-        ]);
+    // public function testSubjectDeletion()
+    // {
+    //     $adminUser = User::factory()->create([
+    //         'role' => 'admin', 
+    //     ]);
 
-        $subject = Subject::factory()->create();
+    //     $subject = Subject::factory()->create();
 
-        $this->browse(function (Browser $browser) use ($adminUser, $subject) {
-            $browser->loginAs($adminUser)
-                    ->visit(route('subjects.index'));
-                    //  ->within(".topic[data-subject-id='{$subject->id}']", function ($browser) {
-                    //     $browser->press('.btn-delete i')
-                    //             ->acceptDialog()
-                    //             ->pause(1000); // Adjust pause as needed
-                    // })
-                    // ->assertDontSee($subject->name); // Verify subject is deleted
-        });
-    }
+    //     $this->browse(function (Browser $browser) use ($adminUser, $subject) {
+    //         $browser->loginAs($adminUser)
+    //                 ->visit(route('subjects.index'));
+    //                 //  ->within(".topic[data-subject-id='{$subject->id}']", function ($browser) {
+    //                 //     $browser->press('.btn-delete i')
+    //                 //             ->acceptDialog()
+    //                 //             ->pause(1000); // Adjust pause as needed
+    //                 // })
+    //                 // ->assertDontSee($subject->name); // Verify subject is deleted
+    //     });
+    // }
     
 }

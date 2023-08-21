@@ -48,7 +48,7 @@
 
     </style>
 @include('navbar')
-<div class="card">
+<div class="card" style="background: whitesmoke;">
         <div class="recent-sales box">
             <div class="title">Change Password</h2>
             </div>
@@ -64,7 +64,7 @@
                 @endif
                 
             
-            <div class="sales-details">
+            <div class="sales-details" >
                 <form method="POST" action="{{ route('change.password') }}">
                     @csrf
                     <form method="POST" action="{{ route('password.update') }}">

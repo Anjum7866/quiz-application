@@ -260,7 +260,8 @@
             </div>
           
             <div class="row g-4 justify-content-center">
-            @foreach($subjects as $key => $subject)
+            @foreach($subjects as $key => $subject)    
+                @if($key < 6)
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
@@ -289,6 +290,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 @endforeach
             </div>
            
@@ -304,6 +306,7 @@
                 <h1 class="mb-5">Expert Instructors</h1>
             </div>
             <div class="row g-4">
+                
             @foreach ($teachers as $teacher)
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item bg-light">

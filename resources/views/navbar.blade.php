@@ -192,6 +192,7 @@ a{
                             <a href="{{ url('/review') }}">review</a> -->
                             <a href="{{ url('/') }}">contact us</a>
                             <a href="{{ url('/') }}">about us</a>
+                           
                         @else
                         <a href="{{ url('/') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</a>
                         <a href="{{ url('/allsubjects')}}">Subjects</a>
@@ -213,17 +214,16 @@ a{
                     </nav>
                     @auth
                     <nav>
-                      <ul>
-                      @if (Auth::user()->profile) 
-                      @if(Auth::user()->profile->avatar)
-                      <a href="#" class="display-picture">
-                      <img src="{{asset('assets/uploads/profile/'.Auth::user()->profile->avatar)}}" style="width: 50px;height: 50px;" class="rounded-circle img-fluid" alt="avatar">
-                      </a>
-                      @endif
-                      @else
-                      <a href="#" class="display-picture"><img src="https://i.pravatar.cc/85" alt=""></a><!--Profile Image-->
-                       
-                    @endif
+                        <ul>
+                          @if(Auth::user()->profile)
+                            @if(Auth::user()->profile->avatar)
+                            <a href="#" class="display-picture">
+                            <img src="{{asset('assets/uploads/profile/'.Auth::user()->profile->avatar)}}" style="width: 50px;height: 50px;" class="rounded-circle img-fluid" alt="avatar">
+                            </a>
+                            @else
+                            <a href="#" class="display-picture"><img src="https://i.pravatar.cc/85" alt=""></a>
+                            @endif
+                            @endif
                         </ul>
                         <div class="profile-card hidden">
                           <ul>
@@ -246,12 +246,12 @@ a{
                         </div>
                     </nav>
                     @endauth
-                    <label class="theme-switch">
+                    <!-- <label class="theme-switch">
                 <input type="checkbox" id="themeToggle" />
                 <span class="slider round" style="display:none"></span>
                 <i class="sun-icon fas fa-sun"></i>
                 <i class="moon-icon fas fa-moon"></i>
-              </label>
+              </label> -->
         </header>
 
     <script>

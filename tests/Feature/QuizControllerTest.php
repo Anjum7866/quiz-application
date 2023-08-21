@@ -14,9 +14,8 @@ class QuizControllerTest extends TestCase
         $user = User::factory()->create([
             'role' => 'admin', 
         ]);
-        // Authenticate the test user
+       
         $this->actingAs($user);
-
         $response = $this->get(route('quizzes.create', ['subjectId' => $subject->id]));
 
         $response->assertStatus(200);
@@ -58,6 +57,38 @@ class QuizControllerTest extends TestCase
         $response->assertStatus(302); 
       
     }
+    public function testDeleteQuiz()
+{
+    $quiz = Quiz::factory()->create();
+
+    $this->actingAs(User::factory()->create(['role' => 'admin']));
+
+    $response = $this->delete(route('quizzes.destroy', ['quiz' => $quiz->id]));
+
+    $response->assertStatus(302);
+
+}
+public function testShowQuizBySubjectId()
+{
+    $subject = Subject::factory()->create();
+
+    $quiz = Quiz::factory()->count(1)->create([
+        'subject_id' => $subject->id,
+    ]);
+
+    $adminUser = User::factory()->create([
+        'role' => 'admin',
+    ]);
+
+    $this->actingAs($adminUser);
+
+    $response = $this->get(route('subjects.show', ['subject' => $subject->id]));
+
+    $response->assertStatus(200);
+
+   
+}
+
     // public function testCreateQuizByTopic()
     // {
     //     $topic = Topic::factory()->create();

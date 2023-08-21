@@ -91,7 +91,7 @@ border-radius: 2rem;
                           @csrf
                           @method('PUT')
              
-          <div class="row">
+          <div class="row" style="background: whitesmoke;">
               <div class="col-md-4 border-right">
               @if ($profile->avatar) 
                       <div class="col-6 mt-3">

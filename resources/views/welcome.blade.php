@@ -65,7 +65,8 @@
             </div>
         </div>
 
-    @endforeach    
+    @endforeach  
+   
 </section>
 
 <h1 class="heading"> Contact Us </h1>

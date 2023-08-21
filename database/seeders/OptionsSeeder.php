@@ -15,7 +15,7 @@ class OptionsSeeder extends Seeder
     {
         DB::table('options')->insert([
             // Question 1 options
-            [
+            [ 
                 'text' => 'A technology for storing and accessing data over the internet.',
                 'question_id' => 1,
                 'points' => 1,

@@ -15,6 +15,7 @@ class QuizzesSeeder extends Seeder
     {
         DB::table('quizzes')->insert([
             [
+                'id' =>1,
                 'title' => 'Cloud Computing Quiz',
                 'description' => 'Quiz about Cloud Computing',
                 'topic_id' => 2,

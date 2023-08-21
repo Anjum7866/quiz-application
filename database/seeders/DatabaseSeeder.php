@@ -15,15 +15,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->count(10)->create();
-        Subject::factory()->count(10)->create();
-
+      
         
         $this->call(TopicsSeeder::class);
         $this->call(QuizzesSeeder::class);
         $this->call(QuestionsSeeder::class);
         $this->call(OptionsSeeder::class);
         $this->call(InformationTechnologyQuizSeeder::class);
+        User::factory()->count(1)->create();
+        Subject::factory()->count(1)->create();
+
        
     }
 }

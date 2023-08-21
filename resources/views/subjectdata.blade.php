@@ -503,8 +503,8 @@
                 <a class="topic" data-topic-id="{{ $topic->id }}" style="color:black" href='#'> &bull;{{ $topic->name }}</a>
             @endforeach
             @foreach($singlesubject->quizzes as $quiz)
-            <p style="padding:10px"> Take Subject Quiz By clicking link below</p>
-            <a href='#' data-quiz-id="{{ $quiz->id }}" style="color:black; padding:10px"><strong>{{ $quiz->title }}</strong></a><br><br>
+            <p style="padding:5px"> Take Subject Quiz By clicking link below</p>
+            <a href='#' data-quiz-id="{{ $quiz->id }}" style="color:black; padding:5px"><strong>{{ $quiz->title }}</strong></a><br><br>
             @endforeach
         @else
             <p>No topics found for subject</p>

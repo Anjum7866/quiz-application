@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(QuestionsSeeder::class);
         $this->call(OptionsSeeder::class);
         $this->call(InformationTechnologyQuizSeeder::class);
+        $this->call(ITTopicSeeder::class);
         User::factory()->count(1)->create();
         Subject::factory()->count(1)->create();
 

@@ -42,7 +42,7 @@
     }
     .topic {
     display: block;
-    padding: 10px;
+    padding: 5px;
       }
 
     .active-topic {

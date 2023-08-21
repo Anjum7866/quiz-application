@@ -106,7 +106,7 @@ Route::prefix('org')->middleware(CheckRole::class.':superadmin,admin,teacher')->
     Route::get('/subject/{subject}', [SubjectController::class,'showSingle'])->name('subject.showSingle');
     Route::resource('subjects', SubjectController::class);
     Route::get('/subjects', [SubjectController::class,'index'])->name('subjects.index');
-    Route::get('/subjects/edit/{subjectId}', [SubjectController::class,'edit'])->name('subjects.update');
+    Route::put('/subjects/edit/{subjectId}', [SubjectController::class,'update'])->name('subjects.update');
     
     Route::resource('topics', TopicController::class);
     Route::resource('quizzes', QuizController::class);

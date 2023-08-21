@@ -88,7 +88,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Topic Name</th>
+                            <th element style="width: 35%;">Topic Name</th>
                             <th>Quizzes</th>
                             <th>Action</th>
                         </tr>

@@ -1,13 +1,11 @@
 <?php
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Admin;
 
 class AdminApiTest extends TestCase
 {
-    use RefreshDatabase;
     protected $admin;
 
     protected function setUp(): void

@@ -114,24 +114,6 @@ class ITTopicSeeder extends Seeder
                 'subject_id' => 46,
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
-            [
-                'id' => 14,
-                'name' => 'Biotechnology',
-                'description' => 'Biotechnology combines biology and technology to develop products and processes that improve human health, agriculture, and the environment. It includes areas like genetic engineering and drug development.',
-                'content' => 'biotech.jpg',
-                'subject_id' => 46,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'id' => 15,
-                'name' => 'Mobile App Development',
-                'description' => 'Mobile app development involves creating software applications for mobile devices. Developers use programming languages and frameworks to design apps for platforms like iOS and Android.',
-                'content' => 'mobile_app.jpg',
-                'subject_id' => 46,
-                'created_at' => now(),
-                'updated_at' => now(),
             ]
         ]);
     }

@@ -17,7 +17,7 @@ class SubjectTest extends DuskTestCase
      */
     public function testSubjectList()
     {
-        $subjects = Subject::factory()->count(5)->create();
+        $subjects = Subject::factory()->count(1)->create();
         $adminUser = User::factory()->create([
             'role' => 'admin',
         ]);

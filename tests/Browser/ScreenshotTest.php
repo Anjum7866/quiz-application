@@ -16,14 +16,15 @@ class ScreenshotTest extends DuskTestCase
     public function testGenerateScreenshot()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/screenshot-form')
+            $browser->visit('/generate-screenshot')
                     ->select('browser', 'chrome')
-                    ->type('browser_version', 'latest')
-                    ->select('resolution', 'fhd')
+                    ->type('browser_version', '92')
+                    ->select('resolution', 'HD')
                     ->type('url', 'https://www.example.com')
                     ->press('Generate Screenshot')
-                    ->waitFor('.screenshot-success') // Add a class to display success message in your form
-                    ->assertSee('Screenshot generated successfully!');
+                    ->pause(5000) // Add a pause to allow time for screenshot
+                    ->assertSee('Screenshot generated successfully');
         });
     }
+
 }

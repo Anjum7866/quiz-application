@@ -458,7 +458,7 @@
       </nav>
       <nav>
     <ul>
-        @if (Auth::user()->profile->avatar) 
+        @if (Auth::user()->profile) 
         <a href="#" class="display-picture">
         <img src="{{asset('assets/uploads/profile/'.Auth::user()->profile->avatar)}}" style="width: 50px;height: 50px;" class="rounded-circle img-fluid" alt="avatar">
         </a>
@@ -468,7 +468,9 @@
       </ul>
       <div class="profile-card hidden">
         <ul>
+        @if (Auth::user()->profile) 
           <li><a style="color: black !important;" href="{{ route('profile.edit', Auth::user()->profile->id) }}">Manage Profile</li></a>
+         @endif
           <li><a style="color: black !important;" href="{{ route('change.password', Auth::user()->id) }}">Change Password</li></a>
           @if(Auth::user()->quizResults->count() > 0)
                                 <li><a style="color: black !important;" href="{{ route('answered-quiz-history') }}">Quiz History</a></li>

@@ -20,6 +20,7 @@ use App\Http\Controllers\QuizResultController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ScreenshotController;
 
 use App\Http\Middleware\CheckRole;
 
@@ -36,11 +37,12 @@ use App\Http\Middleware\CheckRole;
 
 
 Route::resource('/', HomeController::class);
+Route::get('/generate-screenshot', [ScreenshotController::class, 'index']);
+Route::post('/generate-screenshot', [ScreenshotController::class, 'generateScreenshot'])->name('generate-screenshot');
 Route::get('/dusk', function () {
     return view('dusk');
 });
 
-Route::post('/generate-screenshot', 'ScreenshotController@generateScreenshot')->name('generate-screenshot');
 
 Route::get('/formsubmit', function () {
      return view('form-submit'); 

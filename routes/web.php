@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Laravel\Dusk\Browser;
+
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\QuizController;
@@ -36,6 +39,8 @@ Route::resource('/', HomeController::class);
 Route::get('/dusk', function () {
     return view('dusk');
 });
+
+Route::post('/generate-screenshot', 'ScreenshotController@generateScreenshot')->name('generate-screenshot');
 
 Route::get('/formsubmit', function () {
      return view('form-submit'); 

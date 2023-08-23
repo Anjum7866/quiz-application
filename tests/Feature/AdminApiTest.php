@@ -15,7 +15,7 @@ class AdminApiTest extends TestCase
         // Create an admin record for reuse in test cases
         $this->admin = Admin::create([
             'name' => 'John',
-            'email' => 'john@example.com',
+            'email' => 'john1aa@example.com',
         ]);
     }
 

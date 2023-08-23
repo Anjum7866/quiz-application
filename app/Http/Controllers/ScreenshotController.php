@@ -11,17 +11,7 @@ class ScreenshotController extends Controller
         return view('screenshot-form');
     }
 
-    // public function generateScreenshot(Request $request)
-    // {
-    //     $browser = new Browser();
-
-    //     $browser->{$request->input('browser')}()
-    //         ->visit($request->input('url'))
-    //         ->screenshot('screenshot.png');
-
-    //     return "Screenshot generated successfully!";
-    // }
-
+  
     public function generateScreenshot(Request $request)
     {
         $browser = $request->browser;
